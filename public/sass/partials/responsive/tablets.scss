@@ -1,0 +1,612 @@
+/* This is for tablets (width < 1024px) */
+@media (max-width: 1024px) {
+  header {
+    .upper_header {
+      padding: 12px 50px;
+      gap: 100px;
+      font-size: 14px;
+      line-height: 22px;
+      .upper_header_left {
+        gap: 20px;
+        .upper_header_left_info {
+          gap: 5px;
+          img {
+            width: 18px;
+            height: auto;
+          }
+        }
+      }
+      .upper_header_right {
+        .upper_header_right_login {
+          gap: 5px;
+          .upper_header_right_login_user {
+            img {
+              width: 12px;
+              height: 12px;
+            }
+          }
+        }
+        .upper_header_right_socials {
+          gap: 5px;
+          #fb {
+            padding: 6px 9px;
+            img {
+              width: 8px;
+              height: 14px;
+            }
+          }
+          #twitter {
+            padding: 8px 6px;
+            img {
+              width: 14px;
+              height: 10px;
+            }
+          }
+          #yt {
+            padding: 9px 7px;
+            img {
+              width: 12px;
+              height: 9px;
+            }
+          }
+          #insta {
+            padding: 6px;
+            img {
+              width: 14px;
+              height: 14px;
+            }
+          }
+        }
+      }
+    }
+    .nav_bar {
+      padding: 25px 100px;
+      .nav_options {
+        font-size: 16px;
+        line-height: 22px;
+      }
+      .nav_contact {
+        padding: 10px 20px;
+        font-size: 14px;
+        img {
+          width: 18px;
+          height: 18px;
+        }
+      }
+    }
+  }
+
+  .hero {
+    padding: 0px 100px;
+    .hero_left {
+      padding-top: 100px;
+      .hero_left_top {
+        font-size: 20px;
+        line-height: 30px;
+      }
+      .hero_left_middle {
+        font-size: 44px;
+        line-height: 50px;
+      }
+      .hero_left_bottom {
+        font-size: 14px;
+        line-height: 22px;
+        padding-bottom: 30px;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 14px;
+        img {
+          width: 15px;
+          height: 15px;
+        }
+      }
+    }
+    .hero_right {
+      padding: 50px 0;
+      .hero_right_image_right {
+        gap: 20px;
+        .hero_right_image_right_group {
+          gap: 20px;
+          width: 180px;
+          img {
+            width: 100%;
+            height: auto;
+          }
+        }
+        .hero_right_image_right_single {
+          padding-top: 70px;
+          width: 180px;
+          img {
+            width: 100%;
+            height: auto;
+          }
+        }
+      }
+      .hero_right_image_right_logo {
+        top: 220px;
+        left: 120px;
+        img {
+          width: 130px;
+          height: auto;
+        }
+      }
+    }
+  }
+
+  .about_us {
+    padding: 0 100px;
+    .booking_form {
+      margin: 0;
+      padding: 20px;
+      input {
+        padding: 5px 15px;
+        font-size: 14px;
+        line-height: 24px;
+      }
+      button {
+        padding: 10px 18px;
+        gap: 8px;
+        font-family: Mulish;
+        font-size: 14px;
+        line-height: 20px;
+        img {
+          width: 14px;
+          height: auto;
+        }
+      }
+    }
+    .about_us_side_rect {
+      img {
+        width: 400px;
+        height: auto;
+      }
+    }
+    .about_us_plane {
+      top: 300px;
+      img {
+        width: 300px;
+        height: auto;
+      }
+    }
+    .about_us_below {
+      margin-top: 50px;
+      gap: 10px;
+      .about_us_below_left {
+        .about_us_below_left_one {
+          width: 280px;
+          img {
+            width: 100%;
+            height: auto;
+          }
+        }
+        .about_us_below_left_two {
+          padding-top: 20px;
+          width: 160px;
+          img {
+            width: 100%;
+            height: auto;
+          }
+        }
+      }
+      .about_us_below_right {
+        .about_us_below_right_top {
+          font-size: 22px;
+          line-height: 30px;
+          padding-top: 20px;
+        }
+        .about_us_below_right_title {
+          font-size: 28px;
+          line-height: 44px;
+          margin-bottom: 10px;
+        }
+        .about_us_below_right_body {
+          font-size: 14px;
+          line-height: 20px;
+        }
+        .about_us_below_right_list {
+          gap: 5px;
+          margin-bottom: 25px;
+          .about_us_below_right_list_point {
+            gap: 10px;
+            line-height: 16px;
+            font-size: 14px;
+            img {
+              width: 12px;
+              height: auto;
+            }
+          }
+        }
+        button {
+          padding: 10px 20px;
+          gap: 10px;
+          font-size: 14px;
+          line-height: 20px;
+          img {
+            width: 14px;
+            height: auto;
+          }
+        }
+      }
+    }
+  }
+
+  .booking {
+    padding: 100px 100px;
+    margin-top: 50px;
+    .booking_rect {
+      position: absolute;
+      bottom: 100px;
+      right: 0;
+      z-index: -1;
+      img {
+        width: 250px;
+        height: auto;
+      }
+    }
+    .booking_top {
+      .booking_top_title {
+        font-size: 22px;
+        line-height: 30px;
+      }
+      .booking_top_body {
+        font-size: 34px;
+        line-height: 44px;
+      }
+    }
+    .booking_cards {
+      .booking_card_individual {
+        .booking_card_individual_title {
+          font-size: 20px;
+          line-height: 22px;
+          margin-bottom: 5px;
+        }
+        .booking_card_individual_desc {
+          font-size: 14px;
+          line-height: 22px;
+        }
+        .booking_card_individual_info {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 5px;
+          .booking_card_individual_info_museum {
+            gap: 5px;
+            font-size: 14px;
+            line-height: 22px;
+          }
+          .booking_card_individual_info_capacity {
+            gap: 5px;
+            font-size: 14px;
+            line-height: 22px;
+          }
+        }
+        .booking_card_individual_rate {
+          .booking_card_individual_rate_per {
+            font-size: 14px;
+            line-height: 22px;
+            span {
+              font-family: Space Grotesk;
+              font-size: 36px;
+              line-height: 36px;
+            }
+          }
+          .booking_card_individual_rate_arrow {
+            padding: 12px 11px;
+            img {
+              width: 14px;
+              height: auto;
+            }
+          }
+        }
+      }
+    }
+    .booking_pagination {
+      padding: 10px 15px;
+      gap: 10px;
+      margin-bottom: 50px;
+      img {
+        width: 15px;
+        height: auto;
+      }
+    }
+    .booking_counter {
+      padding-top: 50px;
+      .booking_counter_card {
+        padding: 15px 30px;
+        font-size: 14px;
+        line-height: 22px;
+        img {
+          margin-bottom: 10px;
+          width: 70px;
+          height: auto;
+        }
+        span {
+          font-size: 36px;
+          line-height: 44px;
+        }
+      }
+    }
+  }
+
+  .venues {
+    padding: 100px 100px;
+    .venues_top {
+      font-size: 34px;
+      line-height: 44px;
+      span {
+        font-size: 22px;
+        line-height: 30px;
+      }
+    }
+    .venues_bottom {
+      .venues_bottom_pics {
+        span {
+          bottom: 10px;
+          left: 10px;
+          font-size: 25px;
+          line-height: 40px;
+        }
+      }
+    }
+  }
+
+  .testimonials {
+    padding: 50px 100px;
+    .testimonials_rect {
+      top: 100px;
+      img {
+        width: 300px;
+        height: auto;
+      }
+    }
+    .testimonials_top {
+      font-size: 34px;
+      line-height: 44px;
+      span {
+        font-size: 22px;
+        line-height: 30px;
+      }
+    }
+    .testimonials_bottom {
+      .testimonials_left {
+        height: 100%;
+        #testimonials_girls {
+          width: 100px;
+          height: auto;
+          margin-right: 30px;
+        }
+        #testimonials_boy {
+          width: 200px;
+          height: auto;
+          margin-right: 30px;
+        }
+      }
+      .testimonials_right {
+        .testimonials_right_write {
+          font-size: 14px;
+          line-height: 22px;
+          span {
+            font-size: 18px;
+            line-height: 26px;
+            margin-bottom: 0px;
+          }
+          p {
+            margin-top: 20px;
+          }
+        }
+        button {
+          padding: 14px 13px;
+          img {
+            width: 12px;
+            height: auto;
+          }
+        }
+      }
+    }
+  }
+
+  .call_action {
+    background-size: 1024px;
+    .call_action_top {
+      padding: 50px 100px;
+      font-size: 14px;
+      line-height: 22px;
+      span {
+        font-size: 34px;
+        line-height: 44px;
+      }
+      .call_action_book_now {
+        margin-top: 30px;
+        padding: 10px 20px;
+        font-size: 14px;
+        line-height: 20px;
+        gap: 5px;
+        img {
+          width: 15px;
+          height: auto;
+        }
+      }
+    }
+  }
+
+  .blog {
+    padding: 100px 100px;
+    .blog_rect {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: -1;
+      img {
+        width: 300px;
+        height: auto;
+      }
+    }
+    .blog_top {
+      font-size: 34px;
+      line-height: 44px;
+      span {
+        font-size: 22px;
+        line-height: 30px;
+      }
+    }
+    .blog_bottom {
+      gap: 30px;
+      .blog_bottom_card {
+        width: 250px;
+        .blog_bottom_card_writing {
+          padding: 10px;
+          font-size: 16px;
+          line-height: 24px;
+          p {
+            font-size: 14px;
+            line-height: 22px;
+            margin: 10px 0;
+          }
+          span {
+            font-size: 14px;
+            line-height: 22px;
+          }
+        }
+      }
+    }
+  }
+
+  footer {
+    margin-top: 80px;
+    .footer_subscribe {
+      position: absolute;
+      top: -65px;
+      left: 100px;
+      right: 100px;
+      display: flex;
+      padding: 30px;
+      gap: 100px;
+      .footer_subscribe_title {
+        font-size: 26px;
+        line-height: 36px;
+      }
+      .footer_subscribe_input {
+        gap: 10px;
+        input {
+          width: 250px;
+          font-size: 14px;
+          line-height: 14px;
+          padding: 5px 0 5px 20px;
+          height: 40px;
+        }
+        button {
+          font-size: 14px;
+          line-height: 22px;
+          padding: 10px 20px;
+        }
+      }
+    }
+    .footer_top {
+      padding: 145px 100px 60px 100px;
+      .footer_logos {
+        width: 190px;
+        margin-top: 0;
+        p {
+          font-size: 14px;
+          line-height: 22px;
+        }
+        .footer_logos_socials {
+          gap: 5px;
+          #footer_fb {
+            padding: 8px 11px;
+            img {
+              width: 8px;
+              height: auto;
+            }
+          }
+          #footer_twitter {
+            padding: 9px 8px;
+            img {
+              width: 14px;
+              height: auto;
+            }
+          }
+          #footer_yt {
+            padding: 10px 8px;
+            img {
+              width: 14px;
+              height: auto;
+            }
+          }
+          #footer_insta {
+            padding: 8px;
+            img {
+              width: 14px;
+            }
+          }
+        }
+      }
+      .footer_links {
+        font-size: 14px;
+        line-height: 22px;
+        width: 90px;
+        span {
+          font-size: 16px;
+          line-height: 22px;
+        }
+      }
+      .footer_contact_info {
+        width: 180px;
+        gap: 10px;
+        span {
+          font-size: 16px;
+          line-height: 22px;
+        }
+        .footer_contacts {
+          gap: 5px;
+          p {
+            font-size: 14px;
+            line-height: 22px;
+          }
+          #footer_icon_phone {
+            padding: 6px 6px;
+            img {
+              width: 12px;
+              height: auto;
+            }
+          }
+          #footer_icon_mail {
+            padding: 7px 5px;
+            img {
+              width: 15px;
+              height: auto;
+            }
+          }
+          #footer_icon_location {
+            margin-top: 5px;
+            padding: 5px 7px;
+            img {
+              width: 10px;
+              height: auto;
+            }
+          }
+        }
+      }
+      .footer_instagram {
+        width: 280px;
+        span {
+          font-size: 16px;
+          line-height: 22px;
+        }
+        .footer_instagram_images {
+          margin-top: 10px;
+          img {
+            width: 100%;
+            height: auto;
+          }
+        }
+      }
+    }
+    .footer_bottom {
+      font-size: 14px;
+      line-height: 22px;
+    }
+  }
+  
+}

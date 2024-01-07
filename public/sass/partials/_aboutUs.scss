@@ -1,0 +1,133 @@
+
+.about_us{
+    padding: 0 245px;
+    position: relative;
+    .booking_form{
+        margin: 0 100px;
+        background-color: white;
+        box-shadow: 0 0 5px 2px rgba(108, 108, 108,0.3);
+        padding: 30px;
+        border-radius: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        input{
+            border-radius: 30px;
+            padding: 10px 20px;
+            font-size: 16px;
+            line-height: 28px;
+            font-family: 'Lexend', sans-serif;
+            font-weight: 600;
+            outline: none;
+            border: solid rgba(70, 145, 242,0.3); /* Example border style: 2px width, solid style, #4691F2 color */
+        }
+        input::placeholder{
+            color: black;
+        }
+        button{
+            padding: 14px 26px;
+            border-radius: 30px;
+            background-color: #4691F2;
+            border: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: Mulish;
+            font-weight: 800;
+            font-size: 16px;
+            line-height: 24px;
+        }
+        button:hover{
+            box-shadow: 0px 0px 5px 3px rgba(0, 0, 0,0.3);
+            cursor: pointer;
+        }
+    }
+    .about_us_side_rect{
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
+    .about_us_plane{
+        position: absolute;
+        top: 280px;
+        right: 0;
+    }
+    .about_us_below{
+        display: flex;
+        margin-top: 100px;
+        position: relative;
+        .about_us_below_left{
+            display: flex;
+            align-items: center;
+            .about_us_below_left_one{
+            }
+            .about_us_below_left_two{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 30px;
+            }
+        }
+        .about_us_below_right{
+            .about_us_below_right_top{
+                color: #4691F2;
+                font-family: Pacifico;
+                font-size: 24px;
+                line-height: 34px;
+                padding-top: 30px;
+                font-weight: 500;
+            }
+            .about_us_below_right_title{
+                color: #1A1313;
+                font-weight: 800;
+                font-size: 44px;
+                line-height: 54px;
+                font-family: Space Grotesk;
+                margin-bottom: 20px;
+            }
+            .about_us_below_right_body{
+                font-family: Mulish;
+                font-size: 16px;
+                line-height: 26px;
+                color: #6C6C6C;
+                font-weight: 600;
+                margin-bottom: 15px;
+            }
+            .about_us_below_right_list{
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                margin-bottom: 35px;
+                .about_us_below_right_list_point{
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+                    font-family: Mulish;
+                    line-height: 26px;
+                    font-family: 16px;
+                    font-weight: 600;
+                }
+            }
+            button{
+                border: none;
+                padding: 14px 26px;
+                border-radius: 30px;
+                background-color: #4691F2;
+                color: white;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-family: Mulish;
+                font-weight: 800;
+                font-size: 16px;
+                line-height: 24px;
+            }
+            button:hover{
+                box-shadow: 0px 0px 5px 3px rgba(0, 0, 0,0.3);
+                cursor: pointer;
+            }
+        }
+    }
+}

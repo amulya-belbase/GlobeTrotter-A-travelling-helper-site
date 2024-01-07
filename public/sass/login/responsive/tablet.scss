@@ -1,0 +1,84 @@
+/* This is for tablets (width < 1024px) */
+@media (max-width: 1024px) {
+
+  .login_page {
+    height: 100%;
+    .left_login_div {
+      .login_info {
+        padding: 50px 70px;
+        .login_info_up {
+          font-size: 32px;
+          line-height: 38px;
+        }
+        .login_info_bottom {
+          font-size: 14px;
+          line-height: 18px;
+        }
+      }
+    }
+    .right_login_div {
+      #login_plane {
+        top: 50px;
+        img{
+            width: 180px;
+            height: auto;
+        }
+      }
+      #login_taj {
+        img{
+            width: 150px;
+            height: auto;
+        }
+      }
+      #login_pisa {
+        img{
+            width: 150px;
+            height: auto;
+        }
+      }
+      .right_login_div_content {
+        padding: 100px 70px;
+        .right_login_div_content_top {
+          text-align: center;
+          span {
+            font-size: 58px;
+            line-height: 38px;
+          }
+          p {
+            font-size: 14px;
+          }
+        }
+        .right_login_div_content_input {
+          gap: 20px;
+          .right_login_div_content_input_bar {
+            img {
+              padding: 0;
+              width: 20px;
+              height: auto;
+              top: 12px;
+              left: 12px;
+            }
+            input {
+              padding: 10px 0 10px 35px;
+              font-size: 14px;
+              line-height: 14px;
+            }
+            input::placeholder {
+              font-size: 14px;
+              line-height: 14px;
+            }
+          }
+        }
+        .right_login_div_content_forgot {
+          margin-top: 15px;
+        }
+        .right_login_div_content_buttons {
+          button {
+            padding: 12px 30px;
+          }
+        }
+      }
+    }
+  }
+  
+}

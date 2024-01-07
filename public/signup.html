@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Signup</title>
+</head>
+
+<body>
+    <div class="signup_page">
+        <div class="left_signup_div">
+            <div class="signup_info">
+                <div class="signup_info_up">
+                    GlobeTrotters
+                </div>
+                <div class="signup_info_bottom">
+                    Embark on your next adventure. Join us and journey beyond boundaries!
+                </div>
+            </div>
+        </div>
+        <div class="right_signup_div">
+            <div class="right_signup_div_content">
+                <div class="right_signup_div_content_top">
+                    <span>Welcome</span>
+                    <p>Signup With Email</p>
+                </div>
+                <form action="/signup_input" method="post">
+                    <div class="right_signup_div_content_input">
+                        <div class="right_signup_div_content_input_bar">
+                            <span>Email Id</span>
+                            <img src="./assets/img/login_sms.png" alt="">
+                            <input type="text" name="email" placeholder="example@example.com">
+                        </div>
+                        <div class="right_signup_div_content_input_bar">
+                            <span>Password</span>
+                            <img src="./assets/img/login_lock.png" alt="">
+                            <input type="password" name="password" placeholder="*********">
+                        </div>
+                        <div id="right_signup_div_content_input_bar_user">
+                            <div class="right_signup_div_content_input_bar">
+                                <span>Firstname</span>
+                                <input type="text" name="firstname" placeholder="Firstname">
+                            </div>
+                            <div class="right_signup_div_content_input_bar">
+                                <span>Lastname</span>
+                                <input type="text" name="lastname" placeholder="Lastname">
+                            </div>
+                        </div>
+                        <div class="right_signup_div_content_input_bar_dropdown">
+                            <div class="signupform_right_select">
+                                <label for="gender">Select your gender:</label>
+                                <select id="gender" name="gender">
+                                    <option value="#">-- Select --</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="others">Others</option>
+                                </select>
+                            </div>
+                            <div class="signupform_right_select">
+                                <label for="role">Select your role:</label>
+                                <select id="role" name="role">
+                                    <option value="#">-- Select --</option>
+                                    <option value="traveller">Traveller</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="signup_form_date">
+                            <label for="birthday">Date of Birth:</label>
+                            <input type="date" id="birthday" name="birthday">
+                        </div>
+                        <div class="right_signup_div_content_forgot">
+                            <span>Please upload your profile picture:</span>
+                            <input type="file" name="profilepic">
+                        </div>
+                    </div>
+                    <div class="right_signup_div_content_buttons">
+                        <button type="button">SIGNUP</button>
+                        <p>Already have an account? <span><a href="./login.html">Login</a></span></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

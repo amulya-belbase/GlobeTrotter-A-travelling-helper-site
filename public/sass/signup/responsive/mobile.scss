@@ -1,0 +1,19 @@
+/* This is for mobile (width < 575px) */
+@media (max-width: 575px) {
+
+    .signup_page {
+      height: 100%;
+      .left_signup_div {
+        display: none;
+      }
+      .right_signup_div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+      }
+    }
+    
+  }
+  

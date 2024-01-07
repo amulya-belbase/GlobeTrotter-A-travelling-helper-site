@@ -1,0 +1,78 @@
+.testimonials{
+    padding: 100px 245px;
+    position: relative;
+    .testimonials_rect{
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
+    .testimonials_top{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        margin-bottom: 60px;
+        font-size: 44px;
+        line-height: 54px;
+        font-family: Space Grotesk;
+        font-weight: 800;
+        span{
+            color: #4691F2;
+            font-size: 24px;
+            line-height: 34px;
+            font-family: Pacifico;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+    }
+    .testimonials_bottom{
+        display: flex;
+        .testimonials_left{
+            display: flex;
+            align-items: flex-end;
+            img{
+            margin-right: 30px;
+            }
+        }
+        .testimonials_right{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            .testimonials_right_write{
+                display: flex;
+                flex-direction: column;
+                font-family: Mulish;
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 26px;
+                color: #808080;
+                span{
+                    color: #202020;
+                    font-size: 22px;
+                    line-height: 32px;
+                    font-family: Space Grotesk;
+                    font-weight: 600;
+                    margin-bottom: 5px;
+                }
+                p{
+                    margin-top: 30px;
+                    font-weight: 600;
+                }
+            }
+            button{
+                border: none;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 30px;
+                padding: 16px 15px;
+                width: -moz-fit-content;
+                width: fit-content;
+                background-color: #4691F2;
+            }
+            button:hover{
+                cursor: pointer;
+            }
+        }
+    }
+}

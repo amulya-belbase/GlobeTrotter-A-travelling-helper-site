@@ -1,0 +1,31 @@
+/* This is for mobiles (width < 575px) */
+@media (max-width: 575px) {
+
+    .login_page {
+      height: 100%;
+      .left_login_div {
+        display: none;
+      }
+      .right_login_div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        #login_taj {
+          img{
+              width: 130px;
+              height: auto;
+          }
+        }
+        #login_pisa {
+          img{
+              width: 130px;
+              height: auto;
+          }
+        }
+      }
+    }
+    
+  }
+  

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Login</title>
+</head>
+
+<body>
+    <div class="login_page">
+        <div class="left_login_div">
+            <div class="login_info">
+                <div class="login_info_up">
+                    GlobeTrotters
+                </div>
+                <div class="login_info_bottom">
+                    Travel is the only purchase that enriches you in ways beyond material wealth
+                </div>
+            </div>
+        </div>
+        <div class="right_login_div">
+            <div id="login_plane"><img src="./assets/img/login_flight.png" alt=""></div>
+            <div id="login_taj"><img src="./assets/img/login_taj.png" alt=""></div>
+            <div id="login_pisa"><img src="./assets/img/login_pisa.png" alt=""></div>
+            <div class="right_login_div_content">
+                <div class="right_login_div_content_top">
+                    <span>Welcome</span>
+                    <p>Login With Email</p>
+                </div>
+                <form action="/login_input" method="post">
+                    <div class="right_login_div_content_input">
+                        <div class="right_login_div_content_input_bar">
+                            <span>Email Id</span>
+                            <img src="./assets/img/login_sms.png" alt="">
+                            <input type="text" name="email" placeholder="example@example.com">
+                        </div>
+                        <div class="right_login_div_content_input_bar">
+                            <span>Password</span>
+                            <img src="./assets/img/login_lock.png" alt="">
+                            <input type="password" name="password" placeholder="*********">
+                        </div>
+                    </div>
+                    <div class="right_login_div_content_forgot">
+                        <span>Forgot Your Password?</span>
+                    </div>
+                    <div class="right_login_div_content_buttons">
+                        <button>LOGIN</button>
+                        <p>Don't have an account? <span><a href="./signup.html">Register Now</a></span></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

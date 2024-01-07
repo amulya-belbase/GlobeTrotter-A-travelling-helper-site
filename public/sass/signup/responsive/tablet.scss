@@ -1,0 +1,95 @@
+/* This is for tablets (width < 1024px) */
+@media (max-width: 1024px) {
+
+  .signup_page {
+    height: 100%;
+    .left_signup_div {
+      .signup_info {
+        padding: 50px 50px;
+        .signup_info_up {
+          font-size: 36px;
+          line-height: 36px;
+        }
+        .signup_info_bottom {
+          font-size: 14px;
+        }
+      }
+    }
+    .right_signup_div {
+      .right_signup_div_content {
+        padding: 50px 50px;
+        .right_signup_div_content_top {
+          span {
+            font-size: 58px;
+            line-height: 38px;
+          }
+          p {
+            font-size: 14px;
+          }
+        }
+        .right_signup_div_content_input {
+          #right_signup_div_content_input_bar_user {
+            justify-content: space-between;
+            input {
+              padding: 10px 10px 10px 15px;
+              font-size: 14px;
+              line-height: 14px;
+            }
+          }
+          .right_signup_div_content_input_bar {
+            img {
+              padding: 0;
+              width: 20px;
+              height: auto;
+              top: 12px;
+              left: 12px;
+            }
+            input {
+              padding: 10px 10px 10px 35px;
+              font-size: 14px;
+              line-height: 14px;
+            }
+            input::placeholder {
+              font-size: 14px;
+              line-height: 14px;
+            }
+          }
+          .right_signup_div_content_input_bar_dropdown {
+            .signupform_right_select {
+              label {
+                font-size: 14px;
+                line-height: 14px;
+              }
+              select {
+                padding: 8px 40px 8px 5px;
+                font-size: 14px;
+                option {
+                  font-size: 14px;
+                  line-height: 14px;
+                }
+              }
+            }
+          }
+          .signup_form_date {
+            label {
+              font-size: 14px;
+              line-height: 14px;
+            }
+            input {
+              padding: 8px;
+
+              font-size: 14px;
+            }
+          }
+          .right_signup_div_content_forgot {
+            span {
+              font-size: 14px;
+              line-height: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+}

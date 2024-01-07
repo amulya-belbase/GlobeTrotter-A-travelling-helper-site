@@ -1,0 +1,128 @@
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: Mulish;
+
+  .upper_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 245px;
+    gap: 400px;
+    color: white;
+    width: 100%;
+    background-image: linear-gradient(
+      120deg,
+      #4691f2 0%,
+      #4691f2 50%,
+      #000000 50%,
+      #000000 100%
+    );
+    font-size: 16px;
+    line-height: 26px;
+    box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.5);
+    .upper_header_left {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      .upper_header_left_info {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+    }
+    .upper_header_right {
+      display: flex;
+      .upper_header_right_login {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding-right: 10px;
+        border-right: 2px solid white;
+        .upper_header_right_login_user {
+          background-color: white;
+          border-radius: 50px;
+          padding: 8px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        a{
+          text-decoration: none;
+          color: white;
+        }
+      }
+      .upper_header_right_socials {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding-left: 10px;
+        .upper_header_right_socials_logo {
+          background-color: white;
+          border-radius: 50px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        #fb {
+          padding: 8px 11px;
+        }
+        #twitter {
+          padding: 10px 8px;
+        }
+        #yt {
+          padding: 10px 8px;
+        }
+        #insta {
+          padding: 8px;
+        }
+      }
+    }
+  }
+  .nav_bar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 25px 245px;
+    .nav_logo{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        :hover{
+            cursor: pointer;
+        }
+    }
+    .nav_options{
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 28px;
+        color: #6C6C6C;
+        :hover{
+            color: #4691F2;
+            cursor: pointer;
+        }
+    }   
+    .nav_contact{
+        background-color: #4691f2;
+        display: flex;
+        align-items: center;
+        padding: 14px 26px;
+        border-radius: 30px;
+        color: white;
+        font-size: 16px;
+        font-weight: 800;
+        gap: 10px;
+    }
+    .nav_contact:hover{
+        box-shadow: 0px 0px 5px 3px rgba(0, 0, 0,0.3);
+        cursor: pointer;
+    }
+  }
+}

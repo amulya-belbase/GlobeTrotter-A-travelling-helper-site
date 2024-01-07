@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Lexend&family=Mulish:wght@500&family=Pacifico&family=Space+Grotesk&display=swap');
+
+
+// IMPORTS FOR INDEX PAGE
+@import "./partials/header";
+@import "./partials/hero";
+@import "./partials/aboutUs";
+@import "./partials/booking";
+@import "./partials/venues";
+@import "./partials/testimonials";
+@import "./partials/action";
+@import "./partials/blog";
+@import "./partials/footer";
+@import "./partials/responsive/tablets";
+@import "./partials/responsive/mobile";
+
+// IMPORTS FOR LOGIN PAGE
+@import "./login/login";
+@import "./login/responsive/tablet";
+@import "./login/responsive/mobile";
+
+// IMPORTS FOR SIGNUP PAGE
+@import "./signup/signup";
+@import "./signup/responsive/tablet";
+@import "./signup/responsive/mobile";
+
+
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+}
+a{
+    text-decoration: none;
+}
