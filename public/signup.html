@@ -26,12 +26,13 @@
                     <span>Welcome</span>
                     <p>Signup With Email</p>
                 </div>
-                <form action="/signup_input" method="post">
+                <form action="/users/signup" method="post">
                     <div class="right_signup_div_content_input">
                         <div class="right_signup_div_content_input_bar">
                             <span>Email Id</span>
                             <img src="./assets/img/login_sms.png" alt="">
-                            <input type="text" name="email" placeholder="example@example.com">
+                            <input type="email" name="email" placeholder="example@example.com">
+                            <!-- <p id="email_validator">Email already taken</p> -->
                         </div>
                         <div class="right_signup_div_content_input_bar">
                             <span>Password</span>
@@ -69,7 +70,7 @@
                         </div>
                         <div class="signup_form_date">
                             <label for="birthday">Date of Birth:</label>
-                            <input type="date" id="birthday" name="birthday">
+                            <input type="date" id="birthday" name="dateofbirth">
                         </div>
                         <div class="right_signup_div_content_forgot">
                             <span>Please upload your profile picture:</span>
@@ -77,7 +78,7 @@
                         </div>
                     </div>
                     <div class="right_signup_div_content_buttons">
-                        <button type="button">SIGNUP</button>
+                        <button>SIGNUP</button>
                         <p>Already have an account? <span><a href="./login.html">Login</a></span></p>
                     </div>
                 </form>
