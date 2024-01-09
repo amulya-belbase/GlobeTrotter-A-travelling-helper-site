@@ -1,0 +1,15 @@
+export interface HotelInfo {
+    hotelname:string, 
+    location:string,
+    established:string,
+    signlerooms:number,
+    singleroomrate: number,
+    doublerooms: number,
+    doubleroomsrate: number,
+    suites: number,
+    suitesrate: number,
+    website:string,
+    email:string,
+    phoneno:string,
+    image1:string,
+}

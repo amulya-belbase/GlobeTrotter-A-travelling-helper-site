@@ -29,9 +29,12 @@
   }
   .right_signup_div {
     width: 50%;
-    position: relative;
+    // position: relative;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
     .right_signup_div_content {
-      padding: 100px 200px;
+      padding: 90px 200px;
       .right_signup_div_content_top {
         text-align: center;
         span {
@@ -173,6 +176,17 @@
                 color: #009ee2;
             }
         }
+        #frontend_email_validation,#frontend_password_validation,#frontend_firstname_validation,
+        #frontend_lastname_validation, #frontend_gender_validation, #frontend_role_validation,
+        #frontend_birthday_validation {
+          margin: 5px 0 0 5px;
+          font-size: 12px;
+          line-height: 12px;
+          color: red;
+          font-family: lexend;
+          text-align: left;
+          display: none;
+      }
       }
       .right_signup_div_content_buttons {
         padding-top: 25px;

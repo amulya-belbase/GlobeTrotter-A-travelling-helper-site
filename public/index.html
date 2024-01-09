@@ -28,7 +28,15 @@
                     <div class="upper_header_right_login_user">
                         <img src="./assets/img/header_user.png" alt="">
                     </div>
-                    <span><a href="./login.html">Login / Register</a></span>
+                    <span id="loginLink"><a href="./login.html">Login / Register</a></span>
+                    <div id="userValidationDiv">
+                        <span id="userValidation"></span>
+                        <div id="userValidationDivDropdown">
+                            <!-- <button>Add Hotels/Flights</button>
+                            <button>Logout</button> -->
+                        </div>
+                    </div>
+
                 </div>
                 <div class="upper_header_right_socials">
                     <div class="upper_header_right_socials_logo" id="fb">
@@ -468,7 +476,59 @@
             © 2023 All rights reserved
         </div>
     </footer>
-    
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
+    <script>
+        const loginCheck = document.getElementById("userValidationDiv");
+        const loginUser = document.getElementById("userValidation");
+        const loginLink = document.getElementById("loginLink");
+        const loginCheckDiv = document.querySelector(".upper_header_right_login");
+        const userButtons = document.getElementById("userValidationDivDropdown");
+
+        if (localStorage.getItem('userId')) {
+            loginLink.style.display = "none";
+            loginCheck.style.display = "block";
+            loginCheckDiv.style.padding = "5px";
+            loginCheckDiv.style.gap = "0px";
+            loginCheckDiv.style.backgroundColor = "#276ac1";
+            loginCheckDiv.style.borderRadius = "5px";
+            loginUser.innerHTML = `Welcome, ${localStorage.getItem('userName')}`;
+            // Assuming loginCheck is a valid DOM element where you want to append the created node
+
+            const logoutButton = document.createElement('button');
+            logoutButton.textContent = 'Logout';
+            logoutButton.setAttribute('id', 'logoutBtn');
+            const hotelButton = document.createElement('button');
+
+            if (localStorage.getItem('role') === "admin") {
+                hotelButton.textContent = 'Add Hotels/Flights'; 
+                hotelButton.setAttribute('id', 'addHotelBtn');
+
+                userButtons.appendChild(hotelButton);
+                userButtons.appendChild(logoutButton);
+            }
+            if (localStorage.getItem('role') === "traveller") {
+                hotelButton.textContent = 'Book Hotels/Flights'; 
+                hotelButton.setAttribute('id', 'bookHotelBtn');
+                userButtons.appendChild(hotelButton);
+                userButtons.appendChild(logoutButton);
+            }
+        }
+
+        if (document.getElementById('logoutBtn')) {
+            document.getElementById('logoutBtn').addEventListener('click', function (event) {
+                localStorage.removeItem('userId');
+                localStorage.removeItem('userName');
+                localStorage.removeItem('role');
+                window.location.href = '/'; // Replace '/dashboard' with your desired page
+            });
+        }
+        if (document.getElementById('addHotelBtn')) {
+            document.getElementById('addHotelBtn').addEventListener('click', function (event) {
+                window.location.href = "/addHotels.html";
+            });
+        }
+    </script>
 </body>
 
 </html>

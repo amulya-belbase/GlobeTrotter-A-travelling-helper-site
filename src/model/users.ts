@@ -31,8 +31,10 @@ export async function signup(result: SignupInfo) {
       .then(function () {
         return (200);
       });
+      // console.log(databaseInsert);
     return databaseInsert;
   } catch (error) {
+    console.log(error);
     return { error: error };
   }
 }

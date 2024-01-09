@@ -47,6 +47,43 @@ header .upper_header .upper_header_right .upper_header_right_login .upper_header
   justify-content: center;
   align-items: center;
 }
+header .upper_header .upper_header_right .upper_header_right_login #loginLink {
+  display: block;
+}
+header .upper_header .upper_header_right .upper_header_right_login #userValidationDiv {
+  cursor: pointer;
+  padding: 5px;
+  display: none;
+  position: relative;
+}
+header .upper_header .upper_header_right .upper_header_right_login #userValidationDiv #userValidationDivDropdown {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  top: 0;
+  left: 5px;
+  padding: 0;
+  opacity: 0;
+  transition: 0.3s ease-in-out top, 0.3s ease-in-out opacity;
+}
+header .upper_header .upper_header_right .upper_header_right_login #userValidationDiv #userValidationDivDropdown button {
+  padding: 5px 0;
+  font-family: Mulish;
+  border: none;
+  color: white;
+  background-color: #4691f2;
+  border-radius: 2px;
+  border-bottom: 2px solid gray;
+}
+header .upper_header .upper_header_right .upper_header_right_login #userValidationDiv #userValidationDivDropdown button:hover {
+  cursor: pointer;
+  background-color: #276ac1;
+}
+header .upper_header .upper_header_right .upper_header_right_login #userValidationDiv:hover #userValidationDivDropdown {
+  opacity: 1;
+  top: 40px;
+}
 header .upper_header .upper_header_right .upper_header_right_login a {
   text-decoration: none;
   color: white;
@@ -2061,6 +2098,14 @@ footer .footer_bottom {
   left: 15px;
   background-color: white;
 }
+.login_page .right_login_div .right_login_div_content .right_login_div_content_input .right_login_div_content_input_bar #frontend_email_validation, .login_page .right_login_div .right_login_div_content .right_login_div_content_input .right_login_div_content_input_bar #frontend_password_validation {
+  margin: 5px 0 0 5px;
+  font-size: 12px;
+  line-height: 12px;
+  color: red;
+  font-family: lexend;
+  display: none;
+}
 .login_page .right_login_div .right_login_div_content .right_login_div_content_forgot {
   margin-top: 25px;
   text-align: right;
@@ -2229,10 +2274,9 @@ footer .footer_bottom {
 }
 .signup_page .right_signup_div {
   width: 50%;
-  position: relative;
 }
 .signup_page .right_signup_div .right_signup_div_content {
-  padding: 100px 200px;
+  padding: 90px 200px;
 }
 .signup_page .right_signup_div .right_signup_div_content .right_signup_div_content_top {
   text-align: center;
@@ -2376,6 +2420,17 @@ footer .footer_bottom {
   font-weight: 600;
   color: #009ee2;
 }
+.signup_page .right_signup_div .right_signup_div_content .right_signup_div_content_input #frontend_email_validation, .signup_page .right_signup_div .right_signup_div_content .right_signup_div_content_input #frontend_password_validation, .signup_page .right_signup_div .right_signup_div_content .right_signup_div_content_input #frontend_firstname_validation,
+.signup_page .right_signup_div .right_signup_div_content .right_signup_div_content_input #frontend_lastname_validation, .signup_page .right_signup_div .right_signup_div_content .right_signup_div_content_input #frontend_gender_validation, .signup_page .right_signup_div .right_signup_div_content .right_signup_div_content_input #frontend_role_validation,
+.signup_page .right_signup_div .right_signup_div_content .right_signup_div_content_input #frontend_birthday_validation {
+  margin: 5px 0 0 5px;
+  font-size: 12px;
+  line-height: 12px;
+  color: red;
+  font-family: lexend;
+  text-align: left;
+  display: none;
+}
 .signup_page .right_signup_div .right_signup_div_content .right_signup_div_content_buttons {
   padding-top: 25px;
   display: flex;
@@ -2501,6 +2556,15 @@ footer .footer_bottom {
     width: 100%;
   }
 }
+#addHotelsForm {
+  font-family: lexend;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
 * {
   box-sizing: border-box;
 }

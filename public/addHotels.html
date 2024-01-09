@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Hotels</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <form action="/hotels/addNew" id="addHotelsForm" method="post">
+        <label>Hotel Name: <input type="text" id="hotelname" name="hotelname"></label>
+        <label>Location: <input type="text" id="location" name="location"></label>
+        <label>Established: <input type="text" id="established" name="established"></label>
+        <label>Single Rooms: <input type="text" id="singleroom" name="singlerooms"></label>
+        <label>Single Room Rate: <input type="text" id="singleroomrate" name="singleroomrate"></label>
+        <label>Double Room: <input type="text" id="doubleroom" name="doublerooms"></label>
+        <label>Double Room Rate: <input type="text" id="doubleroomrate" name="doubleroomrate"></label>
+        <label>Suite: <input type="text" id="suite" name="suites"></label>
+        <label>Suite Rate: <input type="text" id="suiterate" name="suiterate"></label>
+        <label>Website: <input type="text" id="website" name="website"></label>
+        <label>Email: <input type="email" id="email" name="email"></label>
+        <label>Phone No: <input type="text" id="phoneno" name="phoneno"></label>
+        <label>Image: <input type="file" id="image1" name="image1"></label>
+        <button>Submit</button>
+    </form>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        document.getElementById('addHotelsForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Get form data
+            const hotelname = document.getElementById('hotelname').value;
+            const location = document.getElementById('location').value;
+            const established = document.getElementById('established').value;
+            const singleroom = document.getElementById('singleroom').value;
+            const singleroomrate = document.getElementById('singleroomrate').value;
+            const doubleroom = document.getElementById('doubleroom').value;
+            const doubleroomrate = document.getElementById('doubleroomrate').value;
+            const suite = document.getElementById('suite').value;
+            const suiterate = document.getElementById('suiterate').value;
+            const website = document.getElementById('website').value;
+            const email = document.getElementById('email').value;
+            const phoneno = document.getElementById('phoneno').value;
+            const image1 = document.getElementById('image1').value;
+
+            const formData = {
+                hotelname: hotelname,
+                location: location,
+                established: established,
+                singleroom: singleroom,
+                singleroomrate: singleroomrate,
+                doubleroom: doubleroom,
+                doubleroomrate: doubleroomrate,
+                suite: suite,
+                suiterate: suiterate,
+                website: website,
+                email: email,
+                phoneno: phoneno,
+                image1: image1,
+            };
+
+            console.log(formData);
+
+            // // Send form data using Axios
+            // axios.post('http://localhost:8000/users/login', formData)
+            //     .then(response => {
+            //         emailValidation.style.display = 'none';
+
+            //         if (response.data.length === 1) {
+            //             // console.log(response.data[0].id, response.data[0].firstname);
+            //             localStorage.setItem('userId', response.data[0].id);
+            //             localStorage.setItem('userName', response.data[0].firstname);
+            //             localStorage.setItem('role', response.data[0].role);
+            //             window.location.href = '/'; // Replace '/dashboard' with your desired page
+            //         } else {
+            //             console.log(response);
+            //         }
+            //     })
+            //     .catch(error => {
+            //         console.log(error.response.status)
+            //         if(error.response.status === 404){
+            //             emailValidation.style.display = 'block';
+            //             emailValidation.innerHTML = "Email doesn't exist";   
+            //             return;  
+            //         }else if(error.response.status === 401){
+            //             emailValidation.style.display = 'block';
+            //             emailValidation.innerHTML = "Invalid Credentials"; 
+            //         }
+            //     });
+        });
+    </script> -->
+
+</body>
+
+</html>

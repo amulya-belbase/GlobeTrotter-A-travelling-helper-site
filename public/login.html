@@ -29,17 +29,19 @@
                     <span>Welcome</span>
                     <p>Login With Email</p>
                 </div>
-                <form action="/users/login" method="post">
+                <form id="loginForm">
                     <div class="right_login_div_content_input">
                         <div class="right_login_div_content_input_bar">
                             <span>Email Id</span>
                             <img src="./assets/img/login_sms.png" alt="">
-                            <input type="email" name="email" placeholder="example@example.com">
+                            <input type="email" name="email" id="email" placeholder="example@example.com">
+                            <p id="frontend_email_validation"></p>
                         </div>
                         <div class="right_login_div_content_input_bar">
                             <span>Password</span>
                             <img src="./assets/img/login_lock.png" alt="">
-                            <input type="password" name="password" placeholder="*********">
+                            <input type="password" name="password" id="password" placeholder="*********">
+                            <p id="frontend_password_validation"></p>
                         </div>
                     </div>
                     <div class="right_login_div_content_forgot">
@@ -53,6 +55,61 @@
             </div>
         </div>
     </div>
+
+    <!-- <script src="./domManipulation.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Get form data
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            const emailValidation = document.getElementById("frontend_email_validation");
+            const passwordValidation = document.getElementById("frontend_password_validation");
+
+            if(password === ''){
+                passwordValidation.style.display = 'block';
+                passwordValidation.innerHTML = "Password is required";
+                return;
+            }else{
+                passwordValidation.style.display = 'none';
+            }
+            // Create a data object with form values
+            const formData = {
+                email: email,
+                password: password
+            };
+
+            // Send form data using Axios
+            axios.post('http://localhost:8000/users/login', formData)
+                .then(response => {
+                    emailValidation.style.display = 'none';
+
+                    if (response.data.length === 1) {
+                        // console.log(response.data[0].id, response.data[0].firstname);
+                        localStorage.setItem('userId', response.data[0].id);
+                        localStorage.setItem('userName', response.data[0].firstname);
+                        localStorage.setItem('role', response.data[0].role);
+                        window.location.href = '/'; // Replace '/dashboard' with your desired page
+                    } else {
+                        console.log(response);
+                    }
+                })
+                .catch(error => {
+                    console.log(error.response.status)
+                    if(error.response.status === 404){
+                        emailValidation.style.display = 'block';
+                        emailValidation.innerHTML = "Email doesn't exist";   
+                        return;  
+                    }else if(error.response.status === 401){
+                        emailValidation.style.display = 'block';
+                        emailValidation.innerHTML = "Invalid Credentials"; 
+                    }
+                });
+        });
+    </script>
 </body>
 
 </html>

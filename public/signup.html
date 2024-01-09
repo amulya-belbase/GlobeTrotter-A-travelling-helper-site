@@ -26,27 +26,30 @@
                     <span>Welcome</span>
                     <p>Signup With Email</p>
                 </div>
-                <form action="/users/signup" method="post">
+                <form id="signUpForm">
                     <div class="right_signup_div_content_input">
                         <div class="right_signup_div_content_input_bar">
                             <span>Email Id</span>
                             <img src="./assets/img/login_sms.png" alt="">
-                            <input type="email" name="email" placeholder="example@example.com">
-                            <!-- <p id="email_validator">Email already taken</p> -->
+                            <input type="email" name="email" id="email" placeholder="example@example.com">
+                            <p id="frontend_email_validation"></p>
                         </div>
                         <div class="right_signup_div_content_input_bar">
                             <span>Password</span>
                             <img src="./assets/img/login_lock.png" alt="">
-                            <input type="password" name="password" placeholder="*********">
+                            <input type="password" name="password" id="password" placeholder="*********">
+                            <p id="frontend_password_validation"></p>
                         </div>
                         <div id="right_signup_div_content_input_bar_user">
                             <div class="right_signup_div_content_input_bar">
                                 <span>Firstname</span>
-                                <input type="text" name="firstname" placeholder="Firstname">
+                                <input type="text" name="firstname" id="firstname" placeholder="Firstname">
+                                <p id="frontend_firstname_validation"></p>
                             </div>
                             <div class="right_signup_div_content_input_bar">
                                 <span>Lastname</span>
-                                <input type="text" name="lastname" placeholder="Lastname">
+                                <input type="text" name="lastname" id="lastname" placeholder="Lastname">
+                                <p id="frontend_lastname_validation"></p>
                             </div>
                         </div>
                         <div class="right_signup_div_content_input_bar_dropdown">
@@ -58,6 +61,7 @@
                                     <option value="female">Female</option>
                                     <option value="others">Others</option>
                                 </select>
+                                <p id="frontend_gender_validation"></p>
                             </div>
                             <div class="signupform_right_select">
                                 <label for="role">Select your role:</label>
@@ -66,15 +70,17 @@
                                     <option value="traveller">Traveller</option>
                                     <option value="admin">Admin</option>
                                 </select>
+                                <p id="frontend_role_validation"></p>
                             </div>
                         </div>
                         <div class="signup_form_date">
                             <label for="birthday">Date of Birth:</label>
                             <input type="date" id="birthday" name="dateofbirth">
+                            <p id="frontend_birthday_validation"></p>
                         </div>
                         <div class="right_signup_div_content_forgot">
                             <span>Please upload your profile picture:</span>
-                            <input type="file" name="profilepic">
+                            <input type="file" name="profilepic" id="profilepic">
                         </div>
                     </div>
                     <div class="right_signup_div_content_buttons">
@@ -85,6 +91,110 @@
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        document.getElementById('signUpForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Get form data
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const firstname = document.getElementById('firstname').value;
+            const lastname = document.getElementById('lastname').value;
+            const dateofbirth = document.getElementById('birthday').value;
+            const gender = document.getElementById('gender').value;
+            const profilepic = document.getElementById('profilepic').value;
+            const role = document.getElementById('role').value;
+
+
+            // Get validation elements
+            const emailValidation = document.getElementById("frontend_email_validation");
+            const passwordValidation = document.getElementById("frontend_password_validation");
+            const firstnameValidation = document.getElementById("frontend_firstname_validation");
+            const lastnameValidation = document.getElementById("frontend_lastname_validation");
+            const genderValidation = document.getElementById("frontend_gender_validation");
+            const roleValidation = document.getElementById("frontend_role_validation");
+            const birthdayValidation = document.getElementById("frontend_birthday_validation");
+
+            if(password === ''){
+                passwordValidation.style.display = 'block';
+                passwordValidation.innerHTML = "Password is required";
+                return;
+            }else{
+                passwordValidation.style.display = 'none';
+            }
+            if(firstname === ''){
+                firstnameValidation.style.display = 'block';
+                firstnameValidation.innerHTML = "Firstname is required";
+                return;
+            }else{
+                firstnameValidation.style.display = 'none';
+            }
+            if(lastname === ''){
+                lastnameValidation.style.display = 'block';
+                lastnameValidation.innerHTML = "Lastname is required";
+                return;
+            }else{
+                lastnameValidation.style.display = 'none';
+            }
+            if(gender === '#'){
+                genderValidation.style.display = 'block';
+                genderValidation.innerHTML = "Gender is required";
+                return;
+            }else{
+                genderValidation.style.display = 'none';
+            }
+            if(role === '#'){
+                roleValidation.style.display = 'block';
+                roleValidation.innerHTML = "Role is required";
+                return;
+            }else{
+                roleValidation.style.display = 'none';
+            }
+            if(dateofbirth === ''){
+                birthdayValidation.style.display = 'block';
+                birthdayValidation.innerHTML = "Date Of Birth is required";
+                return;
+            }else{
+                birthdayValidation.style.display = 'none';
+            }
+
+            // Create a data object with form values
+            const formData = {
+                email: email,
+                password: password,
+                firstname: firstname,
+                lastname: lastname,
+                dateofbirth: dateofbirth,
+                gender: gender,
+                profilepic: profilepic,
+                role: role
+            };
+
+            // Send form data using Axios
+            axios.post('http://localhost:8000/users/signup', formData)
+                .then(response => {
+                    emailValidation.style.display = 'none';
+
+                    if (response.status === 200) {
+                        // console.log(response.data[0].id, response.data[0].firstname);
+                        alert("User registration successful");
+                        window.location.href = '/login.html'; // Replace '/dashboard' with your desired page
+                    } else {
+                        console.log(response);
+                    }
+                })
+                .catch(error => {
+                    console.log(error.response.status)
+                    if(error.response.status === 422){
+                        emailValidation.style.display = 'block';
+                        emailValidation.innerHTML = "User already exists";   
+                        return;  
+                    }
+                });
+        });
+
+    </script>
 </body>
 
 </html>

@@ -69,6 +69,7 @@
                 gap: 25px;
                 .right_login_div_content_input_bar{
                     position: relative;
+
                     img{
                         position: absolute;
                         padding: 18px 0 15px 20px;
@@ -101,6 +102,14 @@
                         top: -10px;
                         left: 15px;
                         background-color: white;
+                    }
+                    #frontend_email_validation,#frontend_password_validation{
+                        margin: 5px 0 0 5px;
+                        font-size: 12px;
+                        line-height: 12px;
+                        color: red;
+                        font-family: lexend;
+                        display: none;
                     }
                 }
             }
