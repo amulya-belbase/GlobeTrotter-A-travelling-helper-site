@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Hotels</title>
-    <link rel="stylesheet" href="./style.css">
+    <title>Hotels</title>
+    <link rel="stylesheet" href="../style.css">
 </head>
 
 <body>
-    <form action="/hotels/addNew" id="addHotelsForm" method="post">
+    <form id="addHotelsForm">
         <label>Hotel Name: <input type="text" id="hotelname" name="hotelname"></label>
         <label>Location: <input type="text" id="location" name="location"></label>
         <label>Established: <input type="text" id="established" name="established"></label>
@@ -26,7 +26,7 @@
         <button>Submit</button>
     </form>
 
-    <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         document.getElementById('addHotelsForm').addEventListener('submit', function (event) {
             event.preventDefault(); // Prevent default form submission
@@ -46,7 +46,9 @@
             const phoneno = document.getElementById('phoneno').value;
             const image1 = document.getElementById('image1').value;
 
+            // FORM VALIDATION IS NEEDED
             const formData = {
+                userId: localStorage.getItem('userId'),
                 hotelname: hotelname,
                 location: location,
                 established: established,
@@ -62,36 +64,27 @@
                 image1: image1,
             };
 
-            console.log(formData);
+            // console.log(formData);
 
-            // // Send form data using Axios
-            // axios.post('http://localhost:8000/users/login', formData)
-            //     .then(response => {
-            //         emailValidation.style.display = 'none';
-
-            //         if (response.data.length === 1) {
-            //             // console.log(response.data[0].id, response.data[0].firstname);
-            //             localStorage.setItem('userId', response.data[0].id);
-            //             localStorage.setItem('userName', response.data[0].firstname);
-            //             localStorage.setItem('role', response.data[0].role);
-            //             window.location.href = '/'; // Replace '/dashboard' with your desired page
-            //         } else {
-            //             console.log(response);
-            //         }
-            //     })
-            //     .catch(error => {
-            //         console.log(error.response.status)
-            //         if(error.response.status === 404){
-            //             emailValidation.style.display = 'block';
-            //             emailValidation.innerHTML = "Email doesn't exist";   
-            //             return;  
-            //         }else if(error.response.status === 401){
-            //             emailValidation.style.display = 'block';
-            //             emailValidation.innerHTML = "Invalid Credentials"; 
-            //         }
-            //     });
+            // Send form data using Axios
+            axios.post('http://localhost:8000/hotels/addNew', formData)
+                .then(response => {
+                    // console.log(response.status);
+                    if(response.status === 200){
+                        alert("Hotel registered successfully");
+                        window.location.href = './adminDashBoard.html';
+                    }
+                    
+                })
+                .catch(error => { 
+                    if(error.response.status === 422){
+                        // emailValidation.style.display = 'block';
+                        // emailValidation.innerHTML = "Invalid Credentials"; 
+                        alert("Enter form properly");
+                    }
+                });
         });
-    </script> -->
+    </script>
 
 </body>
 

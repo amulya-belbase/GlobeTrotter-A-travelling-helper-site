@@ -1,14 +1,17 @@
 import express, {Router} from "express";
 
 import {
-    addNew
+    addNew,
+    getHotelsById,
+    deleteHotel,
+    updateHotel,
 } from "../controller/hotels";
 
 const router = Router();
 
 router.post("/addNew", addNew);
-
-// router.post("/signup", signup);
-
+router.get("/getHotelsById/:userId",getHotelsById);
+router.delete("/delete/:id", deleteHotel)
+router.put("/update/:id", updateHotel);
 
 export default router; 

@@ -4,6 +4,7 @@ import type { Knex } from "knex";
 export async function up(knex: Knex): Promise<void> {
     return knex.schema.createTable('hotels',function(table){
         table.increments('id');
+        table.integer('userId').references('id').inTable('users');
         table.string('hotelname').notNullable();
         table.string('location').notNullable();
         table.date('established').notNullable(); 
@@ -17,8 +18,6 @@ export async function up(knex: Knex): Promise<void> {
         table.string('email').notNullable();
         table.integer('phoneno').notNullable();
         table.string('image1');
-        table.string('image2');
-        table.string('image3');
         table.timestamp('createdat');
         table.timestamp('updatedat');
     })

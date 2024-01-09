@@ -2,12 +2,103 @@ import { promises as fs } from "fs";
 import knexConfig, { baseKnexConfig } from "../knexFile";
 import knex from "knex";
 import { DateTime } from "luxon";
-import { HotelInfo } from "../interface/hotelInterface";
+import { HotelInfo, UpdateHotelInfo } from "../interface/hotelInterface";
 
 const knexInstance = knex(baseKnexConfig);
 
+const desiredTimezone = "Asia/Kathmandu";
+const currentTimeInDesiredZone = DateTime.now().setZone(desiredTimezone);
+const formattedTime = currentTimeInDesiredZone.toFormat(
+  "yyyy-MM-dd HH:mm:ss"
+);
 // POST METHOD
 export async function addNew(result: HotelInfo) {
-    
+  try {
+    const databaseInsert = await knexInstance
+      .insert({
+        userId: result.userId,
+        hotelname: result.hotelname,
+        location: result.location,
+        established: result.established,
+        singlerooms: result.singlerooms,
+        singleroomrate: result.singleroomrate,
+        doublerooms: result.doublerooms,
+        doubleroomrate: result.doubleroomsrate,
+        suites: result.suites,
+        suiterate: result.suitesrate,
+        website: result.website,
+        email: result.email,
+        phoneno: result.phoneno,
+        image1: result.image1,
+        createdat: formattedTime,
+        updatedat: formattedTime,
+      })
+      .into("hotels")
+      .then(function () {
+        return 200;
+      });
+    console.log(databaseInsert);
+    return databaseInsert;
+  } catch (error) {
+    console.log(error);
+    return { error: error };
+  }
 }
 
+const array: any = [];
+export async function getHotelsById(userId: number) {
+  const resultData = await knexInstance
+    .select("*")
+    .from("hotels")
+    .where("userId", userId)
+    .then(function (data) {
+      return data;
+    });
+  return resultData;
+}
+
+export async function deleteHotel(hotelId: number) {
+  try {
+    const resultData = await knexInstance("hotels")
+      .where("id", hotelId)
+      .del()
+      .then(function () {
+        return 200;
+      });
+    return resultData;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function updateHotel(hotelId: number, newHotelObject: UpdateHotelInfo) {
+  // console.log(`From model ${hotelId}`);
+  // console.log(`From model ${JSON.stringify(newHotelObject)}`);
+  try{
+      knexInstance("hotels")
+    .where("id", hotelId)
+    .update({
+      userId: newHotelObject.userId,
+      hotelname: newHotelObject.hotelname,
+      location: newHotelObject.location,
+      established: newHotelObject.established,
+      singlerooms: newHotelObject.singlerooms,
+      singleroomrate: newHotelObject.singleroomrate,
+      doublerooms: newHotelObject.doublerooms,
+      doubleroomrate: newHotelObject.doubleroomsrate,
+      suites: newHotelObject.suites,
+      suiterate: newHotelObject.suitesrate,
+      website: newHotelObject.website,
+      email: newHotelObject.email,
+      phoneno: newHotelObject.phoneno,
+      image1: newHotelObject.image1,
+      createdat: newHotelObject.createdat,
+      updatedat: formattedTime,
+    })
+    .then(function(){
+      return (200);
+    });
+  }catch(error){
+    console.log(error);
+  }
+}

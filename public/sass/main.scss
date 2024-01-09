@@ -25,7 +25,11 @@
 @import "./signup/responsive/mobile";
 
 // IMPORTS FOR ADDING HOTELS 
-@import "./addhotels/addhotels";
+@import "./adminHotels/adminHotels";
+
+// IMPORTS FOR ADMIN DASHBOARD
+@import "./adminDashboard/adminDashboard";
+
 
 *{
     box-sizing: border-box;

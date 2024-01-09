@@ -1,19 +1,3 @@
-// // Server-side (Express)
-
-// import express from "express";
-// import config from "./src/config";
-
-// const app = express();
-
-// app.get("/example", (req, res) => {
-//   // Sending a JSON response from the server
-//   res.json({ message: "Server response for /example" });
-// });
-
-// app.listen(config.serverPort, () => {
-//   console.log(`Server listening on port: ${config.serverPort}`);
-// });
-
 
 import express from "express";
 import config from "./src/config";

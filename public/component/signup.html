@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="../style.css">
     <title>Signup</title>
 </head>
 
@@ -30,13 +30,13 @@
                     <div class="right_signup_div_content_input">
                         <div class="right_signup_div_content_input_bar">
                             <span>Email Id</span>
-                            <img src="./assets/img/login_sms.png" alt="">
+                            <img src="../assets/img/login_sms.png" alt="">
                             <input type="email" name="email" id="email" placeholder="example@example.com">
                             <p id="frontend_email_validation"></p>
                         </div>
                         <div class="right_signup_div_content_input_bar">
                             <span>Password</span>
-                            <img src="./assets/img/login_lock.png" alt="">
+                            <img src="../assets/img/login_lock.png" alt="">
                             <input type="password" name="password" id="password" placeholder="*********">
                             <p id="frontend_password_validation"></p>
                         </div>
@@ -179,7 +179,7 @@
                     if (response.status === 200) {
                         // console.log(response.data[0].id, response.data[0].firstname);
                         alert("User registration successful");
-                        window.location.href = '/login.html'; // Replace '/dashboard' with your desired page
+                        window.location.href = './login.html'; // Replace '/dashboard' with your desired page
                     } else {
                         console.log(response);
                     }

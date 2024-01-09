@@ -1,8 +1,9 @@
 export interface HotelInfo {
+    userId:number,
     hotelname:string, 
     location:string,
     established:string,
-    signlerooms:number,
+    singlerooms:number,
     singleroomrate: number,
     doublerooms: number,
     doubleroomsrate: number,
@@ -12,4 +13,22 @@ export interface HotelInfo {
     email:string,
     phoneno:string,
     image1:string,
+}
+
+export interface UpdateHotelInfo {
+    userId:number,
+    hotelname:string, 
+    location:string,
+    established:string,
+    singlerooms:number,
+    singleroomrate: number,
+    doublerooms: number,
+    doubleroomsrate: number,
+    suites: number,
+    suitesrate: number,
+    website:string,
+    email:string,
+    phoneno:string,
+    image1:string,
+    createdat:Date,
 }
