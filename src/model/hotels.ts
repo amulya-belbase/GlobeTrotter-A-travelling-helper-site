@@ -57,13 +57,18 @@ export async function getHotelsById(userId: number) {
   return resultData;
 }
 
-export async function deleteHotel(hotelId: number) {
+export async function deleteHotel(hotelId: number,userId:number) {
+  // console.log(`From model: userId ${userId} & hotelId: ${hotelId}`);
   try {
     const resultData = await knexInstance("hotels")
-      .where("id", hotelId)
+      .where("id", hotelId).andWhere('userId', userId)
       .del()
-      .then(function () {
-        return 200;
+      .then(function (data) {
+        if(data === 0){
+          return (401)
+        }else{
+          return (200)
+        }
       });
     return resultData;
   } catch (error) {
@@ -75,8 +80,8 @@ export async function updateHotel(hotelId: number, newHotelObject: UpdateHotelIn
   // console.log(`From model ${hotelId}`);
   // console.log(`From model ${JSON.stringify(newHotelObject)}`);
   try{
-      knexInstance("hotels")
-    .where("id", hotelId)
+    const resultData = knexInstance("hotels")
+    .where("id", hotelId).andWhere('userId', newHotelObject.userId)
     .update({
       userId: newHotelObject.userId,
       hotelname: newHotelObject.hotelname,
@@ -95,9 +100,14 @@ export async function updateHotel(hotelId: number, newHotelObject: UpdateHotelIn
       createdat: newHotelObject.createdat,
       updatedat: formattedTime,
     })
-    .then(function(){
-      return (200);
+    .then(function(data){
+      if(data === 1){
+        return (200)
+      }else{
+        return (401)
+      }
     });
+    return resultData;
   }catch(error){
     console.log(error);
   }

@@ -2691,57 +2691,172 @@ footer .footer_bottom {
 
 .container {
   display: flex;
-  position: relative;
 }
 .container nav {
   position: sticky;
   top: 0;
   bottom: 0;
-  height: 100vh;
   left: 0;
-  width: 250px; /* ================ for transition */
-  background: #e2dada;
+  height: 100vh;
+  background-image: linear-gradient(120deg, #4691f2 0%, #4691f2 50%, #ffffff 50%, #ffffff 100%);
+}
+.container nav .dashboard_logo {
+  background-color: white;
+  padding: 20px;
+}
+.container nav .dashboard_links {
+  display: flex;
+  flex-direction: column;
+}
+.container nav .dashboard_links a {
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  cursor: pointer;
+}
+.container nav .dashboard_links a span {
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 600;
+  font-family: Space Grotesk;
+}
+.container nav .dashboard_links a:hover {
+  transition: 0.4s ease-in-out;
+  background-color: #2368c2;
 }
 .container .userEntries {
-  padding: 20px;
+  padding: 0 20px;
   display: flex;
   flex-direction: column;
   width: 100%;
-  background-color: rgb(175, 172, 172);
+  background-color: #e2e2e2;
 }
-.container .userEntries h2 {
-  margin: 0;
-  margin-bottom: 10px;
+.container .userEntries span {
+  padding: 20px;
+  font-size: 30px;
+  font-weight: bold;
+  font-family: Space Grotesk;
+  border-bottom: 2px solid #4691f2;
+}
+.container .userEntries span .dashboard_title {
+  color: #4691f2;
+  padding: 0;
+  border-bottom: none;
 }
 .container .userEntries .userHotels {
   display: flex;
   gap: 20px;
   margin-bottom: 50px;
-  padding-left: 20px;
+  padding: 20px;
 }
 .container .userEntries .userHotels .userHotelCard {
   text-align: center;
   background-color: white;
   height: -moz-fit-content;
   height: fit-content;
-  padding: 10px;
+  padding: 20px;
   color: black;
   border-radius: 5px;
+  font-family: lexend;
+  box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.75);
+}
+.container .userEntries .userHotels .userHotelCard p {
+  margin: 0;
+  margin-bottom: 10px;
+}
+.container .userEntries .userHotels .userHotelCard #dashboard_hotel_name {
+  font-size: 20px;
+  font-weight: bold;
+}
+.container .userEntries .userHotels .userHotelCard #dashboard_location_name {
+  font-size: 16px;
+  font-weight: 600;
+}
+.container .userEntries .userHotels .userHotelCard #dashboard_contact_name {
+  font-size: 14px;
+  font-weight: 500;
+}
+.container .userEntries .userHotels .userHotelCard #dashboard_btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.container .userEntries .userHotels .userHotelCard #dashboard_btn button {
+  background: transparent;
+  border: 1px solid #2c70c8;
+  padding: 10px 30px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+.container .userEntries .userHotels .userHotelCard #dashboard_btn button:hover {
+  background: #2c70c8;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+.container .userEntries .userHotels .userHotelCard #dashboard_btn #dashboard_deleteBtn {
+  border: 1px solid #d51818;
+}
+.container .userEntries .userHotels .userHotelCard #dashboard_btn #dashboard_deleteBtn:hover {
+  background: #d51818;
 }
 .container .userEntries .userFlights {
   display: flex;
   gap: 20px;
   margin-bottom: 50px;
-  padding-left: 20px;
+  padding: 20px;
 }
 .container .userEntries .userFlights .userFlightCard {
   text-align: center;
   background-color: white;
   height: -moz-fit-content;
   height: fit-content;
-  padding: 10px;
+  padding: 20px;
   color: black;
   border-radius: 5px;
+  font-family: lexend;
+  box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.75);
+}
+.container .userEntries .userFlights .userFlightCard p {
+  margin: 0;
+  margin-bottom: 10px;
+}
+.container .userEntries .userFlights .userFlightCard #dashboard_hotel_name {
+  font-size: 20px;
+  font-weight: bold;
+}
+.container .userEntries .userFlights .userFlightCard #dashboard_location_name {
+  font-size: 16px;
+  font-weight: 600;
+}
+.container .userEntries .userFlights .userFlightCard #dashboard_contact_name {
+  font-size: 14px;
+  font-weight: 500;
+}
+.container .userEntries .userFlights .userFlightCard #dashboard_btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.container .userEntries .userFlights .userFlightCard #dashboard_btn button {
+  background: transparent;
+  border: 1px solid #2c70c8;
+  padding: 10px 30px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+.container .userEntries .userFlights .userFlightCard #dashboard_btn button:hover {
+  background: #2c70c8;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+.container .userEntries .userFlights .userFlightCard #dashboard_btn #dashboard_deleteBtn {
+  border: 1px solid #d51818;
+}
+.container .userEntries .userFlights .userFlightCard #dashboard_btn #dashboard_deleteBtn:hover {
+  background: #d51818;
 }
 .container #hotelFormDiv {
   position: absolute;
@@ -2754,17 +2869,72 @@ footer .footer_bottom {
   visibility: hidden;
 }
 .container #hotelFormDiv #updateHotel {
-  background-color: rgb(243, 192, 156);
+  font-family: lexend;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: -moz-fit-content;
-  width: fit-content;
-  height: fit-content;
-  padding: 10px;
   gap: 10px;
+  padding-bottom: 15px;
+  background-color: #e2e2e2;
+  border-radius: 5px;
+  padding: 15px 30px;
   opacity: 0;
-  transition: 0.3s ease-in-out opacity;
+  transition: 0.3s ease-in-out;
+}
+.container #hotelFormDiv #updateHotel #updateFormTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.container #hotelFormDiv #updateHotel #updateFormTop span {
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  font-family: Space Grotesk;
+  color: #4691f2;
+  width: 100%;
+}
+.container #hotelFormDiv #updateHotel #updateFormTop a {
+  font-size: 16px;
+  padding: 5px 10px;
+  text-decoration: none;
+  color: black;
+  border-radius: 5px;
+}
+.container #hotelFormDiv #updateHotel #updateFormTop a:hover {
+  color: white;
+  background-color: #4691f2;
+  transition: 0.2s ease-in-out;
+}
+.container #hotelFormDiv #updateHotel label {
+  font-size: 18px;
+}
+.container #hotelFormDiv #updateHotel input {
+  border-radius: 10px;
+  outline: none;
+  border: 1px solid #009EE2;
+  padding: 10px;
+  width: 100%;
+  font-size: 16px;
+  line-height: 14px;
+  font-weight: 500;
+  font-family: Space Grotesk;
+}
+.container #hotelFormDiv #updateHotel .room_div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.container #hotelFormDiv #updateHotel button {
+  padding: 15px 40px;
+  color: white;
+  font-size: 16px;
+  line-height: 14px;
+  font-weight: 700;
+  background-color: #009EE2;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 .container #flightFormDiv {
   position: absolute;
@@ -2777,17 +2947,72 @@ footer .footer_bottom {
   visibility: hidden;
 }
 .container #flightFormDiv #updateFlight {
-  background-color: rgb(243, 192, 156);
+  font-family: lexend;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: -moz-fit-content;
-  width: fit-content;
-  height: fit-content;
-  padding: 10px;
   gap: 10px;
+  padding-bottom: 15px;
+  background-color: #e2e2e2;
+  border-radius: 5px;
+  padding: 15px 30px;
   opacity: 0;
-  transition: 0.3s ease-in-out opacity;
+  transition: 0.3s ease-in-out;
+}
+.container #flightFormDiv #updateFlight #updateFormTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.container #flightFormDiv #updateFlight #updateFormTop span {
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  font-family: Space Grotesk;
+  color: #4691f2;
+  width: 100%;
+}
+.container #flightFormDiv #updateFlight #updateFormTop a {
+  font-size: 16px;
+  padding: 5px 10px;
+  text-decoration: none;
+  color: black;
+  border-radius: 5px;
+}
+.container #flightFormDiv #updateFlight #updateFormTop a:hover {
+  color: white;
+  background-color: #4691f2;
+  transition: 0.2s ease-in-out;
+}
+.container #flightFormDiv #updateFlight label {
+  font-size: 18px;
+}
+.container #flightFormDiv #updateFlight input {
+  border-radius: 10px;
+  outline: none;
+  border: 1px solid #009EE2;
+  padding: 10px;
+  width: 100%;
+  font-size: 16px;
+  line-height: 14px;
+  font-weight: 500;
+  font-family: Space Grotesk;
+}
+.container #flightFormDiv #updateFlight .flight_div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.container #flightFormDiv #updateFlight button {
+  padding: 15px 40px;
+  color: white;
+  font-size: 16px;
+  line-height: 14px;
+  font-weight: 700;
+  background-color: #009ee2;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 * {

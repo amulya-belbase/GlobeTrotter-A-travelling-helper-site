@@ -11,7 +11,7 @@ const router = Router();
 
 router.post("/addNew", addNew);
 router.get("/getHotelsById/:userId",getHotelsById);
-router.delete("/delete/:id", deleteHotel)
+router.delete("/delete/:ids", deleteHotel)
 router.put("/update/:id", updateHotel);
 
 export default router; 

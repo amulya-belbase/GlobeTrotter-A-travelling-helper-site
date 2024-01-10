@@ -49,8 +49,8 @@ export const addNew = async (
   }
   
 
-  export const deleteHotel = async (hotelId:number) => {
-    const data = await hotelModel.deleteHotel(hotelId);
+  export const deleteHotel = async (hotelId:number,userId:number) => {
+    const data = await hotelModel.deleteHotel(hotelId,userId);
     // console.log(data);
     return (data); 
   }

@@ -49,12 +49,18 @@ export const getHotelsById = async (req:Request, res: Response) => {
   }
 }
 export const deleteHotel = async (req:Request, res: Response) => {
-  const hotelId = Number(req.params.id); 
-  // console.log(hotelId);
+  // const hotelId = Number(req.params.id); 
+  const { ids } = req.params;
+  const idArray = ids.split(',').map(Number); 
+  const hotelId = idArray[0];
+  const userId = idArray[1];
   try {
-    const data = await hotelService.deleteHotel(hotelId);
-    // console.log(data);
-    res.status(200).json({message:"Hotel deleted Successfully"});
+    const data = await hotelService.deleteHotel(hotelId,userId);
+    if(data === 401){
+      res.status(401).json({message:"Unauthorized request"})
+    }else if(data === 200){
+      res.status(200).json({message:"Hotel deleted Successfully"});
+    }
   } catch (error) {
     res.status(500).json({ error });
   }
@@ -83,8 +89,11 @@ export const updateHotel = async (req:Request, res: Response) => {
 
   try {
     const data = await hotelService.updateHotel(hotelId,newHotelObject);
-    console.log(data);
-    res.status(200).json({message:"Hotel updated Successfully"});
+    if(data === 200){
+      res.status(200).json({message:"Hotel deleted Successfully"});
+    }else{
+      res.status(401).json({message:"Unauthorized request"})
+    }
   } catch (error) {
     res.status(500).json({ error });
   }

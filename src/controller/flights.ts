@@ -25,7 +25,7 @@ export const addNew = async (req: Request, res: Response) => {
       result.image1
     );
     if (data === 200) {
-      res.status(200).json({message:"Hotel registered Successfully"});
+      res.status(200).json({message:"Flight registered Successfully"});
     } else {
       res.status(422).json(data);
     }
@@ -48,12 +48,18 @@ export const getFlightsById = async (req:Request, res: Response) => {
 }
 
 export const deleteFlight = async (req:Request, res: Response) => {
-  const flightId = Number(req.params.id); 
-  // console.log(hotelId);
+  // const flightId = Number(req.params.id); 
+  const { ids } = req.params;
+  const idArray = ids.split(',').map(Number); 
+  const flightId = idArray[0];
+  const userId = idArray[1];
   try {
-    const data = await flightService.deleteFlight(flightId);
-    // console.log(data);
-    res.status(200).json({message:"Flight deleted Successfully"});
+    const data = await flightService.deleteFlight(flightId,userId);
+    if(data === 401){
+      res.status(401).json({message:"Unauthorized request"})
+    }else if(data === 200){
+      res.status(200).json({message:"Flight deleted Successfully"});
+    }
   } catch (error) {
     res.status(500).json({ error });
   }
@@ -80,8 +86,11 @@ export const updateFlight = async (req:Request, res: Response) => {
 
   try {
     const data = await flightService.updateFlight(flightId,newFlightObject);
-    console.log(data);
-    res.status(200).json({message:"Flight updated Successfully"});
+    if(data === 200){
+      res.status(200).json({message:"Flight deleted Successfully"});
+    }else{
+      res.status(401).json({message:"Unauthorized request"})
+    }
   } catch (error) {
     res.status(500).json({ error });
   }

@@ -45,8 +45,8 @@ export const addNew = async (
   }
   
 
-  export const deleteFlight = async (flightId:number) => {
-    const data = await flightModel.deleteFlight(flightId);
+  export const deleteFlight = async (flightId:number,userId:number) => {
+    const data = await flightModel.deleteFlight(flightId,userId);
     // console.log(data);
     return (data); 
   }
