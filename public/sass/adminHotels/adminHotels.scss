@@ -1,8 +1,76 @@
-#addHotelsForm{
-    font-family: lexend;
+.booking_container{
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 20px;
+    width: 100%;
+    .booking_container_left_hotel{
+        background-image: url("./assets/img/add_hotel.png");
+        background-size: 100%;
+        background-repeat: no-repeat;
+        width: 50%;
+        height: 100vh;
+        color: white;
+        padding: 75px 135px;
+        text-align: center;
+        span{
+            font-family: Pacifico;
+            font-size: 44px;
+            line-height: 48px;
+        }
+        p{
+            margin-top: 15px;
+            font-family: Space Grotesk;
+            font-size: 18px;
+            font-weight: 600;
+        }
+    }
+    .booking_container_right{
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        span{
+            font-size: 62px;
+            line-height: 48px;
+            font-weight: 800;
+            color: #009EE2;
+            font-family: Lexend;
+            padding: 20px 0;
+        }
+        #addHotelsForm{
+            font-family: lexend;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding-bottom: 15px;
+            input{
+                border-radius: 10px;
+                outline: none;
+                border: 2px solid #009EE2;
+                padding: 10px;
+                width: 100%;
+                font-size: 16px;
+                line-height: 14px;
+                font-weight: 500;
+                font-family: Space Grotesk;
+            }
+            .room_div{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 20px;
+            }
+            button{
+                padding: 15px 40px;
+                color: white;
+                font-size: 16px;
+                line-height: 14px;
+                font-weight: 700;
+                background-color: #009EE2;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+        }
+
+    }
 }

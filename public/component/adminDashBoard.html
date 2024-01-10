@@ -25,21 +25,35 @@
             </ul>
         </nav>
 
-        <div class="userHotels">
-            <!-- <div class="userHotelCard">
-                <p>Name</p>
-                <p>Location</p>
-                <p>Rooms</p>
-                <p>Contact</p>
-                <button>Update</button>
-                <button>Delete</button>
-            </div> -->
+        <div class="userEntries">
+            <h2>User Hotels</h2>
+            <div class="userHotels">
+                <!-- <div class="userHotelCard">
+                    <p>Name</p>
+                    <p>Location</p>
+                    <p>Rooms</p>
+                    <p>Contact</p>
+                    <button>Update</button>
+                    <button>Delete</button>
+                </div> -->
+            </div>
+            <h2>User Flights</h2>
+            <div class="userFlights">
+                <!-- <div class="userFlightCard">
+                    <p>Name</p>
+                    <p>Departure</p>
+                    <p>Economy</p>
+                    <p>Contact</p>
+                    <button>Update</button>
+                    <button>Delete</button>
+                </div> -->
+            </div>
 
         </div>
 
-        <div id="formDiv">
+        <div id="hotelFormDiv">
             <form id="updateHotel">
-                <a href="" onclick="hidePopUp()">&times;</a>
+                <a href="" onclick="hideHotelPopUp()">&times;</a>
                 <label>Hotel Name: <input type="text" id="hotelname" name="hotelname"></label>
                 <label>Location: <input type="text" id="location" name="location"></label>
                 <label>Established: <input type="text" id="established" name="established"></label>
@@ -56,23 +70,45 @@
                 <button>Submit</button>
             </form>
         </div>
+        <div id="flightFormDiv">
+            <form id="updateFlight">
+                <a href="" onclick="hideFlightPopUp()">&times;</a>
+                <label>Flight Name: <input type="text" id="flightname" name="flightname"></label>
+                <label>Departure: <input type="text" id="flightdepart" name="flightdepart"></label>
+                <label>Destination: <input type="text" id="flightdest" name="flightdest"></label>
+                <label>Economy: <input type="number" id="economy" name="economy"></label>
+                <label>Economy Rate: <input type="number" id="economyrate" name="economyrate"></label>
+                <label>Business: <input type="number" id="business" name="business"></label>
+                <label>Business Rate: <input type="number" id="businessrate" name="businessrate"></label>
+                <label>Website: <input type="text" id="flightwebsite" name="website"></label>
+                <label>Email: <input type="email" id="flightemail" name="email"></label>
+                <label>Phone No: <input type="number" id="flightphoneno" name="phoneno"></label>
+                <label>Image: <input type="file" id="flightimage1" name="image1"></label>
+                <button>Submit</button>
+            </form>
+        </div>
     </div>
 
-    
+
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        function hidePopUp() {
-            const updateFormDiv = document.getElementById("formDiv");
-            const updateForm = document.getElementById("updateHotel");
+        function hideHotelPopUp() {
+            const updateFormDiv = document.getElementById("hotelFormDiv");
             updateFormDiv.style.visibility = 'hidden';
-            updateForm.style.opacity = "0";
+        }
+        function hideFlightPopUp() {
+            const updateFormDiv = document.getElementById("flightFormDiv");
+            updateFormDiv.style.visibility = 'hidden';
         }
         document.addEventListener('DOMContentLoaded', function () {
             const userId = localStorage.getItem('userId');
+            const role = localStorage.getItem('role');
 
 
             // Make sure userId exists before sending the request
-            if (userId) {
+            if (userId && role === "admin") {
+
+                // TO GET ALL THE USER CREATED HOTELS
                 axios.get(`http://localhost:8000/hotels/getHotelsById/${userId}`)
                     .then(response => {
                         if (response.data.length === 0) {
@@ -118,7 +154,7 @@
                                     const hotelId = Number(this.getAttribute('updateBtn'));
                                     console.log('Update clicked for hotelId:', hotelId);
 
-                                    const updateFormDiv = document.getElementById("formDiv");
+                                    const updateFormDiv = document.getElementById("hotelFormDiv");
                                     const updateForm = document.getElementById("updateHotel");
                                     updateFormDiv.style.visibility = 'visible';
                                     updateForm.style.opacity = "1";
@@ -219,6 +255,150 @@
                     .catch(error => {
                         console.log(error);
                     });
+
+
+                // TO GET ALL THE USER CREATED FLIGHTS
+                axios.get(`http://localhost:8000/flights/getFlightsById/${userId}`)
+                    .then(response => {
+                        if (response.data.length === 0) {
+                            console.log("this user doesn't have any data");
+                        } else {
+                            const divContainer = document.querySelector('.userFlights');
+                            response.data.forEach(item => {
+                                const cardContainer = document.createElement('div');
+                                cardContainer.setAttribute('class', 'userFlightCard');
+
+                                const itemElement1 = document.createElement('p');
+                                const itemElement2 = document.createElement('p');
+                                const itemElement3 = document.createElement('p');
+                                const itemElement4 = document.createElement('p');
+
+                                const updateBtn = document.createElement('button');
+                                const deleteBtn = document.createElement('button');
+
+                                // Set the hotelId as a data attribute for each button
+                                updateBtn.setAttribute('updateBtn', item.id);
+                                deleteBtn.setAttribute('deleteBtn', item.id);
+
+                                itemElement1.textContent = `Flight Name: ${item.flightname}`;
+                                itemElement2.textContent = `Departure: ${item.flightdepart}`;
+                                itemElement3.textContent = `Economy: ${item.economy}`;
+                                itemElement4.textContent = `Phone No.: ${item.phoneno}`;
+
+                                updateBtn.textContent = 'Update';
+                                deleteBtn.textContent = 'Delete';
+
+                                cardContainer.appendChild(itemElement1);
+                                cardContainer.appendChild(itemElement2);
+                                cardContainer.appendChild(itemElement3);
+                                cardContainer.appendChild(itemElement4);
+                                cardContainer.appendChild(updateBtn);
+                                cardContainer.appendChild(deleteBtn);
+
+                                divContainer.appendChild(cardContainer);
+
+                                // Event listener for the update button
+                                updateBtn.addEventListener('click', function () {
+
+                                    const flightId = Number(this.getAttribute('updateBtn'));
+                                    console.log('Update clicked for flightId:', flightId);
+
+                                    const updateFormDiv = document.getElementById("flightFormDiv");
+                                    const updateForm = document.getElementById("updateFlight");
+                                    updateFormDiv.style.visibility = 'visible';
+                                    updateForm.style.opacity = "1";
+
+                                    const selectedItem = response.data.find(item => item.id === flightId);
+                                    document.getElementById('flightname').value = selectedItem.flightname
+                                    document.getElementById('flightdepart').value = selectedItem.flightdepart
+                                    document.getElementById('flightdest').value = selectedItem.flightdest
+                                    document.getElementById('economy').value = selectedItem.economy
+                                    document.getElementById('economyrate').value = selectedItem.economyrate
+                                    document.getElementById('business').value = selectedItem.business
+                                    document.getElementById('businessrate').value = selectedItem.businessrate
+                                    document.getElementById('flightwebsite').value = selectedItem.website
+                                    document.getElementById('flightemail').value = selectedItem.email
+                                    document.getElementById('flightphoneno').value = selectedItem.phoneno
+
+
+                                    updateForm.addEventListener('submit', function (event) {
+                                        event.preventDefault(); // Prevent default form submission
+
+                                        // Get form data
+                                        const flightname = document.getElementById('flightname').value;
+                                        const flightdepart = document.getElementById('flightdepart').value;
+                                        const flightdest = document.getElementById('flightdest').value;
+                                        const economy = document.getElementById('economy').value;
+                                        const economyrate = document.getElementById('economyrate').value;
+                                        const business = document.getElementById('business').value;
+                                        const businessrate = document.getElementById('businessrate').value;
+                                        const website = document.getElementById('flightwebsite').value;
+                                        const email = document.getElementById('flightemail').value;
+                                        const phoneno = document.getElementById('flightphoneno').value;
+                                        const image1 = document.getElementById('flightimage1').value;
+
+                                        // FORM VALIDATION IS NEEDED
+                                        const updatedFlightData = {
+                                            userId: localStorage.getItem('userId'),
+                                            flightname: flightname,
+                                            flightdepart: flightdepart,
+                                            flightdest: flightdest,
+                                            economy: economy,
+                                            economyrate: economyrate,
+                                            business: business,
+                                            businessrate: businessrate,
+                                            website: website,
+                                            email: email,
+                                            phoneno: phoneno,
+                                            image1: image1,
+                                            createdat: selectedItem.createdat,
+                                        };
+
+                                        // console.log(formData);
+
+                                        // Send form data using Axios
+                                        axios.put(`http://localhost:8000/flights/update/${flightId}`, updatedFlightData)
+                                            .then(response => {
+
+                                                if (response.status === 200) {
+                                                    updateFormDiv.style.visibility = 'hidden';
+                                                    updateForm.style.opacity = '0';
+                                                    alert("Flight updated successfully");
+                                                    window.location.href = './adminDashBoard.html';
+                                                }
+                                            })
+                                            .catch(error => {
+                                                console.error('Error updating flight:', error);
+                                                // Handle error while trying to update the hotel
+                                            });
+                                    });
+                                });
+
+                                // Event listener for the delete button
+                                deleteBtn.addEventListener('click', function () {
+                                    const flightId = Number(this.getAttribute('deleteBtn'));
+                                    axios.delete(`http://localhost:8000/flights/delete/${flightId}`)
+                                        .then(response => {
+
+                                            if (response.status === 200) {
+                                                alert('Flight entry deleted successfully');
+                                            }
+                                            console.log(`Flight with ID ${flightId} deleted successfully`);
+                                            // this.parentNode.remove(); 
+
+                                            window.location.href = './adminDashBoard.html';
+                                        })
+                                        .catch(error => {
+                                            console.error('Error deleting flight:', error);
+                                        });
+                                });
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+
             } else {
                 window.location.href = './login.html';
             }

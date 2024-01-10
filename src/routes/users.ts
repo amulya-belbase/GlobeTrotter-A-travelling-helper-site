@@ -4,7 +4,6 @@ import {
     login,
     signup
 } from "../controller/users";
-import { sign } from "crypto";
 
 const router = Router();
 

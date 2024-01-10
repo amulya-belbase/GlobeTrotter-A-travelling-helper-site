@@ -24,8 +24,11 @@
 @import "./signup/responsive/tablet";
 @import "./signup/responsive/mobile";
 
-// IMPORTS FOR ADDING HOTELS 
+// IMPORTS FOR ADDING HOTELS FOR ADMIN
 @import "./adminHotels/adminHotels";
+
+// IMPORTS FOR ADDING FLIGHTS FOR ADMIN
+@import "./adminFlights/adminFlights";
 
 // IMPORTS FOR ADMIN DASHBOARD
 @import "./adminDashboard/adminDashboard";

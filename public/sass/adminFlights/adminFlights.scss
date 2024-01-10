@@ -1,0 +1,63 @@
+.booking_container {
+
+  .booking_container_left {
+    background-image: url("./assets/img/flight_plane2.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 50%;
+    height: 100vh;
+    color: white;
+    padding: 75px 135px;
+    text-align: center;
+    span {
+      font-family: Pacifico;
+      font-size: 44px;
+      line-height: 48px;
+    }
+    p {
+      margin-top: 15px;
+      font-family: Space Grotesk;
+      font-size: 18px;
+      font-weight: 600;
+    }
+  }
+  .booking_container_right {
+
+    #addFlightsForm {
+      font-family: lexend;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      input {
+        border-radius: 10px;
+        outline: none;
+        border: 2px solid #009ee2;
+        padding: 10px;
+        width: 100%;
+        font-size: 16px;
+        line-height: 14px;
+        font-weight: 500;
+        font-family: Space Grotesk;
+      }
+      .flight_div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+      button {
+        padding: 15px 40px;
+        color: white;
+        font-size: 16px;
+        line-height: 14px;
+        font-weight: 700;
+        background-color: #009ee2;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    }
+  }
+}
