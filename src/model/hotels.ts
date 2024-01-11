@@ -11,14 +11,99 @@ const currentTimeInDesiredZone = DateTime.now().setZone(desiredTimezone);
 const formattedTime = currentTimeInDesiredZone.toFormat(
   "yyyy-MM-dd HH:mm:ss"
 );
+
+export async function getAllFilter(locationValue:string,searchValue:string){
+  // From model kathmandu, hunxa
+if(locationValue === 'all' && searchValue === 'all'){
+  // console.log("Display all")
+  try{
+    const resultData = knexInstance
+    .select('*')
+    .from('hotels')
+    .then(function (data) {
+      if(data.length === 0){
+        return (404);
+      }else{
+        return (data);
+      }
+    });
+    return (resultData);
+}
+  catch(error){
+    console.log(error)
+    return (error);
+  }
+}else if(searchValue === 'all'){
+  // console.log("Display only locationValue based db data")
+  try{
+    const resultData = knexInstance
+    .select('*')
+    .from('hotels').where('location',locationValue)
+    .then(function (data) {
+      if(data.length === 0){
+        return (404);
+      }else{
+        return (data);
+      }
+    });
+    return (resultData);
+}
+  catch(error){
+    console.log(error)
+    return (error);
+  }
+
+}
+else if(locationValue === 'all'){
+  // console.log("Display only searchValue based db data")
+  try{
+    const resultData = knexInstance
+    .select('*')
+    .from('hotels').where('hotelname',searchValue)
+    .then(function (data) {
+      if(data.length === 0){
+        return (404);
+      }else{
+        return (data);
+      }
+    });
+    return (resultData);
+}
+  catch(error){
+    console.log(error)
+    return (error);
+  }
+
+}else{
+  // console.log("Display search value")
+  try{
+    const resultData = knexInstance
+    .select('*')
+    .from('hotels').where('hotelname',searchValue).andWhere('location',locationValue)
+    .then(function (data) {
+      if(data.length === 0){
+        return (404);
+      }else{
+        return (data);
+      }
+    });
+    return (resultData);
+}
+  catch(error){
+    console.log(error)
+    return (error);
+  }
+}
+}
+
 // POST METHOD
 export async function addNew(result: HotelInfo) {
   try {
     const databaseInsert = await knexInstance
       .insert({
         userId: result.userId,
-        hotelname: result.hotelname,
-        location: result.location,
+        hotelname: (result.hotelname).toLowerCase(),
+        location: (result.location).toLowerCase(),
         established: result.established,
         singlerooms: result.singlerooms,
         singleroomrate: result.singleroomrate,

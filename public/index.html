@@ -542,19 +542,38 @@
                 window.location.href = '/'; // Replace '/dashboard' with your desired page
             });
         }
+
+        // FOR ADMIN DROPDOWN BUTTONS
         if (document.getElementById('addHotelBtn')) {
             document.getElementById('addHotelBtn').addEventListener('click', function (event) {
-                window.location.href = "./component/adminHotels.html";
+                window.location.href = "./component/admin/adminHotels.html";
             });
         }
         if (document.getElementById('addFlightBtn')) {
             document.getElementById('addFlightBtn').addEventListener('click', function (event) {
-                window.location.href = "./component/adminFlights.html";
+                window.location.href = "./component/admin/adminFlights.html";
             });
         }
         if (document.getElementById('adminDashBoardBtn')) {
             document.getElementById('adminDashBoardBtn').addEventListener('click', function (event) {
-                window.location.href = "./component/adminDashBoard.html";
+                window.location.href = "./component/admin/adminDashBoard.html";
+            });
+        }
+
+        // FOR USER DROPDOWN BUTTONS
+        if (document.getElementById('bookHotelBtn')) {
+            document.getElementById('bookHotelBtn').addEventListener('click', function (event) {
+                window.location.href = "./component/user/userHotels.html";
+            });
+        }
+        if (document.getElementById('bookFlightBtn')) {
+            document.getElementById('bookFlightBtn').addEventListener('click', function (event) {
+                window.location.href = "./component/user/userFlights.html";
+            });
+        }
+        if (document.getElementById('userDashBoardBtn')) {
+            document.getElementById('userDashBoardBtn').addEventListener('click', function (event) {
+                window.location.href = "./component/user/userDashBoard.html";
             });
         }
     </script>

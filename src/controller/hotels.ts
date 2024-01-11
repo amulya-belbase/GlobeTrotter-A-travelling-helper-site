@@ -7,6 +7,25 @@ import { Request, Response } from "express";
 import * as hotelService from "../service/hotels";
 import { HotelInfo, UpdateHotelInfo } from "../interface/hotelInterface";
 
+export const getAllFilter = async (req:Request, res:Response) => {
+  const result = req.params.searchData;
+  const filterArray = result.split(',').map(String); 
+  const locationValue = filterArray[0];
+  const searchValue = filterArray[1];
+  try{
+    const data = await hotelService.getAllFilter(locationValue,searchValue);
+    if (data === 404) {
+      res.status(404).json({message:"No Hotels found"});
+    } else {
+      res.status(200).json(data);
+    }
+  }
+  catch(error){
+    res.status(500).json({ error });
+  }
+}
+
+
 export const addNew = async (req: Request, res: Response) => {
   const result = req.body;
   try {

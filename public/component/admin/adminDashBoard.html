@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../../style.css">
 
 </head>
 
@@ -13,8 +13,8 @@
     <div class="container">
         <nav>
             <div class="dashboard_logo">
-                <a href="../index.html">
-                    <img src="../assets/img/logo.png" alt="GlobeTrotter">
+                <a href="../../index.html">
+                    <img src="../../assets/img/logo.png" alt="GlobeTrotter">
                 </a>
             </div>
             <div class="dashboard_links">
@@ -472,7 +472,10 @@
                     });
 
             } else {
-                window.location.href = './login.html';
+                localStorage.removeItem('userId');
+                localStorage.removeItem('userName');
+                localStorage.removeItem('role');
+                window.location.href = '../login.html';
             }
         });
 

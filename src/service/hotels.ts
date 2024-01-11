@@ -3,8 +3,13 @@ import * as hotelModel from "../model/hotels";
 import { HotelInfo, UpdateHotelInfo } from "../interface/hotelInterface";
 
 
+export const getAllFilter = async (locationValue:string,searchValue:string) => {
+  const data = await hotelModel.getAllFilter(locationValue,searchValue);
+  return data;
+} 
+
 export const addNew = async (
-  userId:number,
+    userId:number,
     hotelname:string, 
     location:string,
     established:string,

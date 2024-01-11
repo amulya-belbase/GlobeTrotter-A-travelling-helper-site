@@ -25,13 +25,16 @@
 @import "./signup/responsive/mobile";
 
 // IMPORTS FOR ADDING HOTELS FOR ADMIN
-@import "./adminHotels/adminHotels";
+@import "./admin/adminHotels/adminHotels";
 
 // IMPORTS FOR ADDING FLIGHTS FOR ADMIN
-@import "./adminFlights/adminFlights";
+@import "./admin/adminFlights/adminFlights";
 
 // IMPORTS FOR ADMIN DASHBOARD
-@import "./adminDashboard/adminDashboard";
+@import "./admin/adminDashboard/adminDashboard";
+
+// IMPORTS FOR BOOKING HOTELS FOR USERS
+@import "./user/userHotels/userHotels.scss";
 
 
 *{
