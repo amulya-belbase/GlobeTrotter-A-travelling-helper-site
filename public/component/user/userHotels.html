@@ -50,7 +50,8 @@
                     <option value="double">Double Room</option>
                     <option value="suite">Suite</option>
                 </select>
-                <label>Room Rate: <input type="text" id="bookRoomRate" name="bookRoomRate" readonly></label>
+                <label>Room Rate (In $/Night): <input type="text" id="bookRoomRate" name="bookRoomRate"
+                        readonly></label>
                 <label>Room Count: <input type="number" id="bookRoomCount" name="bookRoomCount"></label>
                 <button>Submit</button>
             </form>
@@ -113,7 +114,73 @@
 
                                 divContainer.appendChild(cardContainer);
 
-                            });
+                                bookBtn.addEventListener('click', function () {
+
+                                    const bookId = Number(this.getAttribute('bookId'));
+                                    console.log('Book clicked for hotelId:', bookId);
+
+                                    const bookFormDiv = document.getElementById("bookFormDiv");
+                                    const bookForm = document.getElementById("bookHotel");
+                                    bookFormDiv.style.visibility = 'visible';
+                                    bookForm.style.opacity = "1";
+
+                                    const selectedItem = response.data.find(item => item.id === bookId);
+                                    document.getElementById('bookHotelName').value = selectedItem.hotelname;
+
+
+                                    document.getElementById('bookRoomType').addEventListener('change', function () {
+                                        const selectedRoomType = this.value;
+                                        const roomRate = () => {
+                                            switch (selectedRoomType) {
+                                                case 'single': return selectedItem.singleroomrate;
+                                                case 'double': return selectedItem.doubleroomrate;
+                                                case 'suite': return selectedItem.suiterate;
+                                            }
+                                        };
+                                        document.getElementById('bookRoomRate').value = roomRate();
+                                    });
+
+                                    // SUBMIT THE FILLED HOTEL BOOKINGS FORM, CALL API ENDPOINT 
+                                    document.getElementById('bookHotel').addEventListener('submit', function (event) {
+                                        event.preventDefault(); // Prevent default form submission
+                                        // const hotelId = Number(this.getAttribute('bookid'));
+                                        const userId = localStorage.getItem('userId');
+                                        const hotelname = document.getElementById('bookHotelName').value;
+                                        const arrivalDate = document.getElementById('bookArrivalDate').value;
+                                        const room_type = document.getElementById('bookRoomType').value;
+                                        const room_rate = document.getElementById('bookRoomRate').value;
+                                        const room_count = document.getElementById('bookRoomCount').value;
+
+                                        const formData = {
+                                            userId: userId,
+                                            hotelId: bookId,
+                                            hotelname: hotelname,
+                                            arrivalDate: arrivalDate,
+                                            room_type: room_type,
+                                            room_rate: room_rate,
+                                            room_count: room_count,
+                                        };
+
+                                        axios.post('http://localhost:8000/book/bookNewHotel', formData)
+                                            .then(response => {
+
+                                                if (response.status === 200) {
+                                                    // console.log(response.data[0].id, response.data[0].firstname);
+                                                    alert("Hotel booked successful");
+                                                    window.location.href = './userDashBoard.html'; // Replace '/dashboard' with your desired page
+                                                } else {
+                                                    console.log(response);
+                                                }
+                                            })
+                                            .catch(error => {
+                                                console.log(error.response.status)
+                                            });
+
+                                    });
+
+
+                                });
+                            })
                         }
                     })
                     .catch(error => {
@@ -187,91 +254,63 @@
                                         bookFormDiv.style.visibility = 'visible';
                                         bookForm.style.opacity = "1";
 
-                                        try {
-                                            const selectedItem = response.data.find(item => item.id === bookId);
-                                            document.getElementById('bookHotelName').value = selectedItem.hotelname;
-                                            // document.getElementById('location').value = selectedItem.location;
-                                            // document.getElementById('established').value = selectedItem.established;
-                                            // document.getElementById('singleroom').value = selectedItem.singlerooms;
-                                            // document.getElementById('singleroomrate').value = selectedItem.singleroomrate;
-                                            // document.getElementById('doubleroom').value = selectedItem.doublerooms;
-                                            // document.getElementById('doubleroomrate').value = selectedItem.doubleroomrate;
-                                            // document.getElementById('suite').value = selectedItem.suites;
-                                            // document.getElementById('suiterate').value = selectedItem.suiterate;
-                                            // document.getElementById('website').value = selectedItem.website;
-                                            // document.getElementById('email').value = selectedItem.email;
-                                            // document.getElementById('phoneno').value = selectedItem.phoneno;
+                                        const selectedItem = response.data.find(item => item.id === bookId);
+                                        document.getElementById('bookHotelName').value = selectedItem.hotelname;
 
-                                            updateForm.addEventListener('submit', function (event) {
-                                                event.preventDefault(); // Prevent default form submission
 
-                                                // Get form data
-                                                const hotelname = document.getElementById('hotelname').value;
-                                                const location = document.getElementById('location').value;
-                                                const established = document.getElementById('established').value;
-                                                const singleroom = document.getElementById('singleroom').value;
-                                                const singleroomrate = document.getElementById('singleroomrate').value;
-                                                const doubleroom = document.getElementById('doubleroom').value;
-                                                const doubleroomrate = document.getElementById('doubleroomrate').value;
-                                                const suite = document.getElementById('suite').value;
-                                                const suiterate = document.getElementById('suiterate').value;
-                                                const website = document.getElementById('website').value;
-                                                const email = document.getElementById('email').value;
-                                                const phoneno = document.getElementById('phoneno').value;
-                                                const image1 = document.getElementById('image1').value;
+                                        document.getElementById('bookRoomType').addEventListener('change', function () {
+                                            const selectedRoomType = this.value;
+                                            const roomRate = () => {
+                                                switch (selectedRoomType) {
+                                                    case 'single': return selectedItem.singleroomrate;
+                                                    case 'double': return selectedItem.doubleroomrate;
+                                                    case 'suite': return selectedItem.suiterate;
+                                                }
+                                            };
+                                            document.getElementById('bookRoomRate').value = roomRate();
+                                        });
 
-                                                // FORM VALIDATION IS NEEDED
-                                                const updatedHotelData = {
-                                                    userId: localStorage.getItem('userId'),
-                                                    hotelname: hotelname,
-                                                    location: location,
-                                                    established: established,
-                                                    singleroom: singleroom,
-                                                    singleroomrate: singleroomrate,
-                                                    doubleroom: doubleroom,
-                                                    doubleroomrate: doubleroomrate,
-                                                    suite: suite,
-                                                    suiterate: suiterate,
-                                                    website: website,
-                                                    email: email,
-                                                    phoneno: phoneno,
-                                                    image1: image1,
-                                                    createdat: selectedItem.createdat,
-                                                };
+                                        // SUBMIT THE FILLED HOTEL BOOKINGS FORM, CALL API ENDPOINT 
+                                        document.getElementById('bookHotel').addEventListener('submit', function (event) {
+                                            event.preventDefault(); // Prevent default form submission
+                                            // const hotelId = Number(this.getAttribute('bookid'));
+                                            const userId = localStorage.getItem('userId');
+                                            const hotelname = document.getElementById('bookHotelName').value;
+                                            const arrivalDate = document.getElementById('bookArrivalDate').value;
+                                            const room_type = document.getElementById('bookRoomType').value;
+                                            const room_rate = document.getElementById('bookRoomRate').value;
+                                            const room_count = document.getElementById('bookRoomCount').value;
 
-                                                // console.log(formData);
+                                            const formData = {
+                                                userId: userId,
+                                                hotelId: bookId,
+                                                hotelname: hotelname,
+                                                arrivalDate: arrivalDate,
+                                                room_type: room_type,
+                                                room_rate: room_rate,
+                                                room_count: room_count,
+                                            };
 
-                                                // Send form data using Axios
-                                                axios.put(`http://localhost:8000/hotels/update/${hotelId}`, updatedHotelData)
-                                                    .then(response => {
+                                            axios.post('http://localhost:8000/book/bookNewHotel', formData)
+                                                .then(response => {
 
-                                                        if (response.status === 200) {
-                                                            updateFormDiv.style.visibility = 'hidden';
-                                                            updateForm.style.opacity = '0';
-                                                            alert("Hotel updated successfully");
-                                                            window.location.href = './adminDashBoard.html';
-                                                        }
-                                                    })
-                                                    .catch(error => {
-                                                        console.error('Error updating hotel:', error);
-                                                        // Handle error while trying to update the hotel
-                                                        if (error.response.status === 401) {
-                                                            alert("Unauthorized request");
-                                                        }
-                                                    });
-                                            });
-                                        } catch (error) {
-                                            updateFormDiv.style.visibility = 'hidden';
-                                            updateForm.style.opacity = '0';
-                                            alert("Unauthorized request");
-                                            window.location.href = './adminDashBoard.html';
-                                        }
+                                                    if (response.status === 200) {
+                                                        // console.log(response.data[0].id, response.data[0].firstname);
+                                                        alert("Hotel booked successful");
+                                                        window.location.href = './userDashBoard.html'; // Replace '/dashboard' with your desired page
+                                                    } else {
+                                                        console.log(response);
+                                                    }
+                                                })
+                                                .catch(error => {
+                                                    console.log(error.response.status)
+                                                });
+
+                                        });
 
 
                                     });
-
-
-                                });
+                                })
                             }
                         })
                         .catch(error => {

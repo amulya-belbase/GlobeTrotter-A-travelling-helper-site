@@ -59,7 +59,7 @@ else if(locationValue === 'all'){
   try{
     const resultData = knexInstance
     .select('*')
-    .from('hotels').where('hotelname',searchValue)
+    .from('hotels').where('hotelname', 'like', `%${searchValue}%`)
     .then(function (data) {
       if(data.length === 0){
         return (404);
@@ -79,7 +79,7 @@ else if(locationValue === 'all'){
   try{
     const resultData = knexInstance
     .select('*')
-    .from('hotels').where('hotelname',searchValue).andWhere('location',locationValue)
+    .from('hotels').where('hotelname', 'like', `%${searchValue}%`).andWhere('location',locationValue) // like -> partial match, % -> anywhere in the hotelname
     .then(function (data) {
       if(data.length === 0){
         return (404);
@@ -196,4 +196,17 @@ export async function updateHotel(hotelId: number, newHotelObject: UpdateHotelIn
   }catch(error){
     console.log(error);
   }
+}
+
+
+
+export async function getHotelForUser(hotelId: number) {
+  const resultData = await knexInstance
+    .select("*")
+    .from("hotels")
+    .where("id", hotelId)
+    .then(function (data) {
+      return data;
+    });
+  return resultData;
 }

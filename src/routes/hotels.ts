@@ -6,14 +6,21 @@ import {
     getHotelsById,
     deleteHotel,
     updateHotel,
+    getHotelForUser,
 } from "../controller/hotels";
 
 const router = Router();
 
-router.get("/getAllFilter/:searchData", getAllFilter);
+// FOR ADMIN
 router.post("/addNew", addNew);
 router.get("/getHotelsById/:userId",getHotelsById);
 router.delete("/delete/:ids", deleteHotel)
 router.put("/update/:id", updateHotel);
+
+// FOR USER
+router.get("/getAllFilter/:searchData", getAllFilter);
+
+
+router.get("/getHotelForUser/:id", getHotelForUser)
 
 export default router; 

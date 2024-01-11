@@ -1,11 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../style.css">
     <title>Dashboard</title>
 </head>
+
 <body>
-    This is user dashboard
+    <div class="userHotels">
+        <!-- <div class="userHotelCard">
+            <p id="dashboard_hotel_name">Hotel Name</p>
+            <p id="dashboard_location_name">Location</p>
+            <p id="dashboard_contact_name">Contact</p>
+            <div id="dashboard_btn">
+                <button>Update</button>
+                <button id="dashboard_deleteBtn">Delete</button>
+            </div>
+        </div> -->
+    </div>
+
+    <div id="bookFormDiv">
+        <form id="bookHotel">
+            <div id="bookFormTop">
+                <span>Update Your Hotel Booking</span>
+                <a href="" onclick="hideBookPopup()">X</a>
+            </div>
+            <label>Hotel Name: <input type="text" id="bookHotelName" name="bookHotelName" readonly></label>
+            <label>Arrival Date: <input type="date" id="bookArrivalDate" name="bookArrivalDate"></label>
+            <label for="bookRoomType">Select the room type:</label>
+            <select id="bookRoomType" name="bookRoomType">
+                <option value="#">-- Select --</option>
+                <option value="single">Single Room</option>
+                <option value="double">Double Room</option>
+                <option value="suite">Suite</option>
+            </select>
+            <label>Room Rate (In $/Night): <input type="text" id="bookRoomRate" name="bookRoomRate" readonly></label>
+            <label>Room Count: <input type="number" id="bookRoomCount" name="bookRoomCount"></label>
+            <button>Submit</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+
+        function hideHotelPopUp() {
+            const bookFormDiv = document.getElementById("bookFormDiv");
+            bookFormDiv.style.visibility = 'hidden';
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const userId = localStorage.getItem('userId');
+            const role = localStorage.getItem('role');
+
+            if (userId && role === "traveller") {
+
+                // TO GET ALL THE USER BOOKED HOTELS
+                axios.get(`http://localhost:8000/book/myHotels/${userId}`)
+                    .then(response => {
+                        if (response.data.length === 0) {
+                            console.log("this user doesn't have any data");
+                        } else {
+                            const divContainer = document.querySelector('.userHotels');
+                            response.data.forEach(item => {
+
+                                const cardContainer = document.createElement('div');
+                                cardContainer.setAttribute('class', 'userHotelCard');
+
+                                const itemElement1 = document.createElement('p');
+                                itemElement1.setAttribute('id', 'dashboard_hotel_name');
+                                const itemElement2 = document.createElement('p');
+                                itemElement2.setAttribute('id', 'dashboard_location_name');
+                                const itemElement3 = document.createElement('p');
+                                itemElement3.setAttribute('id', 'dashboard_contact_name');
+
+
+                                const btnContainer = document.createElement('div');
+                                btnContainer.setAttribute('id', 'dashboard_btn');
+                                const updateBtn = document.createElement('button');
+                                const deleteBtn = document.createElement('button');
+
+                                // Set the hotelId as a data attribute for each button
+                                updateBtn.setAttribute('updateBtn', item.id);
+                                deleteBtn.setAttribute('deleteBtn', item.id);
+                                deleteBtn.setAttribute('id', 'dashboard_deleteBtn');
+
+
+                                // to format the date
+                                const dateString = item.arrivalDate;
+                                const dateObject = new Date(dateString);
+                                const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+                                const formattedDate = dateObject.toLocaleDateString(options);
+
+
+                                itemElement1.textContent = `Hotel Name: ${item.hotelname}`;
+                                itemElement2.textContent = `Arrival Date: ${formattedDate}`;
+                                itemElement3.textContent = `Room Type: ${item.room_type}`;
+
+                                updateBtn.textContent = 'Update';
+                                deleteBtn.textContent = 'Delete';
+                                btnContainer.appendChild(updateBtn);
+                                btnContainer.appendChild(deleteBtn);
+
+                                cardContainer.appendChild(itemElement1);
+                                cardContainer.appendChild(itemElement2);
+                                cardContainer.appendChild(itemElement3);
+                                cardContainer.appendChild(btnContainer);
+
+
+                                divContainer.appendChild(cardContainer);
+
+                                updateBtn.addEventListener('click', function () {
+
+                                    const bookId = Number(this.getAttribute('updateBtn'));
+                                    console.log('Update clicked for bookId:', bookId);
+
+                                    const updateFormDiv = document.getElementById("bookFormDiv");
+                                    const updateForm = document.getElementById("bookHotel");
+                                    updateFormDiv.style.visibility = 'visible';
+                                    updateForm.style.opacity = "1";
+
+                                    try {
+                                        const selectedItem = response.data.find(item => item.id === bookId);
+
+                                        document.getElementById('bookHotelName').value = selectedItem.hotelname;
+
+                                        const arrivalDate = new Date(selectedItem.arrivalDate);
+                                        const formattedDate = arrivalDate.toISOString().split('T')[0];
+                                        document.getElementById('bookArrivalDate').value = formattedDate;
+
+                                        document.getElementById('bookRoomCount').value = selectedItem.room_count;
+                                        const hotelId = selectedItem.hotelId;
+
+                                        // To change the rate according to option change in dropdown
+                                        document.getElementById('bookRoomType').addEventListener('change', function () {
+                                            const selectedRoomType = this.value;
+                                            axios.get(`http://localhost:8000/hotels/getHotelForUser/${hotelId}`)
+                                                .then(response => {
+                                                    const roomRate = () => {
+                                                        switch (selectedRoomType) {
+                                                            case 'single': return response.data[0].singleroomrate;
+                                                            case 'double': return response.data[0].doubleroomrate;
+                                                            case 'suite': return response.data[0].suiterate;
+                                                        }
+                                                    };
+                                                    document.getElementById('bookRoomRate').value = roomRate();
+                                                });
+                                        })
+
+
+                                        updateForm.addEventListener('submit', function (event) {
+                                            event.preventDefault(); // Prevent default form submission
+
+                                            // Get form data
+                                            const userId = localStorage.getItem('userId');
+                                            const hotelname = document.getElementById('bookHotelName').value;
+                                            const arrivalDate = document.getElementById('bookArrivalDate').value;
+                                            const room_type = document.getElementById('bookRoomType').value;
+                                            const room_rate = document.getElementById('bookRoomRate').value;
+                                            const room_count = document.getElementById('bookRoomCount').value;
+
+                                            const formData = {
+                                                userId: userId,
+                                                hotelId: hotelId,
+                                                hotelname: hotelname,
+                                                arrivalDate: arrivalDate,
+                                                room_type: room_type,
+                                                room_rate: room_rate,
+                                                room_count: room_count,
+                                                createdat: selectedItem.createdat
+                                            };
+                                            // console.log(formData,bookId);
+
+                                            // Send form data using Axios
+                                            axios.put(`http://localhost:8000/book/updateMyHotel/${bookId}`, formData)
+                                                .then(response => {
+
+                                                    if (response.status === 200) {
+                                                        updateFormDiv.style.visibility = 'hidden';
+                                                        updateForm.style.opacity = '0';
+                                                        alert("Hotel booking updated successfully");
+                                                        window.location.href = './userDashBoard.html';
+                                                    }
+                                                })
+                                                .catch(error => {
+                                                    console.error('Error updating hotel:', error);
+                                                    // Handle error while trying to update the hotel
+                                                    if (error.response.status === 401) {
+                                                        alert("Unauthorized request");
+                                                    }
+                                                });
+                                        });
+                                    } catch (error) {
+                                        updateFormDiv.style.visibility = 'hidden';
+                                        updateForm.style.opacity = '0';
+                                        alert("Unauthorized request");
+                                        window.location.href = './userDashBoard.html';
+                                    }
+                                });
+
+                                // Event listener for the delete button
+                                deleteBtn.addEventListener('click', function () {
+                                    const id = Number(this.getAttribute('deleteBtn'));
+                                    const userId = localStorage.getItem('userId');
+                                    const ids = [id, userId]; 
+                                    const concatenatedIds = ids.join(',');
+
+                                    axios.delete(`http://localhost:8000/book/deleteMyHotel/${concatenatedIds}`)
+                                        .then(response => {
+
+                                            if (response.status === 200) {
+                                                alert('Hotel booking deleted successfully');
+                                            }
+                                            console.log(`Hotel with ID ${id} deleted successfully`);
+                                            // this.parentNode.remove(); 
+
+                                            window.location.href = './userDashBoard.html';
+                                        })
+                                        .catch(error => {
+                                            console.error('Error deleting hotel:', error);
+                                            if (error.response.status === 401) {
+                                                alert("Unauthorized request");
+                                                window.location.href = './userDashBoard.html';
+                                            }
+                                        });
+                                });
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            }
+            else {
+                localStorage.removeItem('userId');
+                localStorage.removeItem('userName');
+                localStorage.removeItem('role');
+                window.location.href = '../login.html';
+            }
+        })
+    </script>
+
 </body>
+
 </html>

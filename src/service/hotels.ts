@@ -65,3 +65,10 @@ export const addNew = async (
     // console.log(data);
     return (data); 
   }
+
+  
+  export const getHotelForUser = async (hotelId:number) => {
+    const data = await hotelModel.getHotelForUser(hotelId);
+    // console.log(data);
+    return (data); 
+  }

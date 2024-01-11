@@ -3142,6 +3142,139 @@ footer .footer_bottom {
   cursor: pointer;
 }
 
+.userHotels {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 50px;
+  padding: 20px;
+}
+.userHotels .userHotelCard {
+  text-align: center;
+  background-color: white;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 20px;
+  color: black;
+  border-radius: 5px;
+  font-family: lexend;
+  box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.75);
+}
+.userHotels .userHotelCard p {
+  margin: 0;
+  margin-bottom: 10px;
+}
+.userHotels .userHotelCard #dashboard_hotel_name {
+  font-size: 20px;
+  font-weight: bold;
+}
+.userHotels .userHotelCard #dashboard_location_name {
+  font-size: 16px;
+  font-weight: 600;
+}
+.userHotels .userHotelCard #dashboard_contact_name {
+  font-size: 14px;
+  font-weight: 500;
+}
+.userHotels .userHotelCard #dashboard_btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.userHotels .userHotelCard #dashboard_btn button {
+  background: transparent;
+  border: 1px solid #2c70c8;
+  padding: 10px 30px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+.userHotels .userHotelCard #dashboard_btn button:hover {
+  background: #2c70c8;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+.userHotels .userHotelCard #dashboard_btn #dashboard_deleteBtn {
+  border: 1px solid #d51818;
+}
+.userHotels .userHotelCard #dashboard_btn #dashboard_deleteBtn:hover {
+  background: #d51818;
+}
+
+#bookFormDiv {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.3);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+}
+#bookFormDiv #bookHotel {
+  font-family: lexend;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 15px;
+  background-color: #e2e2e2;
+  border-radius: 5px;
+  padding: 15px 30px;
+  opacity: 0;
+  transition: 0.3s ease-in-out;
+}
+#bookFormDiv #bookHotel #bookFormTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#bookFormDiv #bookHotel #bookFormTop span {
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  font-family: Space Grotesk;
+  color: #4691f2;
+  width: 100%;
+}
+#bookFormDiv #bookHotel #bookFormTop a {
+  font-size: 16px;
+  padding: 5px 10px;
+  text-decoration: none;
+  color: black;
+  border-radius: 5px;
+}
+#bookFormDiv #bookHotel #bookFormTop a:hover {
+  color: white;
+  background-color: #4691f2;
+  transition: 0.2s ease-in-out;
+}
+#bookFormDiv #bookHotel label {
+  font-size: 18px;
+}
+#bookFormDiv #bookHotel input {
+  border-radius: 10px;
+  outline: none;
+  border: 1px solid #009ee2;
+  padding: 10px;
+  width: 100%;
+  font-size: 16px;
+  line-height: 14px;
+  font-weight: 500;
+  font-family: Space Grotesk;
+}
+#bookFormDiv #bookHotel button {
+  padding: 15px 40px;
+  color: white;
+  font-size: 16px;
+  line-height: 14px;
+  font-weight: 700;
+  background-color: #009ee2;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 * {
   box-sizing: border-box;
 }

@@ -5,6 +5,7 @@ import {Router} from "express";
 import usersRoutes from "./users";
 import hotelsRoutes from "./hotels";
 import flightsRoutes from "./flights";
+import bookRoutes from "./book";
 
 const router = Router();
 
@@ -16,6 +17,10 @@ router.use("/hotels", hotelsRoutes);
 
 // route for FLIGHT CRUD operations
 router.use("/flights", flightsRoutes);
+
+// route for user bookings
+router.use("/book",bookRoutes);
+
 
 
 export default router; 

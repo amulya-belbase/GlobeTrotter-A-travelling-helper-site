@@ -7,25 +7,7 @@ import { Request, Response } from "express";
 import * as hotelService from "../service/hotels";
 import { HotelInfo, UpdateHotelInfo } from "../interface/hotelInterface";
 
-export const getAllFilter = async (req:Request, res:Response) => {
-  const result = req.params.searchData;
-  const filterArray = result.split(',').map(String); 
-  const locationValue = filterArray[0];
-  const searchValue = filterArray[1];
-  try{
-    const data = await hotelService.getAllFilter(locationValue,searchValue);
-    if (data === 404) {
-      res.status(404).json({message:"No Hotels found"});
-    } else {
-      res.status(200).json(data);
-    }
-  }
-  catch(error){
-    res.status(500).json({ error });
-  }
-}
-
-
+// ADMIN ROUTES
 export const addNew = async (req: Request, res: Response) => {
   const result = req.body;
   try {
@@ -67,6 +49,8 @@ export const getHotelsById = async (req:Request, res: Response) => {
     res.status(500).json({ error });
   }
 }
+
+
 export const deleteHotel = async (req:Request, res: Response) => {
   // const hotelId = Number(req.params.id); 
   const { ids } = req.params;
@@ -113,6 +97,39 @@ export const updateHotel = async (req:Request, res: Response) => {
     }else{
       res.status(401).json({message:"Unauthorized request"})
     }
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+}
+
+
+// USER ROUTES
+
+export const getAllFilter = async (req:Request, res:Response) => {
+  const result = req.params.searchData;
+  const filterArray = result.split(',').map(String); 
+  const locationValue = filterArray[0];
+  const searchValue = filterArray[1];
+  try{
+    const data = await hotelService.getAllFilter(locationValue,searchValue);
+    if (data === 404) {
+      res.status(404).json({message:"No Hotels found"});
+    } else {
+      res.status(200).json(data);
+    }
+  }
+  catch(error){
+    res.status(500).json({ error });
+  }
+}
+
+
+export const getHotelForUser = async (req:Request, res: Response) => {
+  const hotelId = Number(req.params.id); 
+  try {
+    const data = await hotelService.getHotelForUser(hotelId);
+    // console.log(data);
+    res.json(data);
   } catch (error) {
     res.status(500).json({ error });
   }
