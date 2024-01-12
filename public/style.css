@@ -2606,13 +2606,17 @@ footer .footer_bottom {
 .booking_container .booking_container_right #addHotelsForm input {
   border-radius: 10px;
   outline: none;
-  border: 2px solid #009EE2;
+  border: 1px solid #ddd8d8;
   padding: 10px;
   width: 100%;
   font-size: 16px;
   line-height: 14px;
   font-weight: 500;
   font-family: Space Grotesk;
+}
+.booking_container .booking_container_right #addHotelsForm input:focus, .booking_container .booking_container_right #addHotelsForm input:hover {
+  border: 1px solid #009ee2;
+  transition: 0.5s ease-in-out;
 }
 .booking_container .booking_container_right #addHotelsForm .room_div {
   display: flex;
@@ -2663,13 +2667,17 @@ footer .footer_bottom {
 .booking_container .booking_container_right #addFlightsForm input {
   border-radius: 10px;
   outline: none;
-  border: 2px solid #009ee2;
+  border: 1px solid #ddd8d8;
   padding: 10px;
   width: 100%;
   font-size: 16px;
   line-height: 14px;
   font-weight: 500;
   font-family: Space Grotesk;
+}
+.booking_container .booking_container_right #addFlightsForm input:focus, .booking_container .booking_container_right #addFlightsForm input:hover {
+  border: 1px solid #009ee2;
+  transition: 0.5s ease-in-out;
 }
 .booking_container .booking_container_right #addFlightsForm .flight_div {
   display: flex;
@@ -2702,7 +2710,7 @@ footer .footer_bottom {
 }
 .container nav .dashboard_logo {
   background-color: white;
-  padding: 20px;
+  padding: 20px 50px;
 }
 .container nav .dashboard_links {
   display: flex;
@@ -2712,8 +2720,15 @@ footer .footer_bottom {
   text-decoration: none;
   color: white;
   text-align: center;
-  padding: 20px;
+  padding: 20px 20px 20px 50px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
   cursor: pointer;
+}
+.container nav .dashboard_links a img {
+  width: 20px;
+  height: auto;
 }
 .container nav .dashboard_links a span {
   font-size: 16px;
@@ -2726,40 +2741,66 @@ footer .footer_bottom {
   background-color: #2368c2;
 }
 .container .userEntries {
-  padding: 0 20px;
+  display: flex;
+  width: 100%;
+  background-color: #F5F5F5;
+}
+.container .userEntries .userHotels {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  background-color: #e2e2e2;
+  gap: 40px;
+  padding: 0;
+  padding-left: 50px;
+  margin-top: 10px;
+  border-right: 2px solid #C4C4C4;
+  padding-right: 50px;
 }
-.container .userEntries span {
-  padding: 20px;
+.container .userEntries .userHotels .dashboard_hotel_count_card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.container .userEntries .userHotels .dashboard_hotel_count_card span {
   font-size: 30px;
   font-weight: bold;
   font-family: Space Grotesk;
-  border-bottom: 2px solid #4691f2;
+  text-align: center;
 }
-.container .userEntries span .dashboard_title {
+.container .userEntries .userHotels .dashboard_hotel_count_card span .dashboard_title {
   color: #4691f2;
   padding: 0;
   border-bottom: none;
 }
-.container .userEntries .userHotels {
+.container .userEntries .userHotels .dashboard_hotel_count_card .dashboard_hotel_count {
   display: flex;
-  gap: 20px;
-  margin-bottom: 50px;
+  align-items: center;
+  gap: 50px;
+  background-color: white;
   padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.1);
+}
+.container .userEntries .userHotels .dashboard_hotel_count_card .dashboard_hotel_count p {
+  margin: 0;
+  font-size: 10px;
+  font-family: lexend;
+  color: #667185;
+}
+.container .userEntries .userHotels .dashboard_hotel_count_card .dashboard_hotel_count #total_hotel_number {
+  font-size: 25px;
+  font-weight: 600;
+  color: #09121E;
+  margin-bottom: 10px;
 }
 .container .userEntries .userHotels .userHotelCard {
   text-align: center;
-  background-color: white;
+  background-color: #E5F7FF;
   height: -moz-fit-content;
   height: fit-content;
-  padding: 20px;
-  color: black;
-  border-radius: 5px;
+  color: #023F76;
+  border-radius: 25px;
   font-family: lexend;
-  box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.75);
+  box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.1);
 }
 .container .userEntries .userHotels .userHotelCard p {
   margin: 0;
@@ -2774,7 +2815,7 @@ footer .footer_bottom {
   font-weight: 600;
 }
 .container .userEntries .userHotels .userHotelCard #dashboard_contact_name {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
 }
 .container .userEntries .userHotels .userHotelCard #dashboard_btn {
@@ -2801,22 +2842,66 @@ footer .footer_bottom {
 .container .userEntries .userHotels .userHotelCard #dashboard_btn #dashboard_deleteBtn:hover {
   background: #d51818;
 }
+.container .userEntries .userHotels .userHotelCard:hover {
+  border: 1px solid #7E7E7E;
+  box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
 .container .userEntries .userFlights {
   display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 0;
+  padding-left: 50px;
+  margin-top: 10px;
+  padding-right: 50px;
+}
+.container .userEntries .userFlights .dashboard_hotel_count_card {
+  display: flex;
+  align-items: center;
   gap: 20px;
-  margin-bottom: 50px;
+}
+.container .userEntries .userFlights .dashboard_hotel_count_card span {
+  font-size: 30px;
+  font-weight: bold;
+  font-family: Space Grotesk;
+  text-align: center;
+}
+.container .userEntries .userFlights .dashboard_hotel_count_card span .dashboard_title {
+  color: #4691f2;
+  padding: 0;
+  border-bottom: none;
+}
+.container .userEntries .userFlights .dashboard_hotel_count_card .dashboard_hotel_count {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  background-color: white;
   padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.1);
+}
+.container .userEntries .userFlights .dashboard_hotel_count_card .dashboard_hotel_count p {
+  margin: 0;
+  font-size: 10px;
+  font-family: lexend;
+  color: #667185;
+}
+.container .userEntries .userFlights .dashboard_hotel_count_card .dashboard_hotel_count #total_flight_number {
+  font-size: 25px;
+  font-weight: 600;
+  color: #09121E;
+  margin-bottom: 10px;
 }
 .container .userEntries .userFlights .userFlightCard {
   text-align: center;
-  background-color: white;
+  background-color: #e5fffa;
   height: -moz-fit-content;
   height: fit-content;
-  padding: 20px;
-  color: black;
-  border-radius: 5px;
+  color: #023F76;
+  border-radius: 25px;
   font-family: lexend;
-  box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.75);
+  padding: 20px;
+  box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.1);
 }
 .container .userEntries .userFlights .userFlightCard p {
   margin: 0;
@@ -2826,12 +2911,24 @@ footer .footer_bottom {
   font-size: 20px;
   font-weight: bold;
 }
-.container .userEntries .userFlights .userFlightCard #dashboard_location_name {
+.container .userEntries .userFlights .userFlightCard .userFlightCardFlight {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+.container .userEntries .userFlights .userFlightCard .userFlightCardFlight #dashboard_location_name {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   font-size: 16px;
   font-weight: 600;
 }
+.container .userEntries .userFlights .userFlightCard .userFlightCardFlight #dashboard_location_name span {
+  font-size: 12px;
+}
 .container .userEntries .userFlights .userFlightCard #dashboard_contact_name {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
 }
 .container .userEntries .userFlights .userFlightCard #dashboard_btn {
@@ -2857,6 +2954,10 @@ footer .footer_bottom {
 }
 .container .userEntries .userFlights .userFlightCard #dashboard_btn #dashboard_deleteBtn:hover {
   background: #d51818;
+}
+.container .userEntries .userFlights .userFlightCard:hover {
+  border: 1px solid #7E7E7E;
+  box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 .container #hotelFormDiv {
   position: absolute;

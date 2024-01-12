@@ -15,9 +15,9 @@ export async function addNew(result: FlightInfo) {
     const databaseInsert = await knexInstance
       .insert({
         userId: result.userId,
-        flightname: result.flightname.toLowerCase(),
-        flightdepart: result.flightdepart.toLowerCase(),
-        flightdest: result.flightdest.toLowerCase(),
+        flightname: result.flightname,
+        flightdepart: result.flightdepart,
+        flightdest: result.flightdest,
         economy: result.economy,
         economyrate: result.economyrate,
         business: result.business,
@@ -115,15 +115,15 @@ export async function getAllFilter(deptValue:string,destValue:string,searchValue
     let query = knexInstance.select('*').from('flights');
   
     if (deptValue !== 'all') {
-      query = query.where('flightdepart', deptValue);
+      query = query.where('flightdepart', 'ilike', deptValue);
     }
   
     if (destValue !== 'all') {
-      query = query.where('flightdest', destValue);
+      query = query.where('flightdest', 'ilike', destValue);
     }
   
     if (searchValue !== 'all') {
-      query = query.where('flightname', 'like', `%${searchValue}%`);
+      query = query.where('flightname', 'ilike', `%${searchValue}%`);
     }
   
     const resultData = await query;

@@ -45,7 +45,7 @@
             input{
                 border-radius: 10px;
                 outline: none;
-                border: 2px solid #009EE2;
+                border: 1px solid #ddd8d8;
                 padding: 10px;
                 width: 100%;
                 font-size: 16px;
@@ -53,6 +53,12 @@
                 font-weight: 500;
                 font-family: Space Grotesk;
             }
+            input:focus, input:hover{
+                border: 1px solid #009ee2;
+                transition: 0.5s ease-in-out;
+            }
+
+            
             .room_div{
                 display: flex;
                 align-items: center;

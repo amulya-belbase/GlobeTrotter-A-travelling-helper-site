@@ -18,14 +18,28 @@
                 </a>
             </div>
             <div class="dashboard_links">
-                <a href="./adminHotels.html"><span>Add Hotels</span></a>
-                <a href="./adminFlights.html"><span>Add Flights</span></a>
+                <a href="./adminHotels.html"><img src="../../assets/img/dashboard_hotel.svg" alt=""><span>Add
+                        Hotels</span></a>
+                <a href="./adminFlights.html"><img src="../../assets/img/dashboard_plane_icon.png" alt=""><span>Add
+                        Flights</span></a>
             </div>
         </nav>
 
         <div class="userEntries">
-            <span>User <span class="dashboard_title">Hotels</span></span>
             <div class="userHotels">
+                <div class="dashboard_hotel_count_card">
+                    <span>My <span class="dashboard_title">Hotels</span></span>
+                    <div class="dashboard_hotel_count">
+                        <div class="dashboard_hotel_count_left">
+                            <p id="total_hotel_number"></p>
+                            <p>Hotels Added</p>
+                        </div>
+                        <div class="dashboard_hotel_count_icon">
+                            <img src="../../assets/img/dashboard_calendar.png" alt="">
+                        </div>
+                    </div>
+                </div>
+
                 <!-- <div class="userHotelCard">
                     <p id="dashboard_hotel_name">Hotel Name</p>
                     <p id="dashboard_location_name">Location</p>
@@ -36,17 +50,40 @@
                     </div>
                 </div> -->
             </div>
-            <span>User <span class="dashboard_title">Flights</span></span>
+
             <div class="userFlights">
+                <div class="dashboard_hotel_count_card">
+                    <span>My <span class="dashboard_title">Flights</span></span>
+                    <div class="dashboard_hotel_count">
+                        <div class="dashboard_hotel_count_left">
+                            <p id="total_flight_number"></p>
+                            <p>Flights Added</p>
+                        </div>
+                        <div class="dashboard_hotel_count_icon">
+                            <img src="../../assets/img/dashboard_calendar.png" alt="">
+                        </div>
+                    </div>
+                </div>
+
                 <!-- <div class="userFlightCard">
-                    <p id="dashboard_hotel_name">Hotel Name</p>
-                    <p id="dashboard_location_name">Location</p>
+                    <p id="dashboard_hotel_name">Flight Name</p>
+                    <div class="userFlightCardFlight">
+                        <div id="dashboard_location_name">
+                            Beijing
+                            <span>Departure</span>
+                        </div>
+                        <img src="../../assets/img/dashboard_flight_journey.png" alt="">
+                        <div id="dashboard_location_name">
+                            Kathmandu
+                            <span>Destination</span>
+                        </div>                    </div>
                     <p id="dashboard_contact_name">Contact</p>
                     <div id="dashboard_btn">
                         <button>Update</button>
                         <button id="dashboard_deleteBtn">Delete</button>
                     </div>
                 </div> -->
+
             </div>
 
         </div>
@@ -79,7 +116,7 @@
                 <button>Submit</button>
             </form>
         </div>
-        
+
         <div id="flightFormDiv">
             <form id="updateFlight">
                 <div id="updateFormTop">
@@ -130,23 +167,25 @@
                 // TO GET ALL THE USER CREATED HOTELS
                 axios.get(`http://localhost:8000/hotels/getHotelsById/${userId}`)
                     .then(response => {
-                        if (response.data.length === 0) {
+                        const responseCount = response.data.length;
+                        if (responseCount === 0) {
                             console.log("this user doesn't have any data");
                         } else {
                             const divContainer = document.querySelector('.userHotels');
+                            document.getElementById('total_hotel_number').textContent = responseCount;
                             response.data.forEach(item => {
 
                                 const cardContainer = document.createElement('div');
                                 cardContainer.setAttribute('class', 'userHotelCard');
 
                                 const itemElement1 = document.createElement('p');
-                                itemElement1.setAttribute('id','dashboard_hotel_name');
+                                itemElement1.setAttribute('id', 'dashboard_hotel_name');
                                 const itemElement2 = document.createElement('p');
-                                itemElement2.setAttribute('id','dashboard_location_name');
+                                itemElement2.setAttribute('id', 'dashboard_location_name');
                                 const itemElement3 = document.createElement('p');
-                                itemElement3.setAttribute('id','dashboard_contact_name');
+                                itemElement3.setAttribute('id', 'dashboard_contact_name');
 
-             
+
                                 const btnContainer = document.createElement('div');
                                 btnContainer.setAttribute('id', 'dashboard_btn');
                                 const updateBtn = document.createElement('button');
@@ -273,7 +312,7 @@
                                 deleteBtn.addEventListener('click', function () {
                                     const hotelId = Number(this.getAttribute('deleteBtn'));
                                     const userId = localStorage.getItem('userId');
-                                    const hotelIds = [hotelId, userId]; 
+                                    const hotelIds = [hotelId, userId];
                                     const concatenatedIds = hotelIds.join(',');
                                     axios.delete(`http://localhost:8000/hotels/delete/${concatenatedIds}`)
                                         .then(response => {
@@ -305,10 +344,12 @@
                 // TO GET ALL THE USER CREATED FLIGHTS
                 axios.get(`http://localhost:8000/flights/getFlightsById/${userId}`)
                     .then(response => {
-                        if (response.data.length === 0) {
+                        const responseCount = response.data.length;
+                        if (responseCount === 0) {
                             // console.log("this user doesn't have any data");
                         } else {
                             const divContainer = document.querySelector('.userFlights');
+                            document.getElementById('total_flight_number').textContent = responseCount;
                             response.data.forEach(item => {
 
                                 const cardContainer = document.createElement('div');
@@ -317,11 +358,18 @@
                                 const itemElement1 = document.createElement('p');
                                 itemElement1.setAttribute('id', 'dashboard_hotel_name');
 
-                                const itemElement2 = document.createElement('p');
-                                itemElement2.setAttribute('id', 'dashboard_location_name');
-                                
-                                const itemElement3 = document.createElement('p');
-                                itemElement3.setAttribute('id', 'dashboard_location_name');
+                                const itemElement2 = document.createElement('div');
+                                itemElement2.setAttribute('class', 'userFlightCardFlight');
+                                const itemElementfordept = document.createElement('div');
+                                itemElementfordept.setAttribute('id', 'dashboard_location_name');
+                                const itemElement2Inner1 = document.createElement('span');
+                                itemElement2Inner1.textContent = 'Departure';
+                                const imgElement = document.createElement("img");
+                                imgElement.src = "../../assets/img/dashboard_flight_journey.png";
+                                const itemElementfordest = document.createElement('div');
+                                itemElementfordest.setAttribute('id', 'dashboard_location_name');
+                                const itemElement2Inner2 = document.createElement('span');
+                                itemElement2Inner2.textContent = 'Destination';
 
                                 const itemElement4 = document.createElement('p');
                                 itemElement4.setAttribute('id', 'dashboard_contact_name');
@@ -330,15 +378,15 @@
                                 btnContainer.setAttribute('id', 'dashboard_btn');
                                 const updateBtn = document.createElement('button');
                                 const deleteBtn = document.createElement('button');
-                                
+
                                 // Set the hotelId as a data attribute for each button
                                 updateBtn.setAttribute('updateBtn', item.id);
                                 deleteBtn.setAttribute('deleteBtn', item.id);
-                                deleteBtn.setAttribute('id','dashboard_deleteBtn');
+                                deleteBtn.setAttribute('id', 'dashboard_deleteBtn');
 
                                 itemElement1.textContent = `Flight Name: ${item.flightname}`;
-                                itemElement2.textContent = `Departure: ${item.flightdepart}`;
-                                itemElement3.textContent = `Destination: ${item.flightdest}`;
+                                itemElementfordept.textContent = `${item.flightdepart}`;
+                                itemElementfordest.textContent = `${item.flightdest}`;
                                 itemElement4.textContent = `Contact: ${item.phoneno}`;
 
                                 updateBtn.textContent = 'Update';
@@ -346,9 +394,14 @@
                                 btnContainer.appendChild(updateBtn);
                                 btnContainer.appendChild(deleteBtn);
 
+                                itemElementfordept.append(itemElement2Inner1)
+                                itemElementfordest.append(itemElement2Inner2)
+                                itemElement2.append(itemElementfordept)
+                                itemElement2.append(imgElement)
+                                itemElement2.append(itemElementfordest)
+
                                 cardContainer.appendChild(itemElement1);
                                 cardContainer.appendChild(itemElement2);
-                                cardContainer.appendChild(itemElement3);
                                 cardContainer.appendChild(itemElement4);
                                 cardContainer.appendChild(btnContainer);
 
@@ -365,7 +418,7 @@
                                     updateFormDiv.style.visibility = 'visible';
                                     updateForm.style.opacity = "1";
 
-                                    try{
+                                    try {
                                         const selectedItem = response.data.find(item => item.id === flightId);
                                         document.getElementById('flightname').value = selectedItem.flightname
                                         document.getElementById('flightdepart').value = selectedItem.flightdepart
@@ -377,11 +430,11 @@
                                         document.getElementById('flightwebsite').value = selectedItem.website
                                         document.getElementById('flightemail').value = selectedItem.email
                                         document.getElementById('flightphoneno').value = selectedItem.phoneno
-    
-    
+
+
                                         updateForm.addEventListener('submit', function (event) {
                                             event.preventDefault(); // Prevent default form submission
-    
+
                                             // Get form data
                                             const flightname = document.getElementById('flightname').value;
                                             const flightdepart = document.getElementById('flightdepart').value;
@@ -394,7 +447,7 @@
                                             const email = document.getElementById('flightemail').value;
                                             const phoneno = document.getElementById('flightphoneno').value;
                                             const image1 = document.getElementById('flightimage1').value;
-    
+
                                             // FORM VALIDATION IS NEEDED
                                             const updatedFlightData = {
                                                 userId: localStorage.getItem('userId'),
@@ -411,13 +464,13 @@
                                                 image1: image1,
                                                 createdat: selectedItem.createdat,
                                             };
-    
+
                                             // console.log(formData);
-    
+
                                             // Send form data using Axios
                                             axios.put(`http://localhost:8000/flights/update/${flightId}`, updatedFlightData)
                                                 .then(response => {
-    
+
                                                     if (response.status === 200) {
                                                         updateFormDiv.style.visibility = 'hidden';
                                                         updateForm.style.opacity = '0';
@@ -431,7 +484,7 @@
                                                 });
                                         });
 
-                                    }catch(error){
+                                    } catch (error) {
                                         updateFormDiv.style.visibility = 'hidden';
                                         updateForm.style.opacity = '0';
                                         alert("Unauthorized request");
@@ -443,7 +496,7 @@
                                 deleteBtn.addEventListener('click', function () {
                                     const flightId = Number(this.getAttribute('deleteBtn'));
                                     const userId = localStorage.getItem('userId');
-                                    const flightIds = [flightId, userId]; 
+                                    const flightIds = [flightId, userId];
                                     const concatenatedIds = flightIds.join(',');
                                     axios.delete(`http://localhost:8000/flights/delete/${concatenatedIds}`)
                                         .then(response => {

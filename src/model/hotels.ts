@@ -18,11 +18,11 @@ export async function getAllFilter(locationValue:string,searchValue:string){
     let query = knexInstance.select('*').from('hotels');
   
     if (locationValue !== 'all') {
-      query = query.where('location', locationValue);
+      query = query.where('location', 'ilike', locationValue);
     }
   
     if (searchValue !== 'all') {
-      query = query.where('hotelname', 'like', `%${searchValue}%`);
+      query = query.where('hotelname', 'ilike', `%${searchValue}%`);
     }
   
     const resultData = await query;
@@ -45,8 +45,8 @@ export async function addNew(result: HotelInfo) {
     const databaseInsert = await knexInstance
       .insert({
         userId: result.userId,
-        hotelname: (result.hotelname).toLowerCase(),
-        location: (result.location).toLowerCase(),
+        hotelname: (result.hotelname),
+        location: (result.location),
         established: result.established,
         singlerooms: result.singlerooms,
         singleroomrate: result.singleroomrate,
