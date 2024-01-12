@@ -95,3 +95,23 @@ export const updateFlight = async (req:Request, res: Response) => {
     res.status(500).json({ error });
   }
 }
+
+export const getAllFilter = async (req:Request, res:Response) => {
+  const result = req.params.searchData;
+  const filterArray = result.split(',').map(String); 
+  const deptValue = filterArray[0];
+  const destValue = filterArray[1];
+  const searchValue = filterArray[2];
+  // console.log(`${deptValue} is departure, ${destValue} is destination, ${searchValue} is search`)
+  try{
+    const data = await flightService.getAllFilter(deptValue,destValue,searchValue);
+    if (data === 404) {
+      res.status(404).json({message:"No Flights found"});
+    } else {
+      res.status(200).json(data);
+    }
+  }
+  catch(error){
+    res.status(500).json({ error });
+  }
+}

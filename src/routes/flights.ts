@@ -1,6 +1,7 @@
 import express, {Router} from "express";
 
 import {
+    getAllFilter,
     addNew,
     getFlightsById,
     deleteFlight,
@@ -13,5 +14,9 @@ router.post("/addNew", addNew);
 router.get("/getFlightsById/:userId",getFlightsById);
 router.delete("/delete/:ids", deleteFlight)
 router.put("/update/:id", updateFlight);
+
+
+router.get("/getAllFilter/:searchData", getAllFilter);
+
 
 export default router; 

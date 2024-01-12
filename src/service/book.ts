@@ -1,6 +1,6 @@
 import * as bookModel from "../model/book";
 
-import { BookHotelInfo, UpdateHotelBooking } from "../interface/bookInterface";
+import { BookHotelInfo, UpdateHotelBooking, BookFilghtInfo, UpdateFlightBooking } from "../interface/bookInterface";
 
 
 export const bookNewHotel = async (
@@ -46,4 +46,29 @@ export const bookNewHotel = async (
     const data = await bookModel.deleteMyHotel(entryId,userId);
     // console.log(data);
     return (data); 
+  }
+
+
+  export const bookNewFlight = async (
+    userId:number,
+    flightId:number, 
+    flightname:string,
+    departureDate:Date,
+    seat_type:string,
+    seat_rate: number,
+    seat_count: number,
+  ) => {
+      const result: BookFilghtInfo = {
+        userId:userId,
+        flightId:flightId, 
+        flightname:flightname,
+        departureDate:departureDate,
+        seat_type:seat_type,
+        seat_rate: seat_rate,
+        seat_count: seat_count,
+        };
+        // console.log(`From axios and service ${JSON.stringify(result)}`);
+
+      const data = await bookModel.bookNewFlight(result);
+      return data; 
   }

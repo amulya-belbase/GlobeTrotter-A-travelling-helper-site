@@ -15,9 +15,9 @@ export async function addNew(result: FlightInfo) {
     const databaseInsert = await knexInstance
       .insert({
         userId: result.userId,
-        flightname: result.flightname,
-        flightdepart: result.flightdepart,
-        flightdest: result.flightdest,
+        flightname: result.flightname.toLowerCase(),
+        flightdepart: result.flightdepart.toLowerCase(),
+        flightdest: result.flightdest.toLowerCase(),
         economy: result.economy,
         economyrate: result.economyrate,
         business: result.business,
@@ -78,7 +78,7 @@ export async function updateFlight(
   // console.log(`From model ${hotelId}`);
   // console.log(`From model ${JSON.stringify(newHotelObject)}`);
   try {
-    const resultData = knexInstance("flights")
+    const resultData = await knexInstance("flights")
       .where("id", flightId)
       .update({
         userId: newFlightObject.userId,
@@ -107,4 +107,35 @@ export async function updateFlight(
   } catch (error) {
     console.log(error);
   }
+}
+
+export async function getAllFilter(deptValue:string,destValue:string,searchValue:string){
+  // From model kathmandu, hunxa
+  try {
+    let query = knexInstance.select('*').from('flights');
+  
+    if (deptValue !== 'all') {
+      query = query.where('flightdepart', deptValue);
+    }
+  
+    if (destValue !== 'all') {
+      query = query.where('flightdest', destValue);
+    }
+  
+    if (searchValue !== 'all') {
+      query = query.where('flightname', 'like', `%${searchValue}%`);
+    }
+  
+    const resultData = await query;
+  
+    if (resultData.length === 0) {
+      return 404;
+    } else {
+      return resultData;
+    }
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+  
 }

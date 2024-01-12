@@ -1,11 +1,331 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../style.css">
     <title>Book Flights</title>
 </head>
+
 <body>
-    This is user book flights
+    <div class="userHotelsBook">
+        <div class="userHotel_filter_search">
+            <div class="userHotel_filter_part">
+                <form id="flight_filter">
+                    <label for="flight_filter_option_dept">Filter By Departure:</label>
+                    <select name="flight_filter_option_dept" id="flight_filter_option_dept">
+                        <option value="#">--Any--</option>
+                        <option value="kathmandu">Kathmandu</option>
+                        <option value="london">London</option>
+                        <option value="beijing">Beijing</option>
+                    </select>
+
+                    <label for="flight_filter_option_dest">Filter By Destination:</label>
+                    <select name="flight_filter_option_dest" id="flight_filter_option_dest">
+                        <option value="#">--Any--</option>
+                        <option value="kathmandu">Kathmandu</option>
+                        <option value="london">London</option>
+                        <option value="beijing">Beijing</option>
+                    </select>
+
+                    <input type="text" name="search_filter" id="search_filter">
+                    <button>Search</button>
+                </form>
+            </div>
+        </div>
+        <div class="allHotels">
+            <div class="bookHotelCard">
+                <p id="userDashboard_hotel_name">Flight Name</p>
+                <p id="userDashboard_hotel_location">Departure</p>
+                <p id="userDashboard_hotel_contact">Contact</p>
+                <button id="userDashboard_bookBtn">Book</button>
+            </div>
+        </div>
+
+        <div id="bookFormDiv">
+            <form id="bookFlight">
+                <div id="bookFormTop">
+                    <span>Book Your Flight</span>
+                    <a href="" onclick="hideBookPopup()">X</a>
+                </div>
+                <label>Flight Name: <input type="text" id="bookFlightName" name="bookFlightName" readonly></label>
+                <label>Departure Date: <input type="date" id="bookDeptDate" name="bookDeptDate"></label>
+                <label for="bookSeatType">Select the seat type:</label>
+                <select id="bookSeatType" name="bookSeatType">
+                    <option value="#">-- Select --</option>
+                    <option value="economy">Economy</option>
+                    <option value="business">Business</option>
+                </select>
+                <label>Seat Rate (In $): <input type="text" id="bookSeatRate" name="bookSeatRate" readonly></label>
+                <label>Seat Count: <input type="number" id="bookSeatCount" name="bookSeatCount"></label>
+                <button>Submit</button>
+            </form>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        function hideHotelPopUp() {
+            const bookFormDiv = document.getElementById("bookFormDiv");
+            bookFormDiv.style.visibility = 'hidden';
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const userId = localStorage.getItem('userId');
+            const role = localStorage.getItem('role');
+
+            // Make sure userId exists before sending the request
+            if (userId && role === "traveller") {
+
+                const searchData = ['all', 'all', 'all'];
+                const concatenatedSearchData = searchData.join(',');
+                axios.get(`http://localhost:8000/flights/getAllFilter/${searchData}`)
+                    .then(response => {
+
+                        const divContainer = document.querySelector('.allHotels');
+                        divContainer.innerHTML = '';
+
+                        response.data.forEach(item => {
+
+                            const cardContainer = document.createElement('div');
+                            cardContainer.setAttribute('class', 'bookHotelCard');
+
+                            const itemElement1 = document.createElement('p');
+                            itemElement1.setAttribute('id', 'userDashboard_hotel_name');
+                            const itemElement2 = document.createElement('p');
+                            itemElement2.setAttribute('id', 'userDashboard_hotel_location');
+                            const itemElement3 = document.createElement('p');
+                            itemElement3.setAttribute('id', 'userDashboard_hotel_contact');
+
+                            const bookBtn = document.createElement('button');
+
+                            // Set the hotelId as a data attribute for each button
+                            bookBtn.setAttribute('flightId', item.id);
+                            bookBtn.setAttribute('id', 'userDashboard_bookBtn');
+
+
+                            itemElement1.textContent = `Flight Name: ${(item.flightname).toUpperCase()}`;
+                            itemElement2.textContent = `Departure: ${(item.flightdepart).toUpperCase()}`;
+                            itemElement3.textContent = `Contact: ${item.phoneno}`;
+
+                            bookBtn.textContent = 'Book';
+
+                            cardContainer.appendChild(itemElement1);
+                            cardContainer.appendChild(itemElement2);
+                            cardContainer.appendChild(itemElement3);
+                            cardContainer.appendChild(bookBtn);
+
+                            divContainer.appendChild(cardContainer);
+
+
+                            bookBtn.addEventListener('click', function () {
+
+                                const bookId = Number(this.getAttribute('flightId'));
+                                console.log('Book clicked for flightId:', bookId);
+
+                                const bookFormDiv = document.getElementById("bookFormDiv");
+                                const bookForm = document.getElementById("bookFlight");
+                                bookFormDiv.style.visibility = 'visible';
+                                bookForm.style.opacity = "1";
+
+                                const selectedItem = response.data.find(item => item.id === bookId);
+                                document.getElementById('bookFlightName').value = selectedItem.flightname;
+
+
+                                document.getElementById('bookSeatType').addEventListener('change', function () {
+                                    const selectedSeatType = this.value;
+                                    const seatRate = () => {
+                                        switch (selectedSeatType) {
+                                            case 'economy': return selectedItem.economyrate;
+                                            case 'business': return selectedItem.businessrate;
+                                        }
+                                    };
+                                    document.getElementById('bookSeatRate').value = seatRate();
+                                });
+
+                                // SUBMIT THE FILLED HOTEL BOOKINGS FORM, CALL API ENDPOINT 
+                                document.getElementById('bookFlight').addEventListener('submit', function (event) {
+                                    event.preventDefault();
+                                    // const hotelId = Number(this.getAttribute('bookid'));
+
+                                    const userId = localStorage.getItem('userId');
+                                    const flightname = document.getElementById('bookFlightName').value;
+                                    const departureDate = document.getElementById('bookDeptDate').value;
+                                    const seat_type = document.getElementById('bookSeatType').value;
+                                    const seat_rate = document.getElementById('bookSeatRate').value;
+                                    const seat_count = document.getElementById('bookSeatCount').value;
+
+                                    const formData = {
+                                        userId: userId,
+                                        flightId: bookId,
+                                        flightname: flightname,
+                                        departureDate: departureDate,
+                                        seat_type: seat_type,
+                                        seat_rate: seat_rate,
+                                        seat_count: seat_count,
+                                    };
+                                    console.log(formData);
+                                    axios.post('http://localhost:8000/book/bookNewFlight', formData)
+                                        .then(response => {
+
+                                            if (response.status === 200) {
+                                                // console.log(response.data[0].id, response.data[0].firstname);
+                                                alert("Flight booked successful");
+                                                window.location.href = './userDashBoard.html'; // Replace '/dashboard' with your desired page
+                                            } else {
+                                                console.log(response);
+                                            }
+                                        })
+                                        .catch(error => {
+                                            console.log(error.response.status)
+                                        });
+
+                                });
+
+                            })
+                        })
+                    })
+                    .catch(error => { console.log(error) });
+
+                document.getElementById('flight_filter').addEventListener('submit', function (event) {
+                    event.preventDefault();
+
+                    const deptOption = document.getElementById('flight_filter_option_dept').value;
+                    const destOption = document.getElementById('flight_filter_option_dest').value;
+                    const searchOption = document.getElementById('search_filter').value;
+
+                    const deptValue = (deptOption === '#') ? 'all' : (deptOption).toLowerCase();
+                    const destValue = (destOption === '#') ? 'all' : (destOption).toLowerCase();
+                    const searchValue = (searchOption === '') ? 'all' : (searchOption).toLowerCase();
+
+
+                    const searchData = [deptValue, destValue, searchValue];
+                    const concatenatedSearchData = searchData.join(',');
+
+                    axios.get(`http://localhost:8000/flights/getAllFilter/${searchData}`)
+                        .then(response => {
+                            const divContainer = document.querySelector('.allHotels');
+                            divContainer.innerHTML = '';
+
+                            response.data.forEach(item => {
+
+                                const cardContainer = document.createElement('div');
+                                cardContainer.setAttribute('class', 'bookHotelCard');
+
+                                const itemElement1 = document.createElement('p');
+                                itemElement1.setAttribute('id', 'userDashboard_hotel_name');
+                                const itemElement2 = document.createElement('p');
+                                itemElement2.setAttribute('id', 'userDashboard_hotel_location');
+                                const itemElement3 = document.createElement('p');
+                                itemElement3.setAttribute('id', 'userDashboard_hotel_contact');
+
+                                const bookBtn = document.createElement('button');
+
+                                // Set the hotelId as a data attribute for each button
+                                bookBtn.setAttribute('flightId', item.id);
+                                bookBtn.setAttribute('id', 'userDashboard_bookBtn');
+
+
+                                itemElement1.textContent = `Flight Name: ${(item.flightname).toUpperCase()}`;
+                                itemElement2.textContent = `Departure: ${(item.flightdepart).toUpperCase()}`;
+                                itemElement3.textContent = `Contact: ${item.phoneno}`;
+
+                                bookBtn.textContent = 'Book';
+
+                                cardContainer.appendChild(itemElement1);
+                                cardContainer.appendChild(itemElement2);
+                                cardContainer.appendChild(itemElement3);
+                                cardContainer.appendChild(bookBtn);
+
+                                divContainer.appendChild(cardContainer);
+
+
+                                bookBtn.addEventListener('click', function () {
+
+                                    const bookId = Number(this.getAttribute('flightId'));
+                                    console.log('Book clicked for flightId:', bookId);
+
+                                    const bookFormDiv = document.getElementById("bookFormDiv");
+                                    const bookForm = document.getElementById("bookFlight");
+                                    bookFormDiv.style.visibility = 'visible';
+                                    bookForm.style.opacity = "1";
+
+                                    const selectedItem = response.data.find(item => item.id === bookId);
+                                    document.getElementById('bookFlightName').value = selectedItem.flightname;
+
+
+                                    document.getElementById('bookSeatType').addEventListener('change', function () {
+                                        const selectedSeatType = this.value;
+                                        const seatRate = () => {
+                                            switch (selectedSeatType) {
+                                                case 'economy': return selectedItem.economyrate;
+                                                case 'business': return selectedItem.businessrate;
+                                            }
+                                        };
+                                        document.getElementById('bookSeatRate').value = seatRate();
+                                    });
+
+                                    // SUBMIT THE FILLED HOTEL BOOKINGS FORM, CALL API ENDPOINT 
+                                    document.getElementById('bookFlight').addEventListener('submit', function (event) {
+                                        event.preventDefault();
+                                        // const hotelId = Number(this.getAttribute('bookid'));
+
+                                        const userId = localStorage.getItem('userId');
+                                        const flightname = document.getElementById('bookFlightName').value;
+                                        const departureDate = document.getElementById('bookDeptDate').value;
+                                        const seat_type = document.getElementById('bookSeatType').value;
+                                        const seat_rate = document.getElementById('bookSeatRate').value;
+                                        const seat_count = document.getElementById('bookSeatCount').value;
+
+                                        const formData = {
+                                            userId: userId,
+                                            flightId: bookId,
+                                            flightname: flightname,
+                                            departureDate: departureDate,
+                                            seat_type: seat_type,
+                                            seat_rate: seat_rate,
+                                            seat_count: seat_count,
+                                        };
+                                        console.log(formData);
+                                        axios.post('http://localhost:8000/book/bookNewFlight', formData)
+                                            .then(response => {
+
+                                                if (response.status === 200) {
+                                                    // console.log(response.data[0].id, response.data[0].firstname);
+                                                    alert("Flight booked successful");
+                                                    window.location.href = './userDashBoard.html'; // Replace '/dashboard' with your desired page
+                                                } else {
+                                                    console.log(response);
+                                                }
+                                            })
+                                            .catch(error => {
+                                                console.log(error.response.status)
+                                            });
+
+                                    });
+
+                                })
+                            })
+
+                        }).catch(error => {
+                            alert("No flights found");
+                            window.location.href = './userFlights.html'; // Replace '/dashboard' with your desired page
+
+                        });
+                })
+            } else {
+                localStorage.removeItem('userId');
+                localStorage.removeItem('userName');
+                localStorage.removeItem('role');
+                window.location.href = '../login.html';
+            }
+        });
+
+
+    </script>
+
 </body>
+
 </html>

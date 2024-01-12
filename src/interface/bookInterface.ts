@@ -18,3 +18,24 @@ export interface UpdateHotelBooking {
     room_count: number,
     createdat:Date,
 }
+
+
+export interface BookFilghtInfo {
+    userId:number,
+    flightId:number, 
+    flightname:string,
+    departureDate:Date,
+    seat_type:string,
+    seat_rate: number,
+    seat_count: number,
+}      
+export interface UpdateFlightBooking {
+    userId:number,
+    flightId:number, 
+    flightname:string,
+    departureDate:Date,
+    seat_type:string,
+    seat_rate: number,
+    seat_count: number,
+    createdat:Date,
+}

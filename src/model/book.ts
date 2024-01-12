@@ -2,7 +2,7 @@ import { promises as fs } from "fs";
 import knexConfig, { baseKnexConfig } from "../knexFile";
 import knex from "knex";
 import { DateTime } from "luxon";
-import { BookHotelInfo, UpdateHotelBooking } from "../interface/bookInterface";
+import { BookHotelInfo, UpdateHotelBooking, BookFilghtInfo, UpdateFlightBooking } from "../interface/bookInterface";
 
 const knexInstance = knex(baseKnexConfig);
 
@@ -104,5 +104,32 @@ export async function deleteMyHotel(entryId: number,userId:number) {
     return resultData;
   } catch (error) {
     console.log(error);
+  }
+}
+
+
+export async function bookNewFlight(result: BookFilghtInfo) {
+  try {
+    const databaseInsert = await knexInstance
+      .insert({
+        userId:result.userId,
+        flightId:result.flightId, 
+        flightname:result.flightname,
+        departureDate:result.departureDate,
+        seat_type:result.seat_type,
+        seat_rate: result.seat_rate,
+        seat_count: result.seat_count,
+        createdat: formattedTime,
+        updatedat: formattedTime,
+      })
+      .into("users_flights")
+      .then(function () {
+        return (200);
+      });
+    // console.log(databaseInsert);
+    return databaseInsert;
+  } catch (error) {
+    console.log(error);
+    return { error: error };
   }
 }

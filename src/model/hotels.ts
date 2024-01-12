@@ -14,86 +14,29 @@ const formattedTime = currentTimeInDesiredZone.toFormat(
 
 export async function getAllFilter(locationValue:string,searchValue:string){
   // From model kathmandu, hunxa
-if(locationValue === 'all' && searchValue === 'all'){
-  // console.log("Display all")
-  try{
-    const resultData = knexInstance
-    .select('*')
-    .from('hotels')
-    .then(function (data) {
-      if(data.length === 0){
-        return (404);
-      }else{
-        return (data);
-      }
-    });
-    return (resultData);
-}
-  catch(error){
-    console.log(error)
-    return (error);
+  try {
+    let query = knexInstance.select('*').from('hotels');
+  
+    if (locationValue !== 'all') {
+      query = query.where('location', locationValue);
+    }
+  
+    if (searchValue !== 'all') {
+      query = query.where('hotelname', 'like', `%${searchValue}%`);
+    }
+  
+    const resultData = await query;
+  
+    if (resultData.length === 0) {
+      return 404;
+    } else {
+      return resultData;
+    }
+  } catch (error) {
+    console.log(error);
+    return error;
   }
-}else if(searchValue === 'all'){
-  // console.log("Display only locationValue based db data")
-  try{
-    const resultData = knexInstance
-    .select('*')
-    .from('hotels').where('location',locationValue)
-    .then(function (data) {
-      if(data.length === 0){
-        return (404);
-      }else{
-        return (data);
-      }
-    });
-    return (resultData);
-}
-  catch(error){
-    console.log(error)
-    return (error);
-  }
-
-}
-else if(locationValue === 'all'){
-  // console.log("Display only searchValue based db data")
-  try{
-    const resultData = knexInstance
-    .select('*')
-    .from('hotels').where('hotelname', 'like', `%${searchValue}%`)
-    .then(function (data) {
-      if(data.length === 0){
-        return (404);
-      }else{
-        return (data);
-      }
-    });
-    return (resultData);
-}
-  catch(error){
-    console.log(error)
-    return (error);
-  }
-
-}else{
-  // console.log("Display search value")
-  try{
-    const resultData = knexInstance
-    .select('*')
-    .from('hotels').where('hotelname', 'like', `%${searchValue}%`).andWhere('location',locationValue) // like -> partial match, % -> anywhere in the hotelname
-    .then(function (data) {
-      if(data.length === 0){
-        return (404);
-      }else{
-        return (data);
-      }
-    });
-    return (resultData);
-}
-  catch(error){
-    console.log(error)
-    return (error);
-  }
-}
+  
 }
 
 // POST METHOD

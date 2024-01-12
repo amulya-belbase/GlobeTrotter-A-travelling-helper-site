@@ -86,3 +86,30 @@ export const bookNewHotel = async (req: Request, res: Response) => {
       res.status(500).json({ error });
     }
   }
+
+
+  
+
+  export const bookNewFlight = async (req: Request, res: Response) => {
+    const result = req.body;
+
+    try {
+      const data = await bookService.bookNewFlight(
+        result.userId,
+        result.flightId,
+        result.flightname,
+        result.departureDate,
+        result.seat_type,
+        result.seat_rate,
+        result.seat_count
+      );
+      if (data === 200) {
+        res.status(200).json({message:"Hotel booked Successfully"});
+      } else {
+        res.status(422).json(data);
+      }
+    } catch (error) {
+      res.status(500).json({ error });
+    }
+  };
+

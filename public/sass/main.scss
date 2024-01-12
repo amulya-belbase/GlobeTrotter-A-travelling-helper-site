@@ -24,18 +24,23 @@
 @import "./signup/responsive/tablet";
 @import "./signup/responsive/mobile";
 
-// IMPORTS FOR ADDING HOTELS FOR ADMIN
+// IMPORTS OF ADDING HOTELS FOR ADMIN
 @import "./admin/adminHotels/adminHotels";
 
-// IMPORTS FOR ADDING FLIGHTS FOR ADMIN
+// IMPORTS OF ADDING FLIGHTS FOR ADMIN
 @import "./admin/adminFlights/adminFlights";
 
-// IMPORTS FOR ADMIN DASHBOARD
+// IMPORTS OF ADMIN DASHBOARD
 @import "./admin/adminDashboard/adminDashboard";
 
-// IMPORTS FOR BOOKING HOTELS FOR USERS
-@import "./user/userHotels/userHotels.scss";
-@import "./user/userDashboard/userDashboard.scss";
+// IMPORTS OF BOOKING HOTELS FOR USERS
+@import "./user/userHotels/userHotels";
+
+// IMPORTS OF BOOKING FLIGHTS FOR USERS
+@import "./user/userFlights/userFlights";
+
+// IMPORTS OF USER DASHBOARD
+@import "./user/userDashboard/userDashboard";
 
 
 *{

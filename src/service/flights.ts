@@ -56,3 +56,9 @@ export const addNew = async (
     // console.log(data);
     return (data); 
   }
+
+  
+  export const getAllFilter = async (deptValue:string,destValue:string,searchValue:string) => {
+    const data = await flightModel.getAllFilter(deptValue,destValue,searchValue);
+    return data;
+  } 

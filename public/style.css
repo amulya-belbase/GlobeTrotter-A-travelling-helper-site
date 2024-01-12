@@ -3142,6 +3142,84 @@ footer .footer_bottom {
   cursor: pointer;
 }
 
+.userHotelsBook {
+  position: relative;
+}
+.userHotelsBook #bookFormDiv {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.3);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+}
+.userHotelsBook #bookFormDiv #bookFlight {
+  font-family: lexend;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 15px;
+  background-color: #e2e2e2;
+  border-radius: 5px;
+  padding: 15px 30px;
+  opacity: 0;
+  transition: 0.3s ease-in-out;
+}
+.userHotelsBook #bookFormDiv #bookFlight #bookFormTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.userHotelsBook #bookFormDiv #bookFlight #bookFormTop span {
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  font-family: Space Grotesk;
+  color: #4691f2;
+  width: 100%;
+}
+.userHotelsBook #bookFormDiv #bookFlight #bookFormTop a {
+  font-size: 16px;
+  padding: 5px 10px;
+  text-decoration: none;
+  color: black;
+  border-radius: 5px;
+}
+.userHotelsBook #bookFormDiv #bookFlight #bookFormTop a:hover {
+  color: white;
+  background-color: #4691f2;
+  transition: 0.2s ease-in-out;
+}
+.userHotelsBook #bookFormDiv #bookFlight label {
+  font-size: 18px;
+}
+.userHotelsBook #bookFormDiv #bookFlight input {
+  border-radius: 10px;
+  outline: none;
+  border: 1px solid #009ee2;
+  padding: 10px;
+  width: 100%;
+  font-size: 16px;
+  line-height: 14px;
+  font-weight: 500;
+  font-family: Space Grotesk;
+}
+.userHotelsBook #bookFormDiv #bookFlight button {
+  padding: 15px 40px;
+  color: white;
+  font-size: 16px;
+  line-height: 14px;
+  font-weight: 700;
+  background-color: #009ee2;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 .userHotels {
   display: flex;
   gap: 20px;
