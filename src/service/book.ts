@@ -1,8 +1,9 @@
 import * as bookModel from "../model/book";
 
-import { BookHotelInfo, UpdateHotelBooking, BookFilghtInfo, UpdateFlightBooking } from "../interface/bookInterface";
+import { BookHotelInfo, UpdateHotelBooking, BookFlightInfo, UpdateFlightBooking } from "../interface/bookInterface";
 
 
+// FOR HOTELS
 export const bookNewHotel = async (
     userId:number,
     hotelId:number, 
@@ -48,7 +49,7 @@ export const bookNewHotel = async (
     return (data); 
   }
 
-
+// FOR FLIGHTS
   export const bookNewFlight = async (
     userId:number,
     flightId:number, 
@@ -58,7 +59,7 @@ export const bookNewHotel = async (
     seat_rate: number,
     seat_count: number,
   ) => {
-      const result: BookFilghtInfo = {
+      const result: BookFlightInfo = {
         userId:userId,
         flightId:flightId, 
         flightname:flightname,
@@ -71,4 +72,24 @@ export const bookNewHotel = async (
 
       const data = await bookModel.bookNewFlight(result);
       return data; 
+  }
+
+  export const myFlights = async (userId:number) => {
+    const data = await bookModel.myFlights(userId);
+    // console.log(data);
+    return (data); 
+  }
+
+  
+  export const updateMyFlight = async (id:number,newHotelObject:UpdateFlightBooking) => {
+    const data = await bookModel.updateMyFlight(id,newHotelObject);
+    // console.log(data);
+    return (data); 
+  }
+
+    
+  export const deleteMyFlight = async (entryId:number,userId:number) => {
+    const data = await bookModel.deleteMyFlight(entryId,userId);
+    // console.log(data);
+    return (data); 
   }

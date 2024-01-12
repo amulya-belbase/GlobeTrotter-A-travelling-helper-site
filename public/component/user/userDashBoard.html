@@ -21,6 +21,18 @@
         </div> -->
     </div>
 
+    <div class="userFlights">
+        <!-- <div class="userHotelCard">
+            <p id="dashboard_hotel_name">Hotel Name</p>
+            <p id="dashboard_location_name">Location</p>
+            <p id="dashboard_contact_name">Contact</p>
+            <div id="dashboard_btn">
+                <button>Update</button>
+                <button id="dashboard_deleteBtn">Delete</button>
+            </div>
+        </div> -->
+    </div>
+
     <div id="bookFormDiv">
         <form id="bookHotel">
             <div id="bookFormTop">
@@ -38,6 +50,26 @@
             </select>
             <label>Room Rate (In $/Night): <input type="text" id="bookRoomRate" name="bookRoomRate" readonly></label>
             <label>Room Count: <input type="number" id="bookRoomCount" name="bookRoomCount"></label>
+            <button>Submit</button>
+        </form>
+    </div>
+
+    <div id="bookFlightFormDiv">
+        <form id="bookFlight">
+            <div id="bookFormTop">
+                <span>Update Your Flight Booking</span>
+                <a href="" onclick="hideBookPopup()">X</a>
+            </div>
+            <label>Flight Name: <input type="text" id="bookFlightName" name="bookFlightName" readonly></label>
+            <label>Departure Date: <input type="date" id="bookDeptDate" name="bookDeptDate"></label>
+            <label for="bookSeatType">Select the seat type:</label>
+            <select id="bookSeatType" name="bookSeatType">
+                <option value="#">-- Select --</option>
+                <option value="economy">Economy</option>
+                <option value="business">Business</option>
+            </select>
+            <label>Seat Rate (In $): <input type="text" id="bookSeatRate" name="bookSeatRate" readonly></label>
+            <label>Seat Count: <input type="number" id="bookSeatCount" name="bookSeatCount"></label>
             <button>Submit</button>
         </form>
     </div>
@@ -204,7 +236,7 @@
                                 deleteBtn.addEventListener('click', function () {
                                     const id = Number(this.getAttribute('deleteBtn'));
                                     const userId = localStorage.getItem('userId');
-                                    const ids = [id, userId]; 
+                                    const ids = [id, userId];
                                     const concatenatedIds = ids.join(',');
 
                                     axios.delete(`http://localhost:8000/book/deleteMyHotel/${concatenatedIds}`)
@@ -220,6 +252,182 @@
                                         })
                                         .catch(error => {
                                             console.error('Error deleting hotel:', error);
+                                            if (error.response.status === 401) {
+                                                alert("Unauthorized request");
+                                                window.location.href = './userDashBoard.html';
+                                            }
+                                        });
+                                });
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+
+                // TO GET ALL THE USER BOOKED FLIGHTS
+                axios.get(`http://localhost:8000/book/myFlights/${userId}`)
+                    .then(response => {
+                        if (response.data.length === 0) {
+                            console.log("this user doesn't have any data");
+                        } else {
+                            const divContainer = document.querySelector('.userFlights');
+                            response.data.forEach(item => {
+
+                                const cardContainer = document.createElement('div');
+                                cardContainer.setAttribute('class', 'userHotelCard');
+
+                                const itemElement1 = document.createElement('p');
+                                itemElement1.setAttribute('id', 'dashboard_hotel_name');
+                                const itemElement2 = document.createElement('p');
+                                itemElement2.setAttribute('id', 'dashboard_location_name');
+                                const itemElement3 = document.createElement('p');
+                                itemElement3.setAttribute('id', 'dashboard_contact_name');
+
+
+                                const btnContainer = document.createElement('div');
+                                btnContainer.setAttribute('id', 'dashboard_btn');
+                                const updateBtn = document.createElement('button');
+                                const deleteBtn = document.createElement('button');
+
+                                // Set the hotelId as a data attribute for each button
+                                updateBtn.setAttribute('updateBtn', item.id);
+                                deleteBtn.setAttribute('deleteBtn', item.id);
+                                deleteBtn.setAttribute('id', 'dashboard_deleteBtn');
+
+
+                                // to format the date
+                                const dateString = item.departureDate;
+                                const dateObject = new Date(dateString);
+                                const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+                                const formattedDate = dateObject.toLocaleDateString(options);
+
+
+                                itemElement1.textContent = `Hotel Name: ${item.flightname}`;
+                                itemElement2.textContent = `Arrival Date: ${formattedDate}`;
+                                itemElement3.textContent = `Room Type: ${item.seat_type}`;
+
+                                updateBtn.textContent = 'Update';
+                                deleteBtn.textContent = 'Delete';
+                                btnContainer.appendChild(updateBtn);
+                                btnContainer.appendChild(deleteBtn);
+
+                                cardContainer.appendChild(itemElement1);
+                                cardContainer.appendChild(itemElement2);
+                                cardContainer.appendChild(itemElement3);
+                                cardContainer.appendChild(btnContainer);
+
+
+                                divContainer.appendChild(cardContainer);
+
+                                updateBtn.addEventListener('click', function () {
+
+                                    const bookId = Number(this.getAttribute('updateBtn'));
+                                    console.log('Update clicked for bookId:', bookId);
+
+                                    const updateFormDiv = document.getElementById("bookFlightFormDiv");
+                                    const updateForm = document.getElementById("bookFlight");
+                                    updateFormDiv.style.visibility = 'visible';
+                                    updateForm.style.opacity = "1";
+
+                                    try {
+                                        const selectedItem = response.data.find(item => item.id === bookId);
+
+                                        document.getElementById('bookFlightName').value = selectedItem.flightname;
+
+                                        const departureDate = new Date(selectedItem.departureDate);
+                                        const formattedDate = departureDate.toISOString().split('T')[0];
+                                        document.getElementById('bookDeptDate').value = formattedDate;
+
+                                        document.getElementById('bookSeatCount').value = selectedItem.seat_count;
+                                        const flightId = selectedItem.flightId;
+
+                                        // To change the rate according to option change in dropdown
+                                        document.getElementById('bookSeatType').addEventListener('change', function () {
+                                            const selectedRoomType = this.value;
+                                            axios.get(`http://localhost:8000/flights/getFlightForUser/${flightId}`)
+                                                .then(response => {
+                                                    const roomRate = () => {
+                                                        switch (selectedRoomType) {
+                                                            case 'economy': return response.data[0].economyrate;
+                                                            case 'business': return response.data[0].businessrate;
+                                                        }
+                                                    };
+                                                    document.getElementById('bookSeatRate').value = roomRate();
+                                                });
+                                        })
+
+
+                                        updateForm.addEventListener('submit', function (event) {
+                                            event.preventDefault(); // Prevent default form submission
+
+                                            // Get form data
+                                            const userId = localStorage.getItem('userId');
+                                            const flightname = document.getElementById('bookFlightName').value;
+                                            const departureDate = document.getElementById('bookDeptDate').value;
+                                            const seat_type = document.getElementById('bookSeatType').value;
+                                            const seat_rate = document.getElementById('bookSeatRate').value;
+                                            const seat_count = document.getElementById('bookSeatCount').value;
+
+                                            const formData = {
+                                                userId: userId,
+                                                flightId: flightId,
+                                                flightname: flightname,
+                                                departureDate: departureDate,
+                                                seat_type: seat_type,
+                                                seat_rate: seat_rate,
+                                                seat_count: seat_count,
+                                                createdat: selectedItem.createdat
+                                            };
+                                            // console.log(formData,bookId);
+
+                                            // Send form data using Axios
+                                            axios.put(`http://localhost:8000/book/updateMyFlight/${bookId}`, formData)
+                                                .then(response => {
+
+                                                    if (response.status === 200) {
+                                                        updateFormDiv.style.visibility = 'hidden';
+                                                        updateForm.style.opacity = '0';
+                                                        alert("Flight booking updated successfully");
+                                                        window.location.href = './userDashBoard.html';
+                                                    }
+                                                })
+                                                .catch(error => {
+                                                    console.error('Error updating flight:', error);
+                                                    // Handle error while trying to update the hotel
+                                                    if (error.response.status === 401) {
+                                                        alert("Unauthorized request");
+                                                    }
+                                                });
+                                        });
+                                    } catch (error) {
+                                        updateFormDiv.style.visibility = 'hidden';
+                                        updateForm.style.opacity = '0';
+                                        alert("Unauthorized request");
+                                        window.location.href = './userDashBoard.html';
+                                    }
+                                });
+
+                                // Event listener for the delete button
+                                deleteBtn.addEventListener('click', function () {
+                                    const id = Number(this.getAttribute('deleteBtn'));
+                                    const userId = localStorage.getItem('userId');
+                                    const ids = [id, userId];
+                                    const concatenatedIds = ids.join(',');
+
+                                    axios.delete(`http://localhost:8000/book/deleteMyFlight/${concatenatedIds}`)
+                                        .then(response => {
+
+                                            if (response.status === 200) {
+                                                alert('Flight booking deleted successfully');
+                                            }
+                                            console.log(`Flight with ID ${id} deleted successfully`);
+                                            // this.parentNode.remove(); 
+
+                                            window.location.href = './userDashBoard.html';
+                                        })
+                                        .catch(error => {
+                                            console.error('Error deleting flight:', error);
                                             if (error.response.status === 401) {
                                                 alert("Unauthorized request");
                                                 window.location.href = './userDashBoard.html';

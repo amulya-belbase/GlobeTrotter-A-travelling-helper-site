@@ -6,6 +6,7 @@ import {
     getFlightsById,
     deleteFlight,
     updateFlight,
+    getFlightForUser,
 } from "../controller/flights";
 
 const router = Router();
@@ -18,5 +19,6 @@ router.put("/update/:id", updateFlight);
 
 router.get("/getAllFilter/:searchData", getAllFilter);
 
+router.get("/getFlightForUser/:id", getFlightForUser)
 
 export default router; 

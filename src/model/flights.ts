@@ -139,3 +139,15 @@ export async function getAllFilter(deptValue:string,destValue:string,searchValue
   }
   
 }
+
+
+export async function getFlightForUser(flightId: number) {
+  const resultData = await knexInstance
+    .select("*")
+    .from("flights")
+    .where("id", flightId)
+    .then(function (data) {
+      return data;
+    });
+  return resultData;
+}

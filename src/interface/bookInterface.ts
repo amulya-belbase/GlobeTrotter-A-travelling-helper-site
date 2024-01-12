@@ -20,7 +20,7 @@ export interface UpdateHotelBooking {
 }
 
 
-export interface BookFilghtInfo {
+export interface BookFlightInfo {
     userId:number,
     flightId:number, 
     flightname:string,

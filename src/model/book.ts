@@ -2,7 +2,7 @@ import { promises as fs } from "fs";
 import knexConfig, { baseKnexConfig } from "../knexFile";
 import knex from "knex";
 import { DateTime } from "luxon";
-import { BookHotelInfo, UpdateHotelBooking, BookFilghtInfo, UpdateFlightBooking } from "../interface/bookInterface";
+import { BookHotelInfo, UpdateHotelBooking, BookFlightInfo, UpdateFlightBooking } from "../interface/bookInterface";
 
 const knexInstance = knex(baseKnexConfig);
 
@@ -10,7 +10,7 @@ const desiredTimezone = "Asia/Kathmandu";
 const currentTimeInDesiredZone = DateTime.now().setZone(desiredTimezone);
 const formattedTime = currentTimeInDesiredZone.toFormat("yyyy-MM-dd HH:mm:ss");
 
-// POST METHOD
+// FOR HOTELS
 export async function bookNewHotel(result: BookHotelInfo) {
   try {
     const databaseInsert = await knexInstance
@@ -38,7 +38,6 @@ export async function bookNewHotel(result: BookHotelInfo) {
 }
 
 
-const array: any = [];
 export async function myHotels(userId: number) {
   try{
     const resultData = await knexInstance
@@ -107,8 +106,9 @@ export async function deleteMyHotel(entryId: number,userId:number) {
   }
 }
 
+// FOR FLIGHTS
 
-export async function bookNewFlight(result: BookFilghtInfo) {
+export async function bookNewFlight(result: BookFlightInfo) {
   try {
     const databaseInsert = await knexInstance
       .insert({
@@ -131,5 +131,71 @@ export async function bookNewFlight(result: BookFilghtInfo) {
   } catch (error) {
     console.log(error);
     return { error: error };
+  }
+}
+
+export async function myFlights(userId: number) {
+  try{
+    const resultData = await knexInstance
+      .select("*")
+      .from("users_flights")
+      .where("userId", userId)
+      .then(function (data) {
+        return data;
+      });
+    return resultData;
+  }
+  catch(error){
+    console.log(error);
+  }
+}
+
+
+export async function updateMyFlight(id: number, newHotelObject: UpdateFlightBooking) {
+  // console.log(`From model ${hotelId}`);
+  // console.log(`From model ${JSON.stringify(newHotelObject)}`);
+  try{
+    const resultData = knexInstance("users_flights")
+    .where("id", id).andWhere('userId', newHotelObject.userId)
+    .update({
+      userId: newHotelObject.userId,
+      flightId: newHotelObject.flightId, 
+      flightname: newHotelObject.flightname,
+      departureDate: newHotelObject.departureDate,
+      seat_type: newHotelObject.seat_type,
+      seat_rate: newHotelObject.seat_rate,
+      seat_count: newHotelObject.seat_count,
+      createdat: newHotelObject.createdat,
+      updatedat: formattedTime,
+    })
+    .then(function(data){
+      if(data === 1){
+        return (200)
+      }else{
+        return (401)
+      }
+    });
+    return resultData;
+  }catch(error){
+    console.log(error);
+  }
+}
+
+export async function deleteMyFlight(entryId: number,userId:number) {
+  // console.log(`From model: userId ${userId} & entryId: ${entryId}`);
+  try {
+    const resultData = await knexInstance("users_flights")
+      .where("id", entryId).andWhere('userId', userId)
+      .del()
+      .then(function (data) {
+        if(data === 0){
+          return (401)
+        }else{
+          return (200)
+        }
+      });
+    return resultData;
+  } catch (error) {
+    console.log(error);
   }
 }

@@ -115,3 +115,14 @@ export const getAllFilter = async (req:Request, res:Response) => {
     res.status(500).json({ error });
   }
 }
+
+export const getFlightForUser = async (req:Request, res: Response) => {
+  const flightId = Number(req.params.id); 
+  try {
+    const data = await flightService.getFlightForUser(flightId);
+    // console.log(data);
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+}

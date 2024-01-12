@@ -62,3 +62,9 @@ export const addNew = async (
     const data = await flightModel.getAllFilter(deptValue,destValue,searchValue);
     return data;
   } 
+
+  export const getFlightForUser = async (flightId:number) => {
+    const data = await flightModel.getFlightForUser(flightId);
+    // console.log(data);
+    return (data); 
+  }
