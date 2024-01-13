@@ -28,16 +28,22 @@
                 </form>
             </div>
         </div>
-        
+
 
         <div class="allFlights">
-            <!-- <div class="bookHotelCard">
-                <p id="dashboard_hotel_name">Hotel Name</p>
-                <p id="userDashboard_hotel_location">Location</p>
-                <p id="dashboard_contact_name">Contact</p>
-                <button>Book Now</button>
+            <!-- <div class="userHotelCard">
+                <div id="adminDashboardHotelImg">
+                    <img src="../../images/hotels/1705153055380.jpg" alt="HotelImg">
+                </div>
+                <div id="adminDashboardHotelInfo">
+                    <p id="dashboard_hotel_name">Hotel Name</p>
+                    <p id="dashboard_location_name">Location</p>
+                    <p id="dashboard_contact_name">Contact</p>
+                    <button>Book Now</button>
+                </div>
             </div> -->
         </div>
+
 
         <div id="bookFormDiv">
             <form id="bookHotel">
@@ -61,7 +67,7 @@
             </form>
         </div>
     </div>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         function hideHotelPopUp() {
@@ -89,14 +95,23 @@
                             response.data.forEach(item => {
 
                                 const cardContainer = document.createElement('div');
-                                cardContainer.setAttribute('class', 'bookHotelCard');
+                                cardContainer.setAttribute('class', 'userHotelCard');
+
+                                const imgContainer = document.createElement('div');
+                                imgContainer.setAttribute('id', 'adminDashboardHotelImg');
+                                const hotelImg = document.createElement('img');
+                                hotelImg.src = `../../images/hotels/${item.image1}`;
+                                imgContainer.appendChild(hotelImg);
+
+                                const infoContainer = document.createElement('div');
+                                infoContainer.setAttribute('id', 'adminDashboardHotelInfo');
 
                                 const itemElement1 = document.createElement('p');
-                                itemElement1.setAttribute('id', 'userDashboard_hotel_name');
+                                itemElement1.setAttribute('id', 'userDashboard_flight_name');
                                 const itemElement2 = document.createElement('p');
-                                itemElement2.setAttribute('id', 'userDashboard_hotel_location');
+                                itemElement2.setAttribute('id', 'userDashboard_flight_location');
                                 const itemElement3 = document.createElement('p');
-                                itemElement3.setAttribute('id', 'userDashboard_hotel_contact');
+                                itemElement3.setAttribute('id', 'userDashboard_flight_contact');
 
                                 const bookBtn = document.createElement('button');
 
@@ -111,11 +126,13 @@
 
                                 bookBtn.textContent = 'Book Now';
 
-                                cardContainer.appendChild(itemElement1);
-                                cardContainer.appendChild(itemElement2);
-                                cardContainer.appendChild(itemElement3);
-                                cardContainer.appendChild(bookBtn);
+                                infoContainer.appendChild(itemElement1);
+                                infoContainer.appendChild(itemElement2);
+                                infoContainer.appendChild(itemElement3);
+                                infoContainer.appendChild(bookBtn);
 
+                                cardContainer.appendChild(imgContainer);
+                                cardContainer.appendChild(infoContainer);
 
                                 divContainer.appendChild(cardContainer);
 
@@ -218,35 +235,46 @@
                                 response.data.forEach(item => {
 
                                     const cardContainer = document.createElement('div');
-                                    cardContainer.setAttribute('class', 'bookHotelCard');
+                                cardContainer.setAttribute('class', 'userHotelCard');
 
-                                    const itemElement1 = document.createElement('p');
-                                    itemElement1.setAttribute('id', 'userDashboard_hotel_name');
-                                    const itemElement2 = document.createElement('p');
-                                    itemElement2.setAttribute('id', 'userDashboard_hotel_location');
-                                    const itemElement3 = document.createElement('p');
-                                    itemElement3.setAttribute('id', 'userDashboard_hotel_contact');
+                                const imgContainer = document.createElement('div');
+                                imgContainer.setAttribute('id', 'adminDashboardHotelImg');
+                                const hotelImg = document.createElement('img');
+                                hotelImg.src = `../../images/hotels/${item.image1}`;
+                                imgContainer.appendChild(hotelImg);
 
-                                    const bookBtn = document.createElement('button');
+                                const infoContainer = document.createElement('div');
+                                infoContainer.setAttribute('id', 'adminDashboardHotelInfo');
 
-                                    // Set the hotelId as a data attribute for each button
-                                    bookBtn.setAttribute('bookId', item.id);
-                                    bookBtn.setAttribute('id', 'userDashboard_bookBtn');
-                                    bookBtn.textContent = 'Book Now';
+                                const itemElement1 = document.createElement('p');
+                                itemElement1.setAttribute('id', 'userDashboard_flight_name');
+                                const itemElement2 = document.createElement('p');
+                                itemElement2.setAttribute('id', 'userDashboard_flight_location');
+                                const itemElement3 = document.createElement('p');
+                                itemElement3.setAttribute('id', 'userDashboard_flight_contact');
 
+                                const bookBtn = document.createElement('button');
 
-                                    itemElement1.textContent = `Hotel Name: ${(item.hotelname)}`;
-                                    itemElement2.textContent = `Location: ${(item.location)}`;
-                                    itemElement3.textContent = `Contact: ${item.phoneno}`;
-
-
-                                    cardContainer.appendChild(itemElement1);
-                                    cardContainer.appendChild(itemElement2);
-                                    cardContainer.appendChild(itemElement3);
-                                    cardContainer.appendChild(bookBtn);
+                                // Set the hotelId as a data attribute for each button
+                                bookBtn.setAttribute('bookId', item.id);
+                                bookBtn.setAttribute('id', 'userDashboard_bookBtn');
 
 
-                                    divContainer.appendChild(cardContainer);
+                                itemElement1.textContent = `Hotel Name: ${(item.hotelname)}`;
+                                itemElement2.textContent = `Location: ${(item.location)}`;
+                                itemElement3.textContent = `Contact: ${item.phoneno}`;
+
+                                bookBtn.textContent = 'Book Now';
+
+                                infoContainer.appendChild(itemElement1);
+                                infoContainer.appendChild(itemElement2);
+                                infoContainer.appendChild(itemElement3);
+                                infoContainer.appendChild(bookBtn);
+
+                                cardContainer.appendChild(imgContainer);
+                                cardContainer.appendChild(infoContainer);
+
+                                divContainer.appendChild(cardContainer);
 
                                     bookBtn.addEventListener('click', function () {
 

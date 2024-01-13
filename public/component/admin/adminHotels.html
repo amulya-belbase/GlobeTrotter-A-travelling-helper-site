@@ -64,8 +64,8 @@
                 const website = document.getElementById('website').value;
                 const email = document.getElementById('email').value;
                 const phoneno = document.getElementById('phoneno').value;
-                const image1 = document.getElementById('image1').value;
-
+                const imageInput = document.getElementById('image1');
+                const image1 = imageInput.files[0]; 
                 // FORM VALIDATION IS NEEDED
                 const formData = {
                     userId: localStorage.getItem('userId'),
@@ -84,25 +84,33 @@
                     image1: image1,
                 };
 
-                // console.log(formData);
-
-                // Send form data using Axios
-                axios.post('http://localhost:8000/hotels/addNew', formData)
-                    .then(response => {
-                        // console.log(response.status);
-                        if (response.status === 200) {
-                            alert("Hotel registered successfully");
-                            window.location.href = './adminDashBoard.html';
-                        }
-
-                    })
-                    .catch(error => {
-                        if (error.response.status === 422) {
-                            // emailValidation.style.display = 'block';
-                            // emailValidation.innerHTML = "Invalid Credentials"; 
-                            alert("Enter form properly");
-                        }
-                    });
+                axios.post('http://localhost:8000/upload/hotel', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                })
+                .then(response => {
+                    formData.image1 = response.data.fileName;
+                    axios.post('http://localhost:8000/hotels/addNew', formData)
+                        .then(response => {
+                            // console.log(response.status);
+                            if (response.status === 200) {
+                                alert("Hotel registered successfully");
+                                window.location.href = './adminDashBoard.html';
+                            }
+    
+                        })
+                        .catch(error => {
+                            if (error.response.status === 422) {
+                                // emailValidation.style.display = 'block';
+                                // emailValidation.innerHTML = "Invalid Credentials"; 
+                                alert("Enter form properly");
+                            }
+                        });
+                })
+                .catch(error => {
+                    console.error(error);
+                });
             });
         } else {
             localStorage.removeItem('userId');

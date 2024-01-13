@@ -92,6 +92,8 @@
                         localStorage.setItem('userId', response.data[0].id);
                         localStorage.setItem('userName', response.data[0].firstname);
                         localStorage.setItem('role', response.data[0].role);
+                        localStorage.setItem('profilepic', response.data[0].profilepic);
+
                         window.location.href = '/'; // Replace '/dashboard' with your desired page
                     } else {
                         console.log(response);

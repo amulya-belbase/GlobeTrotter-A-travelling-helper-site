@@ -1,11 +1,10 @@
 import {Router} from "express";
 
-// import {authenticateToken, refreshActionToken} from "../middleware/authToken";
-// import todoRoutes from "./todo";
 import usersRoutes from "./users";
 import hotelsRoutes from "./hotels";
 import flightsRoutes from "./flights";
 import bookRoutes from "./book";
+import uploadRoutes from "./upload";
 
 const router = Router();
 
@@ -20,6 +19,9 @@ router.use("/flights", flightsRoutes);
 
 // route for user bookings
 router.use("/book",bookRoutes);
+
+// FOR picture uploads
+router.use("/upload", uploadRoutes);
 
 
 

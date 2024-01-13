@@ -26,7 +26,7 @@
             <div class="upper_header_right">
                 <div class="upper_header_right_login">
                     <div class="upper_header_right_login_user">
-                        <img src="./assets/img/header_user.png" alt="">
+                        <img src="./assets/img/header_user.png" alt="" id="nonlogpic">
                     </div>
                     <span id="loginLink"><a href="./component/login.html">Login / Register</a></span>
                     <div id="userValidationDiv">
@@ -59,10 +59,10 @@
                 <img src="./assets/img/logo.png" alt="">
             </div>
             <div class="nav_options">
-                <div>Home</div>
+                <div><a href="./index.html">Home</a></div>
                 <div>About Us</div>
-                <div>Venues</div>
-                <div>Flights</div>
+                <div><a href="./component/user/userHotels.html">Venues</a></div>
+                <div><a href="./component/user/userFlights.html">Flights</a></div>
                 <div>Blog</div>
             </div>
             <div class="nav_contact">
@@ -80,10 +80,13 @@
             </div>
             <div class="hero_left_bottom">Lorem ipsum dolor sit amet consectetur. Hac consequat hac arcu sed. Lectus
                 ante ut in mattis ornare commodo nisi. Tortor tincidunt fames quam fusce convallis eget pulvinar.</div>
-            <button>
+            <a href="./component/user/userHotels.html">
+
+                <button>
                 Make Reservation
                 <img src="./assets/img/hero_reservation.png" alt="">
             </button>
+            </a>
         </div>
         <div class="hero_right">
             <div class="hero_right_image_right">
@@ -103,7 +106,7 @@
 
     <!-- ABOUT US PORTION -->
     <div class="about_us">
-        <form action="/" class="booking_form" id="myForm" method="post">
+        <form action="#" class="booking_form" id="myForm" method="post">
             <input type="text" placeholder="Type of Venue*" name="venue" class="book_info" id="venue">
             <input type="text" placeholder="Pick A Date*" name="date" class="book_info" id="date">
             <input type="text" placeholder="Zip Code*" name="zip" class="zip_code" id="code">
@@ -181,7 +184,7 @@
                 <div class="booking_card_individual_img">
                     <img src="./assets/img/hotel_1.png" alt="">
                 </div>
-                <div class="booking_card_individual_title">Some Amazing shit</div>
+                <div class="booking_card_individual_title">Some Amazing Description</div>
                 <div class="booking_card_individual_desc">Lorem ipsum dolor sit amet, alina adipisci elite. Egestas
                     elementum enim netus amet turpis lectus.</div>
                 <div class="booking_card_individual_info">
@@ -206,7 +209,7 @@
                 <div class="booking_card_individual_img">
                     <img src="./assets/img/hotel_2.png" alt="">
                 </div>
-                <div class="booking_card_individual_title">Some Amazing shit</div>
+                <div class="booking_card_individual_title">Some Amazing Description</div>
                 <div class="booking_card_individual_desc">Lorem ipsum dolor sit amet, alina adipisci elite. Egestas
                     elementum enim netus amet turpis lectus.</div>
                 <div class="booking_card_individual_info">
@@ -231,7 +234,7 @@
                 <div class="booking_card_individual_img">
                     <img src="./assets/img/hotel_3.png" alt="">
                 </div>
-                <div class="booking_card_individual_title">Some Amazing shit</div>
+                <div class="booking_card_individual_title">Some Amazing Description</div>
                 <div class="booking_card_individual_desc">Lorem ipsum dolor sit amet, alina adipisci elite. Egestas
                     elementum enim netus amet turpis lectus.</div>
                 <div class="booking_card_individual_info">
@@ -349,10 +352,12 @@
             Amet nisl purus in mollis nunc. Blandit libero volutpat sed cras ornare. In pellentesque massa placerat duis
             ultricies lacus sed. Nisl suscipit adipiscing bibendum est ultricies integer quis auctor. Id consectetur
             purus ut faucibus pulvinar elementum integer enim.
+            <a href="./component/user/userFlights.html">
             <button class="call_action_book_now">
                 Book Now
                 <img src="./assets/img/blue_arrow_right.png" alt="">
             </button>
+        </a>
         </div>
     </div>
 
@@ -484,6 +489,7 @@
         const loginLink = document.getElementById("loginLink");
         const loginCheckDiv = document.querySelector(".upper_header_right_login");
         const userButtons = document.getElementById("userValidationDivDropdown");
+        const loggedInProfilePic = document.querySelector('.upper_header_right_login_user');
 
         if (localStorage.getItem('userId')) {
             loginLink.style.display = "none";
@@ -494,6 +500,11 @@
             loginCheckDiv.style.borderRadius = "5px";
             loginUser.innerHTML = `Welcome, ${localStorage.getItem('userName')}`;
             // Assuming loginCheck is a valid DOM element where you want to append the created node
+
+            loggedInProfilePic.innerHTML = '';
+            const profileImg = document.createElement('img');
+            profileImg.src = `/images/users/${localStorage.getItem('profilepic')}`;
+            loggedInProfilePic.appendChild(profileImg);
 
             const logoutButton = document.createElement('button');
             logoutButton.textContent = 'Logout';

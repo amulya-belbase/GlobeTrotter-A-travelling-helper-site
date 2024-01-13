@@ -41,12 +41,17 @@
                 </div>
 
                 <!-- <div class="userHotelCard">
-                    <p id="dashboard_hotel_name">Hotel Name</p>
-                    <p id="dashboard_location_name">Location</p>
-                    <p id="dashboard_contact_name">Contact</p>
-                    <div id="dashboard_btn">
-                        <button>Update</button>
-                        <button id="dashboard_deleteBtn">Delete</button>
+                    <div id="adminDashboardHotelImg">
+                        <img src="../../images/hotels/1705153055380.jpg" alt="HotelImg">
+                    </div>
+                    <div id="adminDashboardHotelInfo">
+                        <p id="dashboard_hotel_name">Hotel Name</p>
+                        <p id="dashboard_location_name">Location</p>
+                        <p id="dashboard_contact_name">Contact</p>
+                        <div id="dashboard_btn">
+                            <button>Update</button>
+                            <button id="dashboard_deleteBtn">Delete</button>
+                        </div>
                     </div>
                 </div> -->
             </div>
@@ -66,21 +71,26 @@
                 </div>
 
                 <!-- <div class="userFlightCard">
-                    <p id="dashboard_hotel_name">Flight Name</p>
-                    <div class="userFlightCardFlight">
-                        <div id="dashboard_location_name">
-                            Beijing
-                            <span>Departure</span>
+                    <div id="adminDashboardFlightImg">
+                        <img src="../../images/flights/1705154477553.webp" alt="FlightImg">
+                    </div>
+                    <div id="adminDashboardFlightInfo">
+                        <p id="dashboard_hotel_name">Flight Name</p>
+                        <div class="userFlightCardFlight">
+                            <div id="dashboard_location_name">
+                                Beijing
+                                <span>Departure</span>
+                            </div>
+                            <img src="../../assets/img/dashboard_flight_journey.png" alt="">
+                            <div id="dashboard_location_name">
+                                Kathmandu
+                                <span>Destination</span>
+                            </div>                    </div>
+                        <p id="dashboard_contact_name">Contact</p>
+                        <div id="dashboard_btn">
+                            <button>Update</button>
+                            <button id="dashboard_deleteBtn">Delete</button>
                         </div>
-                        <img src="../../assets/img/dashboard_flight_journey.png" alt="">
-                        <div id="dashboard_location_name">
-                            Kathmandu
-                            <span>Destination</span>
-                        </div>                    </div>
-                    <p id="dashboard_contact_name">Contact</p>
-                    <div id="dashboard_btn">
-                        <button>Update</button>
-                        <button id="dashboard_deleteBtn">Delete</button>
                     </div>
                 </div> -->
 
@@ -177,6 +187,15 @@
                                 const cardContainer = document.createElement('div');
                                 cardContainer.setAttribute('class', 'userHotelCard');
 
+                                const imgContainer = document.createElement('div');
+                                imgContainer.setAttribute('id', 'adminDashboardHotelImg');
+                                const hotelImg = document.createElement('img');
+                                hotelImg.src = `../../images/hotels/${item.image1}`;
+                                imgContainer.appendChild(hotelImg);
+
+                                const infoContainer = document.createElement('div');
+                                infoContainer.setAttribute('id', 'adminDashboardHotelInfo');
+
                                 const itemElement1 = document.createElement('p');
                                 itemElement1.setAttribute('id', 'dashboard_hotel_name');
                                 const itemElement2 = document.createElement('p');
@@ -205,11 +224,13 @@
                                 btnContainer.appendChild(updateBtn);
                                 btnContainer.appendChild(deleteBtn);
 
-                                cardContainer.appendChild(itemElement1);
-                                cardContainer.appendChild(itemElement2);
-                                cardContainer.appendChild(itemElement3);
-                                cardContainer.appendChild(btnContainer);
+                                infoContainer.appendChild(itemElement1);
+                                infoContainer.appendChild(itemElement2);
+                                infoContainer.appendChild(itemElement3);
+                                infoContainer.appendChild(btnContainer);
 
+                                cardContainer.appendChild(imgContainer);
+                                cardContainer.appendChild(infoContainer);
 
                                 divContainer.appendChild(cardContainer);
 
@@ -255,7 +276,8 @@
                                             const website = document.getElementById('website').value;
                                             const email = document.getElementById('email').value;
                                             const phoneno = document.getElementById('phoneno').value;
-                                            const image1 = document.getElementById('image1').value;
+                                            const imageInput = document.getElementById('image1');
+                                            const image1 = imageInput.files[0]; 
 
                                             // FORM VALIDATION IS NEEDED
                                             const updatedHotelData = {
@@ -276,26 +298,40 @@
                                                 createdat: selectedItem.createdat,
                                             };
 
-                                            // console.log(formData);
+                                            // console.log(updatedHotelData);
 
-                                            // Send form data using Axios
-                                            axios.put(`http://localhost:8000/hotels/update/${hotelId}`, updatedHotelData)
+                                            axios.post('http://localhost:8000/upload/hotel', updatedHotelData, {
+                                                headers: {
+                                                    'Content-Type': 'multipart/form-data',
+                                                },
+                                            })
                                                 .then(response => {
+                                                    updatedHotelData.image1 = response.data.fileName;
+                                                    // console.log(updatedHotelData);
+                                            //         // Send form data using Axios
+                                                    axios.put(`http://localhost:8000/hotels/update/${hotelId}`, updatedHotelData)
+                                                        .then(response => {
 
-                                                    if (response.status === 200) {
-                                                        updateFormDiv.style.visibility = 'hidden';
-                                                        updateForm.style.opacity = '0';
-                                                        alert("Hotel updated successfully");
-                                                        window.location.href = './adminDashBoard.html';
-                                                    }
+                                                            if (response.status === 200) {
+                                                                updateFormDiv.style.visibility = 'hidden';
+                                                                updateForm.style.opacity = '0';
+                                                                alert("Hotel updated successfully");
+                                                                window.location.href = './adminDashBoard.html';
+                                                            }
+                                                        })
+                                                        .catch(error => {
+                                                            console.error('Error updating hotel:', error);
+                                                            // Handle error while trying to update the hotel
+                                                            if (error.response.status === 401) {
+                                                                alert("Unauthorized request");
+                                                            }
+                                                        });
+
                                                 })
                                                 .catch(error => {
-                                                    console.error('Error updating hotel:', error);
-                                                    // Handle error while trying to update the hotel
-                                                    if (error.response.status === 401) {
-                                                        alert("Unauthorized request");
-                                                    }
+                                                    console.error(error);
                                                 });
+
                                         });
                                     } catch (error) {
                                         updateFormDiv.style.visibility = 'hidden';
@@ -354,6 +390,15 @@
                                 const cardContainer = document.createElement('div');
                                 cardContainer.setAttribute('class', 'userFlightCard');
 
+                                const flightImgContainer = document.createElement('div');
+                                flightImgContainer.setAttribute('id', 'adminDashboardFlightImg');
+                                const flightImg = document.createElement('img');
+                                flightImg.src = `../../images/flights/${item.image1}`;
+                                flightImgContainer.appendChild(flightImg);
+
+                                const flightInfoContainer = document.createElement('div');
+                                flightInfoContainer.setAttribute('id', 'adminDashboardFlightInfo');
+
                                 const itemElement1 = document.createElement('p');
                                 itemElement1.setAttribute('id', 'dashboard_hotel_name');
 
@@ -399,10 +444,13 @@
                                 itemElement2.append(imgElement)
                                 itemElement2.append(itemElementfordest)
 
-                                cardContainer.appendChild(itemElement1);
-                                cardContainer.appendChild(itemElement2);
-                                cardContainer.appendChild(itemElement4);
-                                cardContainer.appendChild(btnContainer);
+                                flightInfoContainer.appendChild(itemElement1);
+                                flightInfoContainer.appendChild(itemElement2);
+                                flightInfoContainer.appendChild(itemElement4);
+                                flightInfoContainer.appendChild(btnContainer);
+
+                                cardContainer.appendChild(flightImgContainer);
+                                cardContainer.appendChild(flightInfoContainer);
 
                                 divContainer.appendChild(cardContainer);
 
@@ -445,7 +493,8 @@
                                             const website = document.getElementById('flightwebsite').value;
                                             const email = document.getElementById('flightemail').value;
                                             const phoneno = document.getElementById('flightphoneno').value;
-                                            const image1 = document.getElementById('flightimage1').value;
+                                            const imageInput = document.getElementById('flightimage1');
+                                            const image1 = imageInput.files[0];
 
                                             // FORM VALIDATION IS NEEDED
                                             const updatedFlightData = {
@@ -465,21 +514,31 @@
                                             };
 
                                             // console.log(formData);
+                                            axios.post('http://localhost:8000/upload/flight', updatedFlightData, {
+                                                headers: {
+                                                    'Content-Type': 'multipart/form-data',
+                                                },
+                                            }).then(response => {
+                                                updatedFlightData.image1 = response.data.fileName;
+                                                // Send form data using Axios
+                                                axios.put(`http://localhost:8000/flights/update/${flightId}`, updatedFlightData)
+                                                    .then(response => {
 
-                                            // Send form data using Axios
-                                            axios.put(`http://localhost:8000/flights/update/${flightId}`, updatedFlightData)
-                                                .then(response => {
+                                                        if (response.status === 200) {
+                                                            updateFormDiv.style.visibility = 'hidden';
+                                                            updateForm.style.opacity = '0';
+                                                            alert("Flight updated successfully");
+                                                            window.location.href = './adminDashBoard.html';
+                                                        }
+                                                    })
+                                                    .catch(error => {
+                                                        console.error('Error updating flight:', error);
+                                                        // Handle error while trying to update the hotel
+                                                    });
 
-                                                    if (response.status === 200) {
-                                                        updateFormDiv.style.visibility = 'hidden';
-                                                        updateForm.style.opacity = '0';
-                                                        alert("Flight updated successfully");
-                                                        window.location.href = './adminDashBoard.html';
-                                                    }
-                                                })
+                                            })
                                                 .catch(error => {
-                                                    console.error('Error updating flight:', error);
-                                                    // Handle error while trying to update the hotel
+                                                    console.error(error);
                                                 });
                                         });
 

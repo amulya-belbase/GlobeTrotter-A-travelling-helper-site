@@ -4,117 +4,133 @@
     margin-bottom: 50px;
     padding: 20px;
     .userHotelCard {
+      display: flex;
+      flex-direction: column;
       text-align: center;
-      background-color: white;
+      background-color: #E5F7FF;
       height: -moz-fit-content;
       height: fit-content;
-      padding: 20px;
-      color: black;
-      border-radius: 5px;
+      color: #023F76;
       font-family: lexend;
-      box-shadow: 0 0 15px 2px rgba(0,0,0,0.75);
-      p{
-        margin: 0;
-        margin-bottom: 10px;
-      }
-      #dashboard_hotel_name{
-        font-size: 20px;
-        font-weight: bold;
-      }
-      #dashboard_location_name{
-        font-size: 16px;
-        font-weight: 600;
-      }
-      #dashboard_contact_name{
-        font-size: 14px;
-        font-weight: 500;
-      }
-      #dashboard_btn{
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        button{
-          background: transparent;
-          border: 1px solid #2c70c8;
-          padding: 10px 30px;
-          border-radius: 5px;
-          font-size: 14px;
-        }
-        button:hover{
-          background: #2c70c8;
-          color: white;
-          cursor: pointer;
-          transition: 0.2s ease-in-out;
-        }
-        #dashboard_deleteBtn{
-          border: 1px solid #d51818;
-        }
-        #dashboard_deleteBtn:hover{
-          background: #d51818;
+      box-shadow: 0 0 15px 0px rgba(0,0,0,0.1);
+      padding: 0;
+      border-radius: 25px;
+      #userDashboardHotelImg{
+        width: 100%;
+        height: 200px;
+        img{
+          border-radius: 25px 25px 0 0px;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
         }
       }
+      #userDashboardHotelInfo{
+        padding: 20px;
+        p{
+          margin: 0;
+          margin-bottom: 10px;
+        }
+        #dashboard_hotel_name_user{
+          font-size: 20px;
+          font-weight: bold;
+        }
+        #dashboard_location_name_user{
+          font-size: 16px;
+          font-weight: 600;
+        }
+        #dashboard_contact_name_user{
+          font-size: 16px;
+          font-weight: 500;
+        }
+        #dashboard_btn{
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          button{
+            background: transparent;
+            border: 1px solid #2c70c8;
+            padding: 10px 30px;
+            border-radius: 5px;
+            font-size: 14px;
+          }
+          button:hover{
+            background: #2c70c8;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s ease-in-out;
+          }
+          #dashboard_deleteBtn{
+            border: 1px solid #d51818;
+          }
+          #dashboard_deleteBtn:hover{
+            background: #d51818;
+          }
+        }
+      }
+    }
+    .userHotelCard:hover{
+      border: 1px solid #7E7E7E;
+      box-shadow: 4px 4px 4px 0px rgba(0,0,0,0.25);
     }
   }
   .userFlights{
     display: flex;
-    gap: 20px;
+    flex-direction: column;
+    gap: 40px;
+    padding: 0;
+    padding-left: 50px;
+    margin-top: 10px;
+    border-right: 2px solid #C4C4C4;
+    padding-right: 50px;
     margin-bottom: 50px;
-    padding: 20px;
-    .userHotelCard {
-      text-align: center;
-      background-color: white;
-      height: -moz-fit-content;
-      height: fit-content;
-      padding: 20px;
-      color: black;
-      border-radius: 5px;
-      font-family: lexend;
-      box-shadow: 0 0 15px 2px rgba(0,0,0,0.75);
-      p{
-        margin: 0;
-        margin-bottom: 10px;
-      }
-      #dashboard_hotel_name{
-        font-size: 20px;
+    .dashboard_flight_count_card{
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      span {
+        font-size: 30px;
         font-weight: bold;
+        font-family: Space Grotesk;
+        text-align: center;
+        .dashboard_title{
+          color: #4691f2;
+          padding: 0;
+          border-bottom: none;
+        }
       }
-      #dashboard_location_name{
-        font-size: 16px;
-        font-weight: 600;
-      }
-      #dashboard_contact_name{
-        font-size: 14px;
-        font-weight: 500;
-      }
-      #dashboard_btn{
+      .dashboard_flight_count{
         display: flex;
         align-items: center;
-        justify-content: space-around;
-        button{
-          background: transparent;
-          border: 1px solid #2c70c8;
-          padding: 10px 30px;
-          border-radius: 5px;
-          font-size: 14px;
-        }
-        button:hover{
-          background: #2c70c8;
-          color: white;
-          cursor: pointer;
-          transition: 0.2s ease-in-out;
-        }
-        #dashboard_deleteBtn{
-          border: 1px solid #d51818;
-        }
-        #dashboard_deleteBtn:hover{
-          background: #d51818;
+        gap: 50px;
+        background-color: white;
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: 0 0 15px 0px rgba(0,0,0,0.1);
+        .dashboard_flight_count_left{
+          text-align: left;
+          p{
+            margin: 0;
+            font-size: 10px;
+            font-family: lexend;
+            color: #667185;
+          }
+          #total_flight_number{
+            font-size: 25px;
+            font-weight: 600;
+            color: #09121E;
+            margin-bottom: 10px;
+          }
         }
       }
+    }
+    #dashboard_departure_date{
+      font-weight: 600;
     }
   }
 
   #bookFormDiv, #bookFlightFormDiv {
-    position: absolute;
+    position: fixed;
     background-color: rgb(0, 0, 0, 0.3);
     top: 0;
     left: 0;

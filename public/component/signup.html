@@ -26,7 +26,11 @@
                     <span>Welcome</span>
                     <p>Signup With Email</p>
                 </div>
-                <form id="signUpForm">
+                <!-- <form action="/upload" enctype="multipart/form-data" method="post">
+                    <input type="file" name="uploadimage">
+                    <button>Submit</button>
+                </form> -->
+                <form id="signUpForm" enctype="multipart/form-data">
                     <div class="right_signup_div_content_input">
                         <div class="right_signup_div_content_input_bar">
                             <span>Email Id</span>
@@ -103,7 +107,8 @@
             const lastname = document.getElementById('lastname').value;
             const dateofbirth = document.getElementById('birthday').value;
             const gender = document.getElementById('gender').value;
-            const profilepic = document.getElementById('profilepic').value;
+            const profilepicInput = document.getElementById('profilepic');
+            const profilepic = profilepicInput.files[0]; 
             const role = document.getElementById('role').value;
 
 
@@ -170,28 +175,40 @@
                 profilepic: profilepic,
                 role: role
             };
-
-            // Send form data using Axios
-            axios.post('http://localhost:8000/users/signup', formData)
+                axios.post('http://localhost:8000/upload/user', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                })
                 .then(response => {
-                    emailValidation.style.display = 'none';
-
-                    if (response.status === 200) {
-                        // console.log(response.data[0].id, response.data[0].firstname);
-                        alert("User registration successful");
-                        window.location.href = './login.html'; // Replace '/dashboard' with your desired page
-                    } else {
-                        console.log(response);
-                    }
+                    formData.profilepic = response.data.fileName;
+                    axios.post('http://localhost:8000/users/signup', formData)
+                        .then(response => {
+                            emailValidation.style.display = 'none';
+        
+                            if (response.status === 200) {
+                                // console.log(response.data[0].id, response.data[0].firstname);
+                                alert("User registration successful");
+                                window.location.href = './login.html'; // Replace '/dashboard' with your desired page
+                            } else {
+                                console.log(response);
+                            }
+                        })
+                        .catch(error => {
+                            console.log(error.response.status)
+                            if(error.response.status === 422){
+                                emailValidation.style.display = 'block';
+                                emailValidation.innerHTML = "User already exists";   
+                                return;  
+                            }
+                        });
                 })
                 .catch(error => {
-                    console.log(error.response.status)
-                    if(error.response.status === 422){
-                        emailValidation.style.display = 'block';
-                        emailValidation.innerHTML = "User already exists";   
-                        return;  
-                    }
+                    console.error(error);
                 });
+
+                console.log(formData);
+            // Send form data using Axios
         });
 
     </script>

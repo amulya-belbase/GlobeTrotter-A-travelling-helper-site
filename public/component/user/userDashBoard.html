@@ -43,46 +43,59 @@
                 </div>
 
                 <!-- <div class="userHotelCard">
-                    <p id="dashboard_hotel_name">Hotel Name</p>
-                    <p id="dashboard_location_name">Location</p>
-                    <p id="dashboard_contact_name">Contact</p>
-                    <div id="dashboard_btn">
-                        <button>Update</button>
-                        <button id="dashboard_deleteBtn">Delete</button>
+                    <div id="userDashboardHotelImg">
+                        <img src="../../images/hotels/1705153055380.jpg" alt="HotelImg">
+                    </div>
+                    <div id="userDashboardHotelInfo">
+                        <p id="dashboard_hotel_name_user">Hotel Name:</p>
+                        <p id="dashboard_location_name_user">Arrival Date</p>
+                        <p id="dashboard_contact_name_user">Room Type:</p>
+                        <div id="dashboard_btn">
+                            <button>Update</button>
+                            <button id="dashboard_deleteBtn">Delete</button>
+                        </div>
                     </div>
                 </div> -->
+
             </div>
 
             <div class="userFlights">
-                <div class="dashboard_hotel_count_card">
+                <div class="dashboard_flight_count_card">
                     <span>My <span class="dashboard_title">Flights</span></span>
-                    <div class="dashboard_hotel_count">
-                        <div class="dashboard_hotel_count_left">
+                    <div class="dashboard_flight_count">
+                        <div class="dashboard_flight_count_left">
                             <p id="total_flight_number"></p>
                             <p>Flights Booked</p>
                         </div>
-                        <div class="dashboard_hotel_count_icon">
+                        <div class="dashboard_flight_count_icon">
                             <img src="../../assets/img/dashboard_calendar.png" alt="">
                         </div>
                     </div>
                 </div>
 
                 <!-- <div class="userFlightCard">
-                    <p id="dashboard_hotel_name">Flight Name</p>
-                    <div class="userFlightCardFlight">
-                        <div id="dashboard_location_name">
-                            Beijing
-                            <span>Departure</span>
+                    <div id="adminDashboardFlightImg">
+                        <img src="../../images/flights/1705154477553.webp" alt="FlightImg">
+                    </div>
+                    <div id="adminDashboardFlightInfo">
+                        <p id="dashboard_hotel_name">Flight Name</p>
+                        <div class="userFlightCardFlight">
+                            <div id="dashboard_location_name">
+                                Beijing
+                                <span>Departure</span>
+                            </div>
+                            <img src="../../assets/img/dashboard_flight_journey.png" alt="">
+                            <div id="dashboard_location_name">
+                                Kathmandu
+                                <span>Destination</span>
+                            </div>                    
                         </div>
-                        <img src="../../assets/img/dashboard_flight_journey.png" alt="">
-                        <div id="dashboard_location_name">
-                            Kathmandu
-                            <span>Destination</span>
-                        </div>                    </div>
-                    <p id="dashboard_contact_name">Contact</p>
-                    <div id="dashboard_btn">
-                        <button>Update</button>
-                        <button id="dashboard_deleteBtn">Delete</button>
+                        <p id="dashboard_departure_date">Departure Date</p>
+                        <p id="dashboard_contact_name">Contact</p>
+                        <div id="dashboard_btn">
+                            <button>Update</button>
+                            <button id="dashboard_deleteBtn">Delete</button>
+                        </div>
                     </div>
                 </div> -->
 
@@ -162,12 +175,25 @@
                                 const cardContainer = document.createElement('div');
                                 cardContainer.setAttribute('class', 'userHotelCard');
 
+                                const imgContainer = document.createElement('div');
+                                imgContainer.setAttribute('id', 'userDashboardHotelImg');
+                                const imgHotel = document.createElement('img');
+
+                                axios.get(`http://localhost:8000/hotels/getHotelForUser/${item.hotelId}`)
+                                    .then(response => {
+                                        imgHotel.src = `../../images/hotels/${response.data[0].image1}`;
+                                    });
+                                imgContainer.appendChild(imgHotel);
+
+                                const hotelInfoContainer = document.createElement('div');
+                                hotelInfoContainer.setAttribute('id', 'userDashboardHotelInfo')
+
                                 const itemElement1 = document.createElement('p');
-                                itemElement1.setAttribute('id', 'dashboard_hotel_name');
+                                itemElement1.setAttribute('id', 'dashboard_hotel_name_user');
                                 const itemElement2 = document.createElement('p');
-                                itemElement2.setAttribute('id', 'dashboard_location_name');
+                                itemElement2.setAttribute('id', 'dashboard_location_name_user');
                                 const itemElement3 = document.createElement('p');
-                                itemElement3.setAttribute('id', 'dashboard_contact_name');
+                                itemElement3.setAttribute('id', 'dashboard_contact_name_user');
 
 
                                 const btnContainer = document.createElement('div');
@@ -197,11 +223,13 @@
                                 btnContainer.appendChild(updateBtn);
                                 btnContainer.appendChild(deleteBtn);
 
-                                cardContainer.appendChild(itemElement1);
-                                cardContainer.appendChild(itemElement2);
-                                cardContainer.appendChild(itemElement3);
-                                cardContainer.appendChild(btnContainer);
+                                hotelInfoContainer.appendChild(itemElement1);
+                                hotelInfoContainer.appendChild(itemElement2);
+                                hotelInfoContainer.appendChild(itemElement3);
+                                hotelInfoContainer.appendChild(btnContainer);
 
+                                cardContainer.appendChild(imgContainer);
+                                cardContainer.appendChild(hotelInfoContainer);
 
                                 divContainer.appendChild(cardContainer);
 
@@ -344,6 +372,14 @@
                                 const cardContainer = document.createElement('div');
                                 cardContainer.setAttribute('class', 'userFlightCard');
 
+                                const flightImgContainer = document.createElement('div');
+                                flightImgContainer.setAttribute('id', 'adminDashboardFlightImg');
+                                const flightImg = document.createElement('img');
+
+
+                                const flightInfoContainer = document.createElement('div');
+                                flightInfoContainer.setAttribute('id', 'adminDashboardFlightInfo');
+
                                 const itemElement1 = document.createElement('p');
                                 itemElement1.setAttribute('id', 'dashboard_hotel_name');
 
@@ -361,7 +397,7 @@
                                 itemElement2Inner2.textContent = 'Destination';
 
                                 const itemElement4 = document.createElement('p');
-                                itemElement4.setAttribute('id', 'dashboard_contact_name');
+                                itemElement4.setAttribute('id', 'dashboard_departure_date');
 
                                 const itemElement5 = document.createElement('p');
                                 itemElement5.setAttribute('id', 'dashboard_contact_name');
@@ -387,10 +423,12 @@
                                             itemElementfordept.textContent = `${item.flightdepart}`;
                                             itemElementfordest.textContent = `${item.flightdest}`;
                                             itemElement5.textContent = `Contact No.: ${item.phoneno}`;
+                                            flightImg.src = `../../images/flights/${item.image1}`;
                                             itemElementfordept.append(itemElement2Inner1)
                                             itemElementfordest.append(itemElement2Inner2)
                                         })
                                     });
+                                flightImgContainer.appendChild(flightImg);
                                 itemElement1.textContent = `Flight Name: ${item.flightname}`;
                                 itemElement4.textContent = `Departure Date: ${formattedDate}`;
 
@@ -404,11 +442,14 @@
                                 itemElement2.append(imgElement)
                                 itemElement2.append(itemElementfordest)
 
-                                cardContainer.appendChild(itemElement1);
-                                cardContainer.appendChild(itemElement2);
-                                cardContainer.appendChild(itemElement4);
-                                cardContainer.appendChild(itemElement5);
-                                cardContainer.appendChild(btnContainer);
+                                flightInfoContainer.appendChild(itemElement1);
+                                flightInfoContainer.appendChild(itemElement2);
+                                flightInfoContainer.appendChild(itemElement4);
+                                flightInfoContainer.appendChild(itemElement5);
+                                flightInfoContainer.appendChild(btnContainer);
+                                
+                                cardContainer.appendChild(flightImgContainer);
+                                cardContainer.appendChild(flightInfoContainer);
 
                                 divContainer.appendChild(cardContainer);
 

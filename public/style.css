@@ -11,7 +11,7 @@ header .upper_header {
   justify-content: space-between;
   align-items: center;
   padding: 12px 245px;
-  gap: 400px;
+  gap: 350px;
   color: white;
   width: 100%;
   background-image: linear-gradient(120deg, #4691f2 0%, #4691f2 50%, #000000 50%, #000000 100%);
@@ -41,11 +41,22 @@ header .upper_header .upper_header_right .upper_header_right_login {
 }
 header .upper_header .upper_header_right .upper_header_right_login .upper_header_right_login_user {
   background-color: white;
-  border-radius: 50px;
-  padding: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50px;
+}
+header .upper_header .upper_header_right .upper_header_right_login .upper_header_right_login_user img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50px;
+  object-fit: cover;
+}
+header .upper_header .upper_header_right .upper_header_right_login .upper_header_right_login_user #nonlogpic {
+  width: 16px;
+  height: 16px;
 }
 header .upper_header .upper_header_right .upper_header_right_login #loginLink {
   display: block;
@@ -135,6 +146,9 @@ header .nav_bar .nav_options {
   font-weight: 700;
   font-size: 18px;
   line-height: 28px;
+  color: #6C6C6C;
+}
+header .nav_bar .nav_options a {
   color: #6C6C6C;
 }
 header .nav_bar .nav_options :hover {
@@ -2793,53 +2807,68 @@ footer .footer_bottom {
   margin-bottom: 10px;
 }
 .container .userEntries .userHotels .userHotelCard {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
   background-color: #E5F7FF;
   height: -moz-fit-content;
   height: fit-content;
   color: #023F76;
-  border-radius: 25px;
   font-family: lexend;
   box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.1);
+  padding: 0;
+  border-radius: 25px;
 }
-.container .userEntries .userHotels .userHotelCard p {
+.container .userEntries .userHotels .userHotelCard #adminDashboardHotelImg {
+  width: 100%;
+  height: 200px;
+}
+.container .userEntries .userHotels .userHotelCard #adminDashboardHotelImg img {
+  border-radius: 25px 25px 0 0px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.container .userEntries .userHotels .userHotelCard #adminDashboardHotelInfo {
+  padding: 20px;
+}
+.container .userEntries .userHotels .userHotelCard #adminDashboardHotelInfo p {
   margin: 0;
   margin-bottom: 10px;
 }
-.container .userEntries .userHotels .userHotelCard #dashboard_hotel_name {
+.container .userEntries .userHotels .userHotelCard #adminDashboardHotelInfo #dashboard_hotel_name {
   font-size: 20px;
   font-weight: bold;
 }
-.container .userEntries .userHotels .userHotelCard #dashboard_location_name {
+.container .userEntries .userHotels .userHotelCard #adminDashboardHotelInfo #dashboard_location_name {
   font-size: 16px;
   font-weight: 600;
 }
-.container .userEntries .userHotels .userHotelCard #dashboard_contact_name {
+.container .userEntries .userHotels .userHotelCard #adminDashboardHotelInfo #dashboard_contact_name {
   font-size: 16px;
   font-weight: 500;
 }
-.container .userEntries .userHotels .userHotelCard #dashboard_btn {
+.container .userEntries .userHotels .userHotelCard #adminDashboardHotelInfo #dashboard_btn {
   display: flex;
   align-items: center;
   justify-content: space-around;
 }
-.container .userEntries .userHotels .userHotelCard #dashboard_btn button {
+.container .userEntries .userHotels .userHotelCard #adminDashboardHotelInfo #dashboard_btn button {
   background: transparent;
   border: 1px solid #2c70c8;
   padding: 10px 30px;
   border-radius: 5px;
   font-size: 14px;
 }
-.container .userEntries .userHotels .userHotelCard #dashboard_btn button:hover {
+.container .userEntries .userHotels .userHotelCard #adminDashboardHotelInfo #dashboard_btn button:hover {
   background: #2c70c8;
   color: white;
   cursor: pointer;
   transition: 0.2s ease-in-out;
 }
-.container .userEntries .userHotels .userHotelCard #dashboard_btn #dashboard_deleteBtn {
+.container .userEntries .userHotels .userHotelCard #adminDashboardHotelInfo #dashboard_btn #dashboard_deleteBtn {
   border: 1px solid #d51818;
 }
-.container .userEntries .userHotels .userHotelCard #dashboard_btn #dashboard_deleteBtn:hover {
+.container .userEntries .userHotels .userHotelCard #adminDashboardHotelInfo #dashboard_btn #dashboard_deleteBtn:hover {
   background: #d51818;
 }
 .container .userEntries .userHotels .userHotelCard:hover {
@@ -2849,6 +2878,7 @@ footer .footer_bottom {
 .container .userEntries .userFlights {
   display: flex;
   flex-direction: column;
+  text-align: center;
   gap: 40px;
   padding: 0;
   padding-left: 50px;
@@ -2893,66 +2923,80 @@ footer .footer_bottom {
   margin-bottom: 10px;
 }
 .container .userEntries .userFlights .userFlightCard {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
   background-color: #e5fffa;
   height: -moz-fit-content;
   height: fit-content;
   color: #023F76;
   border-radius: 25px;
   font-family: lexend;
-  padding: 20px;
+  padding: 0;
   box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.1);
 }
-.container .userEntries .userFlights .userFlightCard p {
+.container .userEntries .userFlights .userFlightCard #adminDashboardFlightImg {
+  width: 100%;
+  height: 200px;
+}
+.container .userEntries .userFlights .userFlightCard #adminDashboardFlightImg img {
+  border-radius: 25px 25px 0 0px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.container .userEntries .userFlights .userFlightCard #adminDashboardFlightInfo {
+  padding: 20px;
+}
+.container .userEntries .userFlights .userFlightCard #adminDashboardFlightInfo p {
   margin: 0;
   margin-bottom: 10px;
 }
-.container .userEntries .userFlights .userFlightCard #dashboard_hotel_name {
+.container .userEntries .userFlights .userFlightCard #adminDashboardFlightInfo #dashboard_hotel_name {
   font-size: 20px;
   font-weight: bold;
 }
-.container .userEntries .userFlights .userFlightCard .userFlightCardFlight {
+.container .userEntries .userFlights .userFlightCard #adminDashboardFlightInfo .userFlightCardFlight {
   display: flex;
   align-items: center;
   justify-content: space-around;
   margin-bottom: 10px;
 }
-.container .userEntries .userFlights .userFlightCard .userFlightCardFlight #dashboard_location_name {
+.container .userEntries .userFlights .userFlightCard #adminDashboardFlightInfo .userFlightCardFlight #dashboard_location_name {
   display: flex;
   flex-direction: column;
   align-items: center;
   font-size: 16px;
   font-weight: 600;
 }
-.container .userEntries .userFlights .userFlightCard .userFlightCardFlight #dashboard_location_name span {
+.container .userEntries .userFlights .userFlightCard #adminDashboardFlightInfo .userFlightCardFlight #dashboard_location_name span {
   font-size: 12px;
 }
-.container .userEntries .userFlights .userFlightCard #dashboard_contact_name {
+.container .userEntries .userFlights .userFlightCard #adminDashboardFlightInfo #dashboard_contact_name {
   font-size: 16px;
   font-weight: 500;
 }
-.container .userEntries .userFlights .userFlightCard #dashboard_btn {
+.container .userEntries .userFlights .userFlightCard #adminDashboardFlightInfo #dashboard_btn {
   display: flex;
   align-items: center;
   justify-content: space-around;
 }
-.container .userEntries .userFlights .userFlightCard #dashboard_btn button {
+.container .userEntries .userFlights .userFlightCard #adminDashboardFlightInfo #dashboard_btn button {
   background: transparent;
   border: 1px solid #2c70c8;
   padding: 10px 30px;
   border-radius: 5px;
   font-size: 14px;
 }
-.container .userEntries .userFlights .userFlightCard #dashboard_btn button:hover {
+.container .userEntries .userFlights .userFlightCard #adminDashboardFlightInfo #dashboard_btn button:hover {
   background: #2c70c8;
   color: white;
   cursor: pointer;
   transition: 0.2s ease-in-out;
 }
-.container .userEntries .userFlights .userFlightCard #dashboard_btn #dashboard_deleteBtn {
+.container .userEntries .userFlights .userFlightCard #adminDashboardFlightInfo #dashboard_btn #dashboard_deleteBtn {
   border: 1px solid #d51818;
 }
-.container .userEntries .userFlights .userFlightCard #dashboard_btn #dashboard_deleteBtn:hover {
+.container .userEntries .userFlights .userFlightCard #adminDashboardFlightInfo #dashboard_btn #dashboard_deleteBtn:hover {
   background: #d51818;
 }
 .container .userEntries .userFlights .userFlightCard:hover {
@@ -3131,57 +3175,71 @@ footer .footer_bottom {
   margin-top: 50px;
   display: flex;
   flex-wrap: wrap;
-  gap: 30px;
+  gap: 50px;
   padding: 50px;
 }
-.userHotelsBook .allFlights .bookHotelCard {
+.userHotelsBook .allFlights .userHotelCard {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
   text-align: center;
-  background-color: #d7f1f9;
+  background-color: #E5F7FF;
   height: -moz-fit-content;
   height: fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-  padding: 20px;
-  color: #264a69;
-  border-radius: 25px;
+  color: #023F76;
   font-family: lexend;
   box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.1);
+  padding: 0;
+  border-radius: 25px;
 }
-.userHotelsBook .allFlights .bookHotelCard p {
+.userHotelsBook .allFlights .userHotelCard #adminDashboardHotelImg {
+  width: 100%;
+  height: 200px;
+}
+.userHotelsBook .allFlights .userHotelCard #adminDashboardHotelImg img {
+  border-radius: 25px 25px 0 0px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.userHotelsBook .allFlights .userHotelCard #adminDashboardHotelInfo {
+  padding: 20px;
+}
+.userHotelsBook .allFlights .userHotelCard #adminDashboardHotelInfo p {
   margin: 0;
   margin-bottom: 10px;
 }
-.userHotelsBook .allFlights .bookHotelCard #userDashboard_hotel_name {
+.userHotelsBook .allFlights .userHotelCard #adminDashboardHotelInfo #userDashboard_flight_name {
   font-size: 20px;
-  font-weight: bold;
+  font-weight: 800;
 }
-.userHotelsBook .allFlights .bookHotelCard #userDashboard_hotel_location {
+.userHotelsBook .allFlights .userHotelCard #adminDashboardHotelInfo #userDashboard_flight_location {
   font-size: 16px;
   font-weight: 600;
 }
-.userHotelsBook .allFlights .bookHotelCard #userDashboard_hotel_contact {
-  font-size: 14px;
+.userHotelsBook .allFlights .userHotelCard #adminDashboardHotelInfo #userDashboard_flight_contact {
+  font-size: 16px;
   font-weight: 500;
 }
-.userHotelsBook .allFlights .bookHotelCard button {
+.userHotelsBook .allFlights .userHotelCard #adminDashboardHotelInfo button {
   background: transparent;
   border: 1px solid #2c70c8;
-  padding: 10px 80px;
+  padding: 10px 50px;
   border-radius: 5px;
   font-size: 14px;
 }
-.userHotelsBook .allFlights .bookHotelCard button:hover {
+.userHotelsBook .allFlights .userHotelCard #adminDashboardHotelInfo button:hover {
   background: #2c70c8;
   color: white;
   cursor: pointer;
   transition: 0.2s ease-in-out;
 }
-.userHotelsBook .allFlights .bookHotelCard:hover {
+.userHotelsBook .allFlights .userHotelCard:hover {
   border: 1px solid #7E7E7E;
   box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 .userHotelsBook #bookFormDiv {
-  position: absolute;
+  position: fixed;
   background-color: rgba(0, 0, 0, 0.3);
   top: 0;
   left: 0;
@@ -3338,53 +3396,69 @@ footer .footer_bottom {
   padding: 50px;
 }
 .userHotelsBook .allHotels .userFlightCard {
+  display: flex;
+  width: 350px;
+  flex-direction: column;
   text-align: center;
-  background-color: #E9F3F6;
+  background-color: #e5fffa;
   height: -moz-fit-content;
   height: fit-content;
   color: #023F76;
   border-radius: 25px;
   font-family: lexend;
-  padding: 20px;
+  padding: 0;
   box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.1);
 }
-.userHotelsBook .allHotels .userFlightCard p {
+.userHotelsBook .allHotels .userFlightCard #adminDashboardFlightImg {
+  width: 100%;
+  height: 200px;
+}
+.userHotelsBook .allHotels .userFlightCard #adminDashboardFlightImg img {
+  border-radius: 25px 25px 0 0px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.userHotelsBook .allHotels .userFlightCard #adminDashboardFlightInfo {
+  padding: 20px;
+}
+.userHotelsBook .allHotels .userFlightCard #adminDashboardFlightInfo p {
   margin: 0;
   margin-bottom: 10px;
 }
-.userHotelsBook .allHotels .userFlightCard #dashboard_hotel_name {
+.userHotelsBook .allHotels .userFlightCard #adminDashboardFlightInfo #dashboard_hotel_name {
   font-size: 20px;
   font-weight: bold;
 }
-.userHotelsBook .allHotels .userFlightCard .userFlightCardFlight {
+.userHotelsBook .allHotels .userFlightCard #adminDashboardFlightInfo .userFlightCardFlight {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  gap: 30px;
+  gap: 20px;
   margin-bottom: 10px;
 }
-.userHotelsBook .allHotels .userFlightCard .userFlightCardFlight #dashboard_location_name {
+.userHotelsBook .allHotels .userFlightCard #adminDashboardFlightInfo .userFlightCardFlight #dashboard_location_name {
   display: flex;
   flex-direction: column;
   align-items: center;
   font-size: 16px;
   font-weight: 600;
 }
-.userHotelsBook .allHotels .userFlightCard .userFlightCardFlight #dashboard_location_name span {
+.userHotelsBook .allHotels .userFlightCard #adminDashboardFlightInfo .userFlightCardFlight #dashboard_location_name span {
   font-size: 12px;
 }
-.userHotelsBook .allHotels .userFlightCard #dashboard_contact_name {
+.userHotelsBook .allHotels .userFlightCard #adminDashboardFlightInfo #dashboard_contact_name {
   font-size: 16px;
   font-weight: 500;
 }
-.userHotelsBook .allHotels .userFlightCard button {
+.userHotelsBook .allHotels .userFlightCard #adminDashboardFlightInfo button {
   background: transparent;
   border: 1px solid #2c70c8;
-  padding: 10px 80px;
+  padding: 10px 40px;
   border-radius: 5px;
   font-size: 14px;
 }
-.userHotelsBook .allHotels .userFlightCard button:hover {
+.userHotelsBook .allHotels .userFlightCard #adminDashboardFlightInfo button:hover {
   background: #2c70c8;
   color: white;
   cursor: pointer;
@@ -3395,7 +3469,7 @@ footer .footer_bottom {
   box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 .userHotelsBook #bookFormDiv {
-  position: absolute;
+  position: fixed;
   background-color: rgba(0, 0, 0, 0.3);
   top: 0;
   left: 0;
@@ -3488,117 +3562,133 @@ footer .footer_bottom {
   padding: 20px;
 }
 .userHotels .userHotelCard {
+  display: flex;
+  flex-direction: column;
   text-align: center;
-  background-color: white;
+  background-color: #E5F7FF;
   height: -moz-fit-content;
   height: fit-content;
-  padding: 20px;
-  color: black;
-  border-radius: 5px;
+  color: #023F76;
   font-family: lexend;
-  box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.75);
+  box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.1);
+  padding: 0;
+  border-radius: 25px;
 }
-.userHotels .userHotelCard p {
+.userHotels .userHotelCard #userDashboardHotelImg {
+  width: 100%;
+  height: 200px;
+}
+.userHotels .userHotelCard #userDashboardHotelImg img {
+  border-radius: 25px 25px 0 0px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.userHotels .userHotelCard #userDashboardHotelInfo {
+  padding: 20px;
+}
+.userHotels .userHotelCard #userDashboardHotelInfo p {
   margin: 0;
   margin-bottom: 10px;
 }
-.userHotels .userHotelCard #dashboard_hotel_name {
+.userHotels .userHotelCard #userDashboardHotelInfo #dashboard_hotel_name_user {
   font-size: 20px;
   font-weight: bold;
 }
-.userHotels .userHotelCard #dashboard_location_name {
+.userHotels .userHotelCard #userDashboardHotelInfo #dashboard_location_name_user {
   font-size: 16px;
   font-weight: 600;
 }
-.userHotels .userHotelCard #dashboard_contact_name {
-  font-size: 14px;
+.userHotels .userHotelCard #userDashboardHotelInfo #dashboard_contact_name_user {
+  font-size: 16px;
   font-weight: 500;
 }
-.userHotels .userHotelCard #dashboard_btn {
+.userHotels .userHotelCard #userDashboardHotelInfo #dashboard_btn {
   display: flex;
   align-items: center;
   justify-content: space-around;
 }
-.userHotels .userHotelCard #dashboard_btn button {
+.userHotels .userHotelCard #userDashboardHotelInfo #dashboard_btn button {
   background: transparent;
   border: 1px solid #2c70c8;
   padding: 10px 30px;
   border-radius: 5px;
   font-size: 14px;
 }
-.userHotels .userHotelCard #dashboard_btn button:hover {
+.userHotels .userHotelCard #userDashboardHotelInfo #dashboard_btn button:hover {
   background: #2c70c8;
   color: white;
   cursor: pointer;
   transition: 0.2s ease-in-out;
 }
-.userHotels .userHotelCard #dashboard_btn #dashboard_deleteBtn {
+.userHotels .userHotelCard #userDashboardHotelInfo #dashboard_btn #dashboard_deleteBtn {
   border: 1px solid #d51818;
 }
-.userHotels .userHotelCard #dashboard_btn #dashboard_deleteBtn:hover {
+.userHotels .userHotelCard #userDashboardHotelInfo #dashboard_btn #dashboard_deleteBtn:hover {
   background: #d51818;
+}
+.userHotels .userHotelCard:hover {
+  border: 1px solid #7E7E7E;
+  box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .userFlights {
   display: flex;
-  gap: 20px;
+  flex-direction: column;
+  gap: 40px;
+  padding: 0;
+  padding-left: 50px;
+  margin-top: 10px;
+  border-right: 2px solid #C4C4C4;
+  padding-right: 50px;
   margin-bottom: 50px;
-  padding: 20px;
 }
-.userFlights .userHotelCard {
-  text-align: center;
-  background-color: white;
-  height: -moz-fit-content;
-  height: fit-content;
-  padding: 20px;
-  color: black;
-  border-radius: 5px;
-  font-family: lexend;
-  box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.75);
-}
-.userFlights .userHotelCard p {
-  margin: 0;
-  margin-bottom: 10px;
-}
-.userFlights .userHotelCard #dashboard_hotel_name {
-  font-size: 20px;
-  font-weight: bold;
-}
-.userFlights .userHotelCard #dashboard_location_name {
-  font-size: 16px;
-  font-weight: 600;
-}
-.userFlights .userHotelCard #dashboard_contact_name {
-  font-size: 14px;
-  font-weight: 500;
-}
-.userFlights .userHotelCard #dashboard_btn {
+.userFlights .dashboard_flight_count_card {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  gap: 20px;
 }
-.userFlights .userHotelCard #dashboard_btn button {
-  background: transparent;
-  border: 1px solid #2c70c8;
-  padding: 10px 30px;
-  border-radius: 5px;
-  font-size: 14px;
+.userFlights .dashboard_flight_count_card span {
+  font-size: 30px;
+  font-weight: bold;
+  font-family: Space Grotesk;
+  text-align: center;
 }
-.userFlights .userHotelCard #dashboard_btn button:hover {
-  background: #2c70c8;
-  color: white;
-  cursor: pointer;
-  transition: 0.2s ease-in-out;
+.userFlights .dashboard_flight_count_card span .dashboard_title {
+  color: #4691f2;
+  padding: 0;
+  border-bottom: none;
 }
-.userFlights .userHotelCard #dashboard_btn #dashboard_deleteBtn {
-  border: 1px solid #d51818;
+.userFlights .dashboard_flight_count_card .dashboard_flight_count {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.1);
 }
-.userFlights .userHotelCard #dashboard_btn #dashboard_deleteBtn:hover {
-  background: #d51818;
+.userFlights .dashboard_flight_count_card .dashboard_flight_count .dashboard_flight_count_left {
+  text-align: left;
+}
+.userFlights .dashboard_flight_count_card .dashboard_flight_count .dashboard_flight_count_left p {
+  margin: 0;
+  font-size: 10px;
+  font-family: lexend;
+  color: #667185;
+}
+.userFlights .dashboard_flight_count_card .dashboard_flight_count .dashboard_flight_count_left #total_flight_number {
+  font-size: 25px;
+  font-weight: 600;
+  color: #09121E;
+  margin-bottom: 10px;
+}
+.userFlights #dashboard_departure_date {
+  font-weight: 600;
 }
 
 #bookFormDiv, #bookFlightFormDiv {
-  position: absolute;
+  position: fixed;
   background-color: rgba(0, 0, 0, 0.3);
   top: 0;
   left: 0;
