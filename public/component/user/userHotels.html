@@ -10,9 +10,11 @@
 
 <body>
     <div class="userHotelsBook">
+
         <div class="userHotel_filter_search">
+            <span>Book Your Hotel</span>
             <div class="userHotel_filter_part">
-                <form id="location_filter">
+                <form id="flight_filter">
                     <label for="location_filter_option">Filter By Location:</label>
                     <select name="location_filter_option" id="location_filter_option">
                         <option value="#">--Any--</option>
@@ -21,18 +23,20 @@
                         <option value="new york">New York</option>
                         <option value="sydney">Sydney</option>
                     </select>
-                    <input type="text" name="search_filter" id="search_filter">
+                    <input type="text" name="search_filter" id="search_filter" placeholder="Search By Hotel Name...">
                     <button>Search</button>
                 </form>
             </div>
         </div>
-        <div class="allHotels">
+        
+
+        <div class="allFlights">
             <!-- <div class="bookHotelCard">
-            <p id="userDashboard_hotel_name">Hotel Name</p>
-            <p id="userDashboard_hotel_location">Location</p>
-            <p id="userDashboard_hotel_contact">Contact</p>
-            <button id="userDashboard_bookBtn">Book</button>
-        </div> -->
+                <p id="dashboard_hotel_name">Hotel Name</p>
+                <p id="userDashboard_hotel_location">Location</p>
+                <p id="dashboard_contact_name">Contact</p>
+                <button>Book Now</button>
+            </div> -->
         </div>
 
         <div id="bookFormDiv">
@@ -79,7 +83,7 @@
                         if (response.data.length === 0) {
                             console.log("There aren't any hotels");
                         } else {
-                            const divContainer = document.querySelector('.allHotels');
+                            const divContainer = document.querySelector('.allFlights');
                             divContainer.innerHTML = '';
 
                             response.data.forEach(item => {
@@ -105,7 +109,7 @@
                                 itemElement2.textContent = `Location: ${(item.location)}`;
                                 itemElement3.textContent = `Contact: ${item.phoneno}`;
 
-                                bookBtn.textContent = 'Book';
+                                bookBtn.textContent = 'Book Now';
 
                                 cardContainer.appendChild(itemElement1);
                                 cardContainer.appendChild(itemElement2);
@@ -189,7 +193,7 @@
                         console.log(error);
                     });
 
-                document.getElementById('location_filter').addEventListener('submit', function (event) {
+                document.getElementById('flight_filter').addEventListener('submit', function (event) {
                     event.preventDefault();
 
                     const locationOption = document.getElementById('location_filter_option').value;
@@ -208,7 +212,7 @@
                             if (response.data.length === 0) {
                                 console.log("There aren't any hotels");
                             } else {
-                                const divContainer = document.querySelector('.allHotels');
+                                const divContainer = document.querySelector('.allFlights');
                                 divContainer.innerHTML = '';
 
                                 response.data.forEach(item => {
@@ -228,7 +232,7 @@
                                     // Set the hotelId as a data attribute for each button
                                     bookBtn.setAttribute('bookId', item.id);
                                     bookBtn.setAttribute('id', 'userDashboard_bookBtn');
-                                    bookBtn.textContent = 'Book';
+                                    bookBtn.textContent = 'Book Now';
 
 
                                     itemElement1.textContent = `Hotel Name: ${(item.hotelname)}`;

@@ -131,7 +131,7 @@
       flex-direction: column;
       gap: 10px;
       padding-bottom: 15px;
-      background-color: #e2e2e2;
+      background-color: #ffffff;
       border-radius: 5px;
       padding: 15px 30px;
       opacity: 0;
@@ -145,7 +145,7 @@
           font-size: 30px;
           font-weight: bold;
           font-family: Space Grotesk;
-          color: #4691f2;
+          color: #009EE2;
           width: 100%;
         }
         a {
@@ -157,12 +157,20 @@
         }
         a:hover {
           color: white;
-          background-color: #4691f2;
+          background-color: #009EE2;
           transition: 0.2s ease-in-out;
         }
       }
       label {
         font-size: 18px;
+      }
+      select{
+        margin-right: 30px;
+        padding: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+        color: black;
       }
       input {
         border-radius: 10px;

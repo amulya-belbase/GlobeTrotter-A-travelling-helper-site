@@ -2706,7 +2706,7 @@ footer .footer_bottom {
   bottom: 0;
   left: 0;
   height: 100vh;
-  background-image: linear-gradient(120deg, #4691f2 0%, #4691f2 50%, #ffffff 50%, #ffffff 100%);
+  background-image: linear-gradient(180deg, #4691f2 0%, #4691f2 30%, #ffffff 60%, #ffffff 100%);
 }
 .container nav .dashboard_logo {
   background-color: white;
@@ -2960,7 +2960,7 @@ footer .footer_bottom {
   box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 .container #hotelFormDiv {
-  position: absolute;
+  position: fixed;
   background-color: rgba(0, 0, 0, 0.3);
   width: 100%;
   height: 100%;
@@ -2975,7 +2975,7 @@ footer .footer_bottom {
   flex-direction: column;
   gap: 10px;
   padding-bottom: 15px;
-  background-color: #e2e2e2;
+  background-color: #ffffff;
   border-radius: 5px;
   padding: 15px 30px;
   opacity: 0;
@@ -2991,7 +2991,7 @@ footer .footer_bottom {
   font-size: 30px;
   font-weight: bold;
   font-family: Space Grotesk;
-  color: #4691f2;
+  color: #009EE2;
   width: 100%;
 }
 .container #hotelFormDiv #updateHotel #updateFormTop a {
@@ -3003,7 +3003,7 @@ footer .footer_bottom {
 }
 .container #hotelFormDiv #updateHotel #updateFormTop a:hover {
   color: white;
-  background-color: #4691f2;
+  background-color: #009EE2;
   transition: 0.2s ease-in-out;
 }
 .container #hotelFormDiv #updateHotel label {
@@ -3012,13 +3012,17 @@ footer .footer_bottom {
 .container #hotelFormDiv #updateHotel input {
   border-radius: 10px;
   outline: none;
-  border: 1px solid #009EE2;
+  border: 1px solid #ddd8d8;
   padding: 10px;
   width: 100%;
   font-size: 16px;
   line-height: 14px;
   font-weight: 500;
   font-family: Space Grotesk;
+}
+.container #hotelFormDiv #updateHotel input:focus, .container #hotelFormDiv #updateHotel input:hover {
+  border: 1px solid #009ee2;
+  transition: 0.5s ease-in-out;
 }
 .container #hotelFormDiv #updateHotel .room_div {
   display: flex;
@@ -3038,7 +3042,7 @@ footer .footer_bottom {
   cursor: pointer;
 }
 .container #flightFormDiv {
-  position: absolute;
+  position: fixed;
   background-color: rgba(0, 0, 0, 0.3);
   width: 100%;
   height: 100%;
@@ -3053,7 +3057,7 @@ footer .footer_bottom {
   flex-direction: column;
   gap: 10px;
   padding-bottom: 15px;
-  background-color: #e2e2e2;
+  background-color: #ffffff;
   border-radius: 5px;
   padding: 15px 30px;
   opacity: 0;
@@ -3069,7 +3073,7 @@ footer .footer_bottom {
   font-size: 30px;
   font-weight: bold;
   font-family: Space Grotesk;
-  color: #4691f2;
+  color: #009EE2;
   width: 100%;
 }
 .container #flightFormDiv #updateFlight #updateFormTop a {
@@ -3081,7 +3085,7 @@ footer .footer_bottom {
 }
 .container #flightFormDiv #updateFlight #updateFormTop a:hover {
   color: white;
-  background-color: #4691f2;
+  background-color: #009EE2;
   transition: 0.2s ease-in-out;
 }
 .container #flightFormDiv #updateFlight label {
@@ -3090,13 +3094,17 @@ footer .footer_bottom {
 .container #flightFormDiv #updateFlight input {
   border-radius: 10px;
   outline: none;
-  border: 1px solid #009EE2;
+  border: 1px solid #ddd8d8;
   padding: 10px;
   width: 100%;
   font-size: 16px;
   line-height: 14px;
   font-weight: 500;
   font-family: Space Grotesk;
+}
+.container #flightFormDiv #updateFlight input:focus, .container #flightFormDiv #updateFlight input:hover {
+  border: 1px solid #009ee2;
+  transition: 0.5s ease-in-out;
 }
 .container #flightFormDiv #updateFlight .flight_div {
   display: flex;
@@ -3119,54 +3127,58 @@ footer .footer_bottom {
 .userHotelsBook {
   position: relative;
 }
-.userHotelsBook .allHotels {
+.userHotelsBook .allFlights {
   margin-top: 50px;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-row-gap: 50px;
-  grid-column-gap: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
   padding: 50px;
 }
-.userHotelsBook .allHotels .bookHotelCard {
-  background-color: white;
+.userHotelsBook .allFlights .bookHotelCard {
+  text-align: center;
+  background-color: #d7f1f9;
   height: -moz-fit-content;
   height: fit-content;
   width: -moz-fit-content;
   width: fit-content;
   padding: 20px;
-  color: black;
-  border-radius: 5px;
+  color: #264a69;
+  border-radius: 25px;
   font-family: lexend;
-  box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.75);
+  box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.1);
 }
-.userHotelsBook .allHotels .bookHotelCard p {
+.userHotelsBook .allFlights .bookHotelCard p {
   margin: 0;
   margin-bottom: 10px;
 }
-.userHotelsBook .allHotels .bookHotelCard #userDashboard_hotel_name {
+.userHotelsBook .allFlights .bookHotelCard #userDashboard_hotel_name {
   font-size: 20px;
   font-weight: bold;
 }
-.userHotelsBook .allHotels .bookHotelCard #userDashboard_hotel_location {
+.userHotelsBook .allFlights .bookHotelCard #userDashboard_hotel_location {
   font-size: 16px;
   font-weight: 600;
 }
-.userHotelsBook .allHotels .bookHotelCard #userDashboard_hotel_contact {
+.userHotelsBook .allFlights .bookHotelCard #userDashboard_hotel_contact {
   font-size: 14px;
   font-weight: 500;
 }
-.userHotelsBook .allHotels .bookHotelCard #userDashboard_bookBtn {
+.userHotelsBook .allFlights .bookHotelCard button {
   background: transparent;
   border: 1px solid #2c70c8;
-  padding: 10px 40px;
+  padding: 10px 80px;
   border-radius: 5px;
   font-size: 14px;
 }
-.userHotelsBook .allHotels .bookHotelCard #userDashboard_bookBtn:hover {
-  background-color: #2c70c8;
+.userHotelsBook .allFlights .bookHotelCard button:hover {
+  background: #2c70c8;
   color: white;
   cursor: pointer;
-  transition: 0.3s ease-in-out;
+  transition: 0.2s ease-in-out;
+}
+.userHotelsBook .allFlights .bookHotelCard:hover {
+  border: 1px solid #7E7E7E;
+  box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 .userHotelsBook #bookFormDiv {
   position: absolute;
@@ -3186,7 +3198,7 @@ footer .footer_bottom {
   flex-direction: column;
   gap: 10px;
   padding-bottom: 15px;
-  background-color: #e2e2e2;
+  background-color: #ffffff;
   border-radius: 5px;
   padding: 15px 30px;
   opacity: 0;
@@ -3202,7 +3214,7 @@ footer .footer_bottom {
   font-size: 30px;
   font-weight: bold;
   font-family: Space Grotesk;
-  color: #4691f2;
+  color: #009EE2;
   width: 100%;
 }
 .userHotelsBook #bookFormDiv #bookHotel #bookFormTop a {
@@ -3214,22 +3226,34 @@ footer .footer_bottom {
 }
 .userHotelsBook #bookFormDiv #bookHotel #bookFormTop a:hover {
   color: white;
-  background-color: #4691f2;
+  background-color: #009EE2;
   transition: 0.2s ease-in-out;
 }
 .userHotelsBook #bookFormDiv #bookHotel label {
   font-size: 18px;
 }
+.userHotelsBook #bookFormDiv #bookHotel select {
+  margin-right: 30px;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  color: black;
+}
 .userHotelsBook #bookFormDiv #bookHotel input {
   border-radius: 10px;
   outline: none;
-  border: 1px solid #009ee2;
+  border: 1px solid #ddd8d8;
   padding: 10px;
   width: 100%;
   font-size: 16px;
   line-height: 14px;
   font-weight: 500;
   font-family: Space Grotesk;
+}
+.userHotelsBook #bookFormDiv #bookHotel input:focus, .userHotelsBook #bookFormDiv #bookHotel input:hover {
+  border: 1px solid #009ee2;
+  transition: 0.5s ease-in-out;
 }
 .userHotelsBook #bookFormDiv #bookHotel button {
   padding: 15px 40px;
@@ -3245,6 +3269,130 @@ footer .footer_bottom {
 
 .userHotelsBook {
   position: relative;
+}
+.userHotelsBook .userHotel_filter_search {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 100px;
+  font-family: lexend;
+  font-size: 20px;
+  background-image: linear-gradient(120deg, #4691f2 0%, #4691f2 25%, #000000 40%, #000000 100%);
+  color: white;
+  box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.1);
+}
+.userHotelsBook .userHotel_filter_search span {
+  font-size: 38px;
+  font-weight: 600;
+}
+.userHotelsBook .userHotel_filter_search #flight_filter {
+  display: flex;
+  align-items: center;
+}
+.userHotelsBook .userHotel_filter_search #flight_filter label {
+  margin-right: 10px;
+}
+.userHotelsBook .userHotel_filter_search #flight_filter select {
+  margin-right: 30px;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  color: black;
+}
+.userHotelsBook .userHotel_filter_search #flight_filter input {
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid #ddd8d8;
+  padding: 10px;
+  font-size: 16px;
+  line-height: 14px;
+  font-weight: 500;
+  font-family: Lexend;
+  margin-right: 10px;
+}
+.userHotelsBook .userHotel_filter_search #flight_filter input:focus, .userHotelsBook .userHotel_filter_search #flight_filter input:hover {
+  border: 1px solid #009ee2;
+  transition: 0.5s ease-in-out;
+}
+.userHotelsBook .userHotel_filter_search #flight_filter button {
+  padding: 15px 30px;
+  color: white;
+  font-size: 16px;
+  line-height: 14px;
+  font-weight: 700;
+  background-color: #009ee2;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.userHotelsBook .userHotel_filter_search #flight_filter button:hover {
+  background-color: #0674a3;
+  transition: 0.2s ease-in-out;
+}
+.userHotelsBook .allHotels {
+  margin-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+  padding: 50px;
+}
+.userHotelsBook .allHotels .userFlightCard {
+  text-align: center;
+  background-color: #E9F3F6;
+  height: -moz-fit-content;
+  height: fit-content;
+  color: #023F76;
+  border-radius: 25px;
+  font-family: lexend;
+  padding: 20px;
+  box-shadow: 0 0 15px 0px rgba(0, 0, 0, 0.1);
+}
+.userHotelsBook .allHotels .userFlightCard p {
+  margin: 0;
+  margin-bottom: 10px;
+}
+.userHotelsBook .allHotels .userFlightCard #dashboard_hotel_name {
+  font-size: 20px;
+  font-weight: bold;
+}
+.userHotelsBook .allHotels .userFlightCard .userFlightCardFlight {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 30px;
+  margin-bottom: 10px;
+}
+.userHotelsBook .allHotels .userFlightCard .userFlightCardFlight #dashboard_location_name {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+}
+.userHotelsBook .allHotels .userFlightCard .userFlightCardFlight #dashboard_location_name span {
+  font-size: 12px;
+}
+.userHotelsBook .allHotels .userFlightCard #dashboard_contact_name {
+  font-size: 16px;
+  font-weight: 500;
+}
+.userHotelsBook .allHotels .userFlightCard button {
+  background: transparent;
+  border: 1px solid #2c70c8;
+  padding: 10px 80px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+.userHotelsBook .allHotels .userFlightCard button:hover {
+  background: #2c70c8;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+.userHotelsBook .allHotels .userFlightCard:hover {
+  border: 1px solid #7E7E7E;
+  box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 .userHotelsBook #bookFormDiv {
   position: absolute;
@@ -3264,7 +3412,7 @@ footer .footer_bottom {
   flex-direction: column;
   gap: 10px;
   padding-bottom: 15px;
-  background-color: #e2e2e2;
+  background-color: #ffffff;
   border-radius: 5px;
   padding: 15px 30px;
   opacity: 0;
@@ -3280,7 +3428,7 @@ footer .footer_bottom {
   font-size: 30px;
   font-weight: bold;
   font-family: Space Grotesk;
-  color: #4691f2;
+  color: #009EE2;
   width: 100%;
 }
 .userHotelsBook #bookFormDiv #bookFlight #bookFormTop a {
@@ -3292,22 +3440,34 @@ footer .footer_bottom {
 }
 .userHotelsBook #bookFormDiv #bookFlight #bookFormTop a:hover {
   color: white;
-  background-color: #4691f2;
+  background-color: #009EE2;
   transition: 0.2s ease-in-out;
 }
 .userHotelsBook #bookFormDiv #bookFlight label {
   font-size: 18px;
 }
+.userHotelsBook #bookFormDiv #bookFlight select {
+  margin-right: 30px;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  color: black;
+}
 .userHotelsBook #bookFormDiv #bookFlight input {
   border-radius: 10px;
   outline: none;
-  border: 1px solid #009ee2;
+  border: 1px solid #ddd8d8;
   padding: 10px;
   width: 100%;
   font-size: 16px;
   line-height: 14px;
   font-weight: 500;
   font-family: Space Grotesk;
+}
+.userHotelsBook #bookFormDiv #bookFlight input:focus, .userHotelsBook #bookFormDiv #bookFlight input:hover {
+  border: 1px solid #009ee2;
+  transition: 0.5s ease-in-out;
 }
 .userHotelsBook #bookFormDiv #bookFlight button {
   padding: 15px 40px;
@@ -3455,7 +3615,7 @@ footer .footer_bottom {
   flex-direction: column;
   gap: 10px;
   padding-bottom: 15px;
-  background-color: #e2e2e2;
+  background-color: #ffffff;
   border-radius: 5px;
   padding: 15px 30px;
   opacity: 0;
@@ -3471,7 +3631,7 @@ footer .footer_bottom {
   font-size: 30px;
   font-weight: bold;
   font-family: Space Grotesk;
-  color: #4691f2;
+  color: #009EE2;
   width: 100%;
 }
 #bookFormDiv #bookHotel #bookFormTop a, #bookFormDiv #bookFlight #bookFormTop a, #bookFlightFormDiv #bookHotel #bookFormTop a, #bookFlightFormDiv #bookFlight #bookFormTop a {
@@ -3483,11 +3643,19 @@ footer .footer_bottom {
 }
 #bookFormDiv #bookHotel #bookFormTop a:hover, #bookFormDiv #bookFlight #bookFormTop a:hover, #bookFlightFormDiv #bookHotel #bookFormTop a:hover, #bookFlightFormDiv #bookFlight #bookFormTop a:hover {
   color: white;
-  background-color: #4691f2;
+  background-color: #009EE2;
   transition: 0.2s ease-in-out;
 }
 #bookFormDiv #bookHotel label, #bookFormDiv #bookFlight label, #bookFlightFormDiv #bookHotel label, #bookFlightFormDiv #bookFlight label {
   font-size: 18px;
+}
+#bookFormDiv #bookHotel select, #bookFormDiv #bookFlight select, #bookFlightFormDiv #bookHotel select, #bookFlightFormDiv #bookFlight select {
+  margin-right: 30px;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  color: black;
 }
 #bookFormDiv #bookHotel input, #bookFormDiv #bookFlight input, #bookFlightFormDiv #bookHotel input, #bookFlightFormDiv #bookFlight input {
   border-radius: 10px;

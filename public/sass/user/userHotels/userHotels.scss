@@ -1,24 +1,29 @@
 .userHotelsBook {
   position: relative;
 
-  .allHotels {
+  .allFlights {
     margin-top: 50px;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-row-gap: 50px;
-    grid-column-gap: 50px;
+    // display: grid;
+    // grid-template-columns: repeat(5, 1fr); 
+    // grid-gap: 30px; 
+    // justify-content: center; 
+    // align-items: center;    
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
     padding: 50px;
     .bookHotelCard {
-      background-color: white;
+      text-align: center;
+      background-color: #d7f1f9;
       height: -moz-fit-content;
       height: fit-content;
       width: -moz-fit-content;
       width: fit-content;
       padding: 20px;
-      color: black;
-      border-radius: 5px;
+      color: #264a69;
+      border-radius: 25px;
       font-family: lexend;
-      box-shadow: 0 0 15px 2px rgba(0, 0, 0, 0.75);
+      box-shadow: 0 0 15px 0px rgba(0,0,0,0.1);
       p {
         margin: 0;
         margin-bottom: 10px;
@@ -35,19 +40,23 @@
         font-size: 14px;
         font-weight: 500;
       }
-      #userDashboard_bookBtn {
+      button{
         background: transparent;
         border: 1px solid #2c70c8;
-        padding: 10px 40px;
+        padding: 10px 80px;
         border-radius: 5px;
         font-size: 14px;
       }
-      #userDashboard_bookBtn:hover {
-        background-color: #2c70c8;
+      button:hover{
+        background: #2c70c8;
         color: white;
         cursor: pointer;
-        transition: 0.3s ease-in-out;
+        transition: 0.2s ease-in-out;
       }
+    }
+    .bookHotelCard:hover{
+      border: 1px solid #7E7E7E;
+      box-shadow: 4px 4px 4px 0px rgba(0,0,0,0.25);
     }
   }
   #bookFormDiv {
@@ -68,7 +77,7 @@
       flex-direction: column;
       gap: 10px;
       padding-bottom: 15px;
-      background-color: #e2e2e2;
+      background-color: #ffffff;
       border-radius: 5px;
       padding: 15px 30px;
       opacity: 0;
@@ -82,7 +91,7 @@
           font-size: 30px;
           font-weight: bold;
           font-family: Space Grotesk;
-          color: #4691f2;
+          color: #009EE2;
           width: 100%;
         }
         a {
@@ -94,24 +103,36 @@
         }
         a:hover {
           color: white;
-          background-color: #4691f2;
+          background-color: #009EE2;
           transition: 0.2s ease-in-out;
         }
       }
       label {
         font-size: 18px;
       }
-      input {
+      select{
+        margin-right: 30px;
+        padding: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+        color: black;
+      }
+      input{
         border-radius: 10px;
         outline: none;
-        border: 1px solid #009ee2;
+        border: 1px solid #ddd8d8;
         padding: 10px;
         width: 100%;
         font-size: 16px;
         line-height: 14px;
         font-weight: 500;
         font-family: Space Grotesk;
-      }
+    }
+    input:focus, input:hover{
+        border: 1px solid #009ee2;
+        transition: 0.5s ease-in-out;
+    }
       // .room_div{
       //     display: flex;
       //     align-items: center;

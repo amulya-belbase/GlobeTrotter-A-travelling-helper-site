@@ -11,6 +11,7 @@
 <body>
     <div class="userHotelsBook">
         <div class="userHotel_filter_search">
+            <span>Book Your Flight</span>
             <div class="userHotel_filter_part">
                 <form id="flight_filter">
                     <label for="flight_filter_option_dept">Filter By Departure:</label>
@@ -29,18 +30,27 @@
                         <option value="beijing">Beijing</option>
                     </select>
 
-                    <input type="text" name="search_filter" id="search_filter">
+                    <input type="text" name="search_filter" id="search_filter" placeholder="Search By Flight Name...">
                     <button>Search</button>
                 </form>
             </div>
         </div>
         <div class="allHotels">
-            <div class="bookHotelCard">
-                <p id="userDashboard_hotel_name">Flight Name</p>
-                <p id="userDashboard_hotel_location">Departure</p>
-                <p id="userDashboard_hotel_contact">Contact</p>
-                <button id="userDashboard_bookBtn">Book</button>
-            </div>
+                <!-- <div class="userFlightCard">
+                    <p id="dashboard_hotel_name">Flight Name</p>
+                    <div class="userFlightCardFlight">
+                        <div id="dashboard_location_name">
+                            Beijing
+                            <span>Departure</span>
+                        </div>
+                        <img src="../../assets/img/dashboard_flight_journey.png" alt="">
+                        <div id="dashboard_location_name">
+                            Kathmandu
+                            <span>Destination</span>
+                        </div>                    </div>
+                    <p id="dashboard_contact_name">Contact</p>
+                    <button>Book Now</button>
+                </div> -->
         </div>
 
         <div id="bookFormDiv">
@@ -64,7 +74,7 @@
         </div>
     </div>
 
-
+    
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         function hideHotelPopUp() {
@@ -89,35 +99,53 @@
 
                         response.data.forEach(item => {
 
-                            const cardContainer = document.createElement('div');
-                            cardContainer.setAttribute('class', 'bookHotelCard');
+                                const cardContainer = document.createElement('div');
+                                cardContainer.setAttribute('class', 'userFlightCard');
 
-                            const itemElement1 = document.createElement('p');
-                            itemElement1.setAttribute('id', 'userDashboard_hotel_name');
-                            const itemElement2 = document.createElement('p');
-                            itemElement2.setAttribute('id', 'userDashboard_hotel_location');
-                            const itemElement3 = document.createElement('p');
-                            itemElement3.setAttribute('id', 'userDashboard_hotel_contact');
+                                const itemElement1 = document.createElement('p');
+                                itemElement1.setAttribute('id', 'dashboard_hotel_name');
 
-                            const bookBtn = document.createElement('button');
+                                const itemElement2 = document.createElement('div');
+                                itemElement2.setAttribute('class', 'userFlightCardFlight');
+                                const itemElementfordept = document.createElement('div');
+                                itemElementfordept.setAttribute('id', 'dashboard_location_name');
+                                const itemElement2Inner1 = document.createElement('span');
+                                itemElement2Inner1.textContent = 'Departure';
+                                const imgElement = document.createElement("img");
+                                imgElement.src = "../../assets/img/dashboard_flight_journey.png";
+                                const itemElementfordest = document.createElement('div');
+                                itemElementfordest.setAttribute('id', 'dashboard_location_name');
+                                const itemElement2Inner2 = document.createElement('span');
+                                itemElement2Inner2.textContent = 'Destination';
 
-                            // Set the hotelId as a data attribute for each button
-                            bookBtn.setAttribute('flightId', item.id);
-                            bookBtn.setAttribute('id', 'userDashboard_bookBtn');
+                                const itemElement4 = document.createElement('p');
+                                itemElement4.setAttribute('id', 'dashboard_contact_name');
+
+                                const bookBtn = document.createElement('button');
+
+                                // Set the hotelId as a data attribute for each button
+                                bookBtn.setAttribute('flightId', item.id);
+
+                                itemElement1.textContent = `Flight Name: ${item.flightname}`;
+                                itemElementfordept.textContent = `${item.flightdepart}`;
+                                itemElementfordest.textContent = `${item.flightdest}`;
+                                itemElement4.textContent = `Contact: ${item.phoneno}`;
+
+                                bookBtn.textContent = 'Book Now';
 
 
-                            itemElement1.textContent = `Flight Name: ${(item.flightname)}`;
-                            itemElement2.textContent = `Departure: ${(item.flightdepart)}`;
-                            itemElement3.textContent = `Contact: ${item.phoneno}`;
+                                itemElementfordept.append(itemElement2Inner1)
+                                itemElementfordest.append(itemElement2Inner2)
+                                itemElement2.append(itemElementfordept)
+                                itemElement2.append(imgElement)
+                                itemElement2.append(itemElementfordest)
 
-                            bookBtn.textContent = 'Book';
+                                cardContainer.appendChild(itemElement1);
+                                cardContainer.appendChild(itemElement2);
+                                cardContainer.appendChild(itemElement4);
+                                cardContainer.appendChild(bookBtn);
 
-                            cardContainer.appendChild(itemElement1);
-                            cardContainer.appendChild(itemElement2);
-                            cardContainer.appendChild(itemElement3);
-                            cardContainer.appendChild(bookBtn);
-
-                            divContainer.appendChild(cardContainer);
+                                divContainer.appendChild(cardContainer);
 
 
                             bookBtn.addEventListener('click', function () {
@@ -212,31 +240,49 @@
                             response.data.forEach(item => {
 
                                 const cardContainer = document.createElement('div');
-                                cardContainer.setAttribute('class', 'bookHotelCard');
+                                cardContainer.setAttribute('class', 'userFlightCard');
 
                                 const itemElement1 = document.createElement('p');
-                                itemElement1.setAttribute('id', 'userDashboard_hotel_name');
-                                const itemElement2 = document.createElement('p');
-                                itemElement2.setAttribute('id', 'userDashboard_hotel_location');
-                                const itemElement3 = document.createElement('p');
-                                itemElement3.setAttribute('id', 'userDashboard_hotel_contact');
+                                itemElement1.setAttribute('id', 'dashboard_hotel_name');
+
+                                const itemElement2 = document.createElement('div');
+                                itemElement2.setAttribute('class', 'userFlightCardFlight');
+                                const itemElementfordept = document.createElement('div');
+                                itemElementfordept.setAttribute('id', 'dashboard_location_name');
+                                const itemElement2Inner1 = document.createElement('span');
+                                itemElement2Inner1.textContent = 'Departure';
+                                const imgElement = document.createElement("img");
+                                imgElement.src = "../../assets/img/dashboard_flight_journey.png";
+                                const itemElementfordest = document.createElement('div');
+                                itemElementfordest.setAttribute('id', 'dashboard_location_name');
+                                const itemElement2Inner2 = document.createElement('span');
+                                itemElement2Inner2.textContent = 'Destination';
+
+                                const itemElement4 = document.createElement('p');
+                                itemElement4.setAttribute('id', 'dashboard_contact_name');
 
                                 const bookBtn = document.createElement('button');
 
                                 // Set the hotelId as a data attribute for each button
                                 bookBtn.setAttribute('flightId', item.id);
-                                bookBtn.setAttribute('id', 'userDashboard_bookBtn');
+
+                                itemElement1.textContent = `Flight Name: ${item.flightname}`;
+                                itemElementfordept.textContent = `${item.flightdepart}`;
+                                itemElementfordest.textContent = `${item.flightdest}`;
+                                itemElement4.textContent = `Contact: ${item.phoneno}`;
+
+                                bookBtn.textContent = 'Book Now';
 
 
-                                itemElement1.textContent = `Flight Name: ${(item.flightname)}`;
-                                itemElement2.textContent = `Departure: ${(item.flightdepart)}`;
-                                itemElement3.textContent = `Contact: ${item.phoneno}`;
-
-                                bookBtn.textContent = 'Book';
+                                itemElementfordept.append(itemElement2Inner1)
+                                itemElementfordest.append(itemElement2Inner2)
+                                itemElement2.append(itemElementfordept)
+                                itemElement2.append(imgElement)
+                                itemElement2.append(itemElementfordest)
 
                                 cardContainer.appendChild(itemElement1);
                                 cardContainer.appendChild(itemElement2);
-                                cardContainer.appendChild(itemElement3);
+                                cardContainer.appendChild(itemElement4);
                                 cardContainer.appendChild(bookBtn);
 
                                 divContainer.appendChild(cardContainer);

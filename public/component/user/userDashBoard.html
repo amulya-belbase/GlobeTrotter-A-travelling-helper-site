@@ -9,69 +9,127 @@
 </head>
 
 <body>
-    <div class="userHotels">
-        <!-- <div class="userHotelCard">
-            <p id="dashboard_hotel_name">Hotel Name</p>
-            <p id="dashboard_location_name">Location</p>
-            <p id="dashboard_contact_name">Contact</p>
-            <div id="dashboard_btn">
-                <button>Update</button>
-                <button id="dashboard_deleteBtn">Delete</button>
-            </div>
-        </div> -->
-    </div>
+    <div class="container">
 
-    <div class="userFlights">
-        <!-- <div class="userHotelCard">
-            <p id="dashboard_hotel_name">Hotel Name</p>
-            <p id="dashboard_location_name">Location</p>
-            <p id="dashboard_contact_name">Contact</p>
-            <div id="dashboard_btn">
-                <button>Update</button>
-                <button id="dashboard_deleteBtn">Delete</button>
+        <nav>
+            <div class="dashboard_logo">
+                <a href="../../index.html">
+                    <img src="../../assets/img/logo.png" alt="GlobeTrotter">
+                </a>
             </div>
-        </div> -->
-    </div>
+            <div class="dashboard_links">
+                <a href="./userHotels.html"><img src="../../assets/img/dashboard_hotel.svg" alt=""><span>Book
+                        Hotels</span></a>
+                <a href="./userFlights.html"><img src="../../assets/img/dashboard_plane_icon.png" alt=""><span>Book
+                        Flights</span></a>
+            </div>
+        </nav>
 
-    <div id="bookFormDiv">
-        <form id="bookHotel">
-            <div id="bookFormTop">
-                <span>Update Your Hotel Booking</span>
-                <a href="" onclick="hideBookPopup()">X</a>
-            </div>
-            <label>Hotel Name: <input type="text" id="bookHotelName" name="bookHotelName" readonly></label>
-            <label>Arrival Date: <input type="date" id="bookArrivalDate" name="bookArrivalDate"></label>
-            <label for="bookRoomType">Select the room type:</label>
-            <select id="bookRoomType" name="bookRoomType">
-                <option value="#">-- Select --</option>
-                <option value="single">Single Room</option>
-                <option value="double">Double Room</option>
-                <option value="suite">Suite</option>
-            </select>
-            <label>Room Rate (In $/Night): <input type="text" id="bookRoomRate" name="bookRoomRate" readonly></label>
-            <label>Room Count: <input type="number" id="bookRoomCount" name="bookRoomCount"></label>
-            <button>Submit</button>
-        </form>
-    </div>
 
-    <div id="bookFlightFormDiv">
-        <form id="bookFlight">
-            <div id="bookFormTop">
-                <span>Update Your Flight Booking</span>
-                <a href="" onclick="hideBookPopup()">X</a>
+        <div class="userEntries">
+
+            <div class="userHotels">
+                <div class="dashboard_hotel_count_card">
+                    <span>My <span class="dashboard_title">Hotels</span></span>
+                    <div class="dashboard_hotel_count">
+                        <div class="dashboard_hotel_count_left">
+                            <p id="total_hotel_number"></p>
+                            <p>Hotels Booked</p>
+                        </div>
+                        <div class="dashboard_hotel_count_icon">
+                            <img src="../../assets/img/dashboard_calendar.png" alt="">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="userHotelCard">
+                    <p id="dashboard_hotel_name">Hotel Name</p>
+                    <p id="dashboard_location_name">Location</p>
+                    <p id="dashboard_contact_name">Contact</p>
+                    <div id="dashboard_btn">
+                        <button>Update</button>
+                        <button id="dashboard_deleteBtn">Delete</button>
+                    </div>
+                </div> -->
             </div>
-            <label>Flight Name: <input type="text" id="bookFlightName" name="bookFlightName" readonly></label>
-            <label>Departure Date: <input type="date" id="bookDeptDate" name="bookDeptDate"></label>
-            <label for="bookSeatType">Select the seat type:</label>
-            <select id="bookSeatType" name="bookSeatType">
-                <option value="#">-- Select --</option>
-                <option value="economy">Economy</option>
-                <option value="business">Business</option>
-            </select>
-            <label>Seat Rate (In $): <input type="text" id="bookSeatRate" name="bookSeatRate" readonly></label>
-            <label>Seat Count: <input type="number" id="bookSeatCount" name="bookSeatCount"></label>
-            <button>Submit</button>
-        </form>
+
+            <div class="userFlights">
+                <div class="dashboard_hotel_count_card">
+                    <span>My <span class="dashboard_title">Flights</span></span>
+                    <div class="dashboard_hotel_count">
+                        <div class="dashboard_hotel_count_left">
+                            <p id="total_flight_number"></p>
+                            <p>Flights Booked</p>
+                        </div>
+                        <div class="dashboard_hotel_count_icon">
+                            <img src="../../assets/img/dashboard_calendar.png" alt="">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="userFlightCard">
+                    <p id="dashboard_hotel_name">Flight Name</p>
+                    <div class="userFlightCardFlight">
+                        <div id="dashboard_location_name">
+                            Beijing
+                            <span>Departure</span>
+                        </div>
+                        <img src="../../assets/img/dashboard_flight_journey.png" alt="">
+                        <div id="dashboard_location_name">
+                            Kathmandu
+                            <span>Destination</span>
+                        </div>                    </div>
+                    <p id="dashboard_contact_name">Contact</p>
+                    <div id="dashboard_btn">
+                        <button>Update</button>
+                        <button id="dashboard_deleteBtn">Delete</button>
+                    </div>
+                </div> -->
+
+            </div>
+        </div>
+
+        <div id="bookFormDiv">
+            <form id="bookHotel">
+                <div id="bookFormTop">
+                    <span>Update Your Hotel Booking</span>
+                    <a href="" onclick="hideBookPopup()">X</a>
+                </div>
+                <label>Hotel Name: <input type="text" id="bookHotelName" name="bookHotelName" readonly></label>
+                <label>Arrival Date: <input type="date" id="bookArrivalDate" name="bookArrivalDate"></label>
+                <label for="bookRoomType">Select the room type:</label>
+                <select id="bookRoomType" name="bookRoomType">
+                    <option value="#">-- Select --</option>
+                    <option value="single">Single Room</option>
+                    <option value="double">Double Room</option>
+                    <option value="suite">Suite</option>
+                </select>
+                <label>Room Rate (In $/Night): <input type="text" id="bookRoomRate" name="bookRoomRate"
+                        readonly></label>
+                <label>Room Count: <input type="number" id="bookRoomCount" name="bookRoomCount"></label>
+                <button>Submit</button>
+            </form>
+        </div>
+
+        <div id="bookFlightFormDiv">
+            <form id="bookFlight">
+                <div id="bookFormTop">
+                    <span>Update Your Flight Booking</span>
+                    <a href="" onclick="hideBookPopup()">X</a>
+                </div>
+                <label>Flight Name: <input type="text" id="bookFlightName" name="bookFlightName" readonly></label>
+                <label>Departure Date: <input type="date" id="bookDeptDate" name="bookDeptDate"></label>
+                <label for="bookSeatType">Select the seat type:</label>
+                <select id="bookSeatType" name="bookSeatType">
+                    <option value="#">-- Select --</option>
+                    <option value="economy">Economy</option>
+                    <option value="business">Business</option>
+                </select>
+                <label>Seat Rate (In $): <input type="text" id="bookSeatRate" name="bookSeatRate" readonly></label>
+                <label>Seat Count: <input type="number" id="bookSeatCount" name="bookSeatCount"></label>
+                <button>Submit</button>
+            </form>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -91,9 +149,13 @@
                 // TO GET ALL THE USER BOOKED HOTELS
                 axios.get(`http://localhost:8000/book/myHotels/${userId}`)
                     .then(response => {
-                        if (response.data.length === 0) {
+                        const responseCount = response.data.length;
+
+                        if (responseCount === 0) {
                             console.log("this user doesn't have any data");
                         } else {
+                            document.getElementById('total_hotel_number').textContent = responseCount;
+
                             const divContainer = document.querySelector('.userHotels');
                             response.data.forEach(item => {
 
@@ -268,22 +330,41 @@
                 // TO GET ALL THE USER BOOKED FLIGHTS
                 axios.get(`http://localhost:8000/book/myFlights/${userId}`)
                     .then(response => {
-                        if (response.data.length === 0) {
+                        const responseCount = response.data.length;
+
+                        if (responseCount === 0) {
                             console.log("this user doesn't have any data");
                         } else {
                             const divContainer = document.querySelector('.userFlights');
+                            document.getElementById('total_flight_number').textContent = responseCount;
+
                             response.data.forEach(item => {
 
+
                                 const cardContainer = document.createElement('div');
-                                cardContainer.setAttribute('class', 'userHotelCard');
+                                cardContainer.setAttribute('class', 'userFlightCard');
 
                                 const itemElement1 = document.createElement('p');
                                 itemElement1.setAttribute('id', 'dashboard_hotel_name');
-                                const itemElement2 = document.createElement('p');
-                                itemElement2.setAttribute('id', 'dashboard_location_name');
-                                const itemElement3 = document.createElement('p');
-                                itemElement3.setAttribute('id', 'dashboard_contact_name');
 
+                                const itemElement2 = document.createElement('div');
+                                itemElement2.setAttribute('class', 'userFlightCardFlight');
+                                const itemElementfordept = document.createElement('div');
+                                itemElementfordept.setAttribute('id', 'dashboard_location_name');
+                                const itemElement2Inner1 = document.createElement('span');
+                                itemElement2Inner1.textContent = 'Departure';
+                                const imgElement = document.createElement("img");
+                                imgElement.src = "../../assets/img/dashboard_flight_journey.png";
+                                const itemElementfordest = document.createElement('div');
+                                itemElementfordest.setAttribute('id', 'dashboard_location_name');
+                                const itemElement2Inner2 = document.createElement('span');
+                                itemElement2Inner2.textContent = 'Destination';
+
+                                const itemElement4 = document.createElement('p');
+                                itemElement4.setAttribute('id', 'dashboard_contact_name');
+
+                                const itemElement5 = document.createElement('p');
+                                itemElement5.setAttribute('id', 'dashboard_contact_name');
 
                                 const btnContainer = document.createElement('div');
                                 btnContainer.setAttribute('id', 'dashboard_btn');
@@ -295,28 +376,39 @@
                                 deleteBtn.setAttribute('deleteBtn', item.id);
                                 deleteBtn.setAttribute('id', 'dashboard_deleteBtn');
 
-
-                                // to format the date
                                 const dateString = item.departureDate;
                                 const dateObject = new Date(dateString);
                                 const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
                                 const formattedDate = dateObject.toLocaleDateString(options);
 
-
-                                itemElement1.textContent = `Hotel Name: ${item.flightname}`;
-                                itemElement2.textContent = `Arrival Date: ${formattedDate}`;
-                                itemElement3.textContent = `Room Type: ${item.seat_type}`;
+                                axios.get(`http://localhost:8000/flights/getFlightForUser/${item.flightId}`)
+                                    .then(response => {
+                                        response.data.forEach(item => {
+                                            itemElementfordept.textContent = `${item.flightdepart}`;
+                                            itemElementfordest.textContent = `${item.flightdest}`;
+                                            itemElement5.textContent = `Contact No.: ${item.phoneno}`;
+                                            itemElementfordept.append(itemElement2Inner1)
+                                            itemElementfordest.append(itemElement2Inner2)
+                                        })
+                                    });
+                                itemElement1.textContent = `Flight Name: ${item.flightname}`;
+                                itemElement4.textContent = `Departure Date: ${formattedDate}`;
 
                                 updateBtn.textContent = 'Update';
                                 deleteBtn.textContent = 'Delete';
                                 btnContainer.appendChild(updateBtn);
                                 btnContainer.appendChild(deleteBtn);
 
+
+                                itemElement2.append(itemElementfordept)
+                                itemElement2.append(imgElement)
+                                itemElement2.append(itemElementfordest)
+
                                 cardContainer.appendChild(itemElement1);
                                 cardContainer.appendChild(itemElement2);
-                                cardContainer.appendChild(itemElement3);
+                                cardContainer.appendChild(itemElement4);
+                                cardContainer.appendChild(itemElement5);
                                 cardContainer.appendChild(btnContainer);
-
 
                                 divContainer.appendChild(cardContainer);
 

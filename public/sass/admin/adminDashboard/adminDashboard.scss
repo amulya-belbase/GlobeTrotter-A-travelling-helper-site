@@ -7,10 +7,10 @@
     left: 0;
     height: 100vh;
     background-image: linear-gradient(
-      120deg,
+      180deg,
       #4691f2 0%,
-      #4691f2 50%,
-      #ffffff 50%,
+      #4691f2 30%,
+      #ffffff 60%,
       #ffffff 100%
     );
     .dashboard_logo {
@@ -270,7 +270,7 @@
     }
   }
   #hotelFormDiv {
-    position: absolute;
+    position: fixed;
     background-color: rgb(0, 0, 0, 0.3);
     width: 100%;
     height: 100%;
@@ -285,7 +285,7 @@
       flex-direction: column;
       gap: 10px;
       padding-bottom: 15px;
-      background-color: #e2e2e2;
+      background-color: #ffffff;
       border-radius: 5px;
       padding: 15px 30px;
       opacity: 0;
@@ -299,7 +299,7 @@
           font-size: 30px;
           font-weight: bold;
           font-family: Space Grotesk;
-          color: #4691f2;
+          color: #009EE2;
           width: 100%;
         }
         a{
@@ -311,17 +311,18 @@
         }
         a:hover{
           color: white;
-          background-color: #4691f2;
+          background-color: #009EE2;
           transition: 0.2s ease-in-out;
         }
       }
       label{
         font-size: 18px;
       }
+      
       input{
           border-radius: 10px;
           outline: none;
-          border: 1px solid #009EE2;
+          border: 1px solid #ddd8d8;
           padding: 10px;
           width: 100%;
           font-size: 16px;
@@ -329,6 +330,10 @@
           font-weight: 500;
           font-family: Space Grotesk;
       }
+      input:focus, input:hover{
+        border: 1px solid #009ee2;
+        transition: 0.5s ease-in-out;
+    }
       .room_div{
           display: flex;
           align-items: center;
@@ -350,7 +355,7 @@
   }
 
   #flightFormDiv {
-    position: absolute;
+    position: fixed;
     background-color: rgb(0, 0, 0, 0.3);
     width: 100%;
     height: 100%;
@@ -365,7 +370,7 @@
       flex-direction: column;
       gap: 10px;
       padding-bottom: 15px;
-      background-color: #e2e2e2;
+      background-color: #ffffff;
       border-radius: 5px;
       padding: 15px 30px;
       opacity: 0;
@@ -379,7 +384,7 @@
           font-size: 30px;
           font-weight: bold;
           font-family: Space Grotesk;
-          color: #4691f2;
+          color: #009EE2;
           width: 100%;
         }
         a{
@@ -391,7 +396,7 @@
         }
         a:hover{
           color: white;
-          background-color: #4691f2;
+          background-color: #009EE2;
           transition: 0.2s ease-in-out;
         }
       }
@@ -401,7 +406,7 @@
       input {
         border-radius: 10px;
         outline: none;
-        border: 1px solid #009EE2;
+        border: 1px solid #ddd8d8;
         padding: 10px;
         width: 100%;
         font-size: 16px;
@@ -409,6 +414,10 @@
         font-weight: 500;
         font-family: Space Grotesk;
       }
+      input:focus, input:hover{
+        border: 1px solid #009ee2;
+        transition: 0.5s ease-in-out;
+    }
       .flight_div {
         display: flex;
         align-items: center;
