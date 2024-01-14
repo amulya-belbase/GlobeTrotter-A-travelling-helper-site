@@ -54,6 +54,7 @@
                             <button>Update</button>
                             <button id="dashboard_deleteBtn">Delete</button>
                         </div>
+                        <button id="downloadBtn">Download Itinerary</button>
                     </div>
                 </div> -->
 
@@ -96,6 +97,7 @@
                             <button>Update</button>
                             <button id="dashboard_deleteBtn">Delete</button>
                         </div>
+                        <button id="downloadBtn">Download Itinerary</button>
                     </div>
                 </div> -->
 
@@ -195,6 +197,10 @@
                                 const itemElement3 = document.createElement('p');
                                 itemElement3.setAttribute('id', 'dashboard_contact_name_user');
 
+                                const itemELement4 = document.createElement('button');
+                                itemELement4.setAttribute('id', 'downloadBtn');
+                                itemELement4.setAttribute('downloadId', item.id);
+
 
                                 const btnContainer = document.createElement('div');
                                 btnContainer.setAttribute('id', 'dashboard_btn');
@@ -217,6 +223,7 @@
                                 itemElement1.textContent = `Hotel Name: ${item.hotelname}`;
                                 itemElement2.textContent = `Arrival Date: ${formattedDate}`;
                                 itemElement3.textContent = `Room Type: ${item.room_type}`;
+                                itemELement4.textContent = 'Download Itinerary';
 
                                 updateBtn.textContent = 'Update';
                                 deleteBtn.textContent = 'Delete';
@@ -227,11 +234,37 @@
                                 hotelInfoContainer.appendChild(itemElement2);
                                 hotelInfoContainer.appendChild(itemElement3);
                                 hotelInfoContainer.appendChild(btnContainer);
+                                hotelInfoContainer.appendChild(itemELement4);
 
                                 cardContainer.appendChild(imgContainer);
                                 cardContainer.appendChild(hotelInfoContainer);
 
                                 divContainer.appendChild(cardContainer);
+
+
+                                itemELement4.addEventListener('click', function () {
+                                    const dataId = Number(this.getAttribute('downloadId'));
+
+                                    // 'arraybuffer' -> converts the response body into an ArrayBuffer object -> work with binary data directly
+                                    // for pdf files -> the PDF data is binary, and using arraybuffer allows you to handle this binary data appropriately.
+
+                                    axios.get(`http://localhost:8000/book/downloadHotel/${dataId}`, { responseType: 'arraybuffer' })
+                                        .then(response => {
+                                            // Binary Large Object -> container for binary data
+                                            const blob = new Blob([response.data], { type: 'application/pdf' });
+
+                                            // creates a url context for the said blob
+                                            const url = URL.createObjectURL(blob);
+                                            window.open(url, '_blank');
+                                        })
+                                        .catch(error => {
+                                            console.error('Error updating hotel:', error);
+                                            // Handle error while trying to update the hotel
+                                            if (error.response.status === 401) {
+                                                alert("Unauthorized request");
+                                            }
+                                        });
+                                })
 
                                 updateBtn.addEventListener('click', function () {
 
@@ -402,6 +435,11 @@
                                 const itemElement5 = document.createElement('p');
                                 itemElement5.setAttribute('id', 'dashboard_contact_name');
 
+                                const itemELement6 = document.createElement('button');
+                                itemELement6.setAttribute('id', 'downloadBtn');
+                                itemELement6.setAttribute('downloadId', item.id);
+                                itemELement6.textContent = 'Download Itinerary';
+
                                 const btnContainer = document.createElement('div');
                                 btnContainer.setAttribute('id', 'dashboard_btn');
                                 const updateBtn = document.createElement('button');
@@ -447,11 +485,33 @@
                                 flightInfoContainer.appendChild(itemElement4);
                                 flightInfoContainer.appendChild(itemElement5);
                                 flightInfoContainer.appendChild(btnContainer);
-                                
+                                flightInfoContainer.appendChild(itemELement6);
+
                                 cardContainer.appendChild(flightImgContainer);
                                 cardContainer.appendChild(flightInfoContainer);
 
                                 divContainer.appendChild(cardContainer);
+
+
+                                itemELement6.addEventListener('click', function () {
+                                    const dataId = Number(this.getAttribute('downloadId'));
+                                    axios.get(`http://localhost:8000/book/downloadFlight/${dataId}`, { responseType: 'arraybuffer' })
+                                        .then(response => {
+                                            // Binary Large Object -> container for binary data
+                                            const blob = new Blob([response.data], { type: 'application/pdf' });
+
+                                            // creates a url context for the said blob
+                                            const url = URL.createObjectURL(blob);
+                                            window.open(url, '_blank');
+                                        })
+                                        .catch(error => {
+                                            console.error('Error updating hotel:', error);
+                                            // Handle error while trying to update the hotel
+                                            if (error.response.status === 401) {
+                                                alert("Unauthorized request");
+                                            }
+                                        });
+                                })
 
                                 updateBtn.addEventListener('click', function () {
 

@@ -47,6 +47,7 @@
           display: flex;
           align-items: center;
           justify-content: space-around;
+          margin-bottom: 10px;
           button{
             background: transparent;
             border: 1px solid #2c70c8;
@@ -66,6 +67,19 @@
           #dashboard_deleteBtn:hover{
             background: #d51818;
           }
+        }
+        #downloadBtn{
+          background: transparent;
+          border: 1px solid #2c70c8;
+          padding: 10px 50px;
+          border-radius: 5px;
+          font-size: 14px;
+        }
+        #downloadBtn:hover{
+          background: rgb(3, 94, 3);
+          color: white;
+          cursor: pointer;
+          transition: 0.2s ease-in-out;
         }
       }
     }
@@ -126,6 +140,21 @@
     }
     #dashboard_departure_date{
       font-weight: 600;
+    }
+    
+    #downloadBtn{
+      margin-top: 10px;
+      background: transparent;
+      border: 1px solid #2c70c8;
+      padding: 10px 50px;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+    #downloadBtn:hover{
+      background: rgb(3, 94, 3);
+      color: white;
+      cursor: pointer;
+      transition: 0.2s ease-in-out;
     }
   }
 

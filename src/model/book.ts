@@ -106,6 +106,41 @@ export async function deleteMyHotel(entryId: number,userId:number) {
   }
 }
 
+
+export async function downloadHotel(dataId: number) {
+  try{
+    const resultData = await knexInstance
+      .select("*")
+      .from("users_hotels")
+      .where("id", dataId)
+      .then(function (data) {
+        return data;
+      });
+    return resultData;
+  }
+  catch(error){
+    console.log(error);
+  }
+}
+
+export async function downloadFlight(dataId: number) {
+  try{
+    const resultData = await knexInstance
+      .select("*")
+      .from("users_flights")
+      .where("id", dataId)
+      .then(function (data) {
+        return data;
+      });
+    return resultData;
+  }
+  catch(error){
+    console.log(error);
+  }
+}
+
+
+
 // FOR FLIGHTS
 
 export async function bookNewFlight(result: BookFlightInfo) {

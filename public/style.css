@@ -3607,6 +3607,7 @@ footer .footer_bottom {
   display: flex;
   align-items: center;
   justify-content: space-around;
+  margin-bottom: 10px;
 }
 .userHotels .userHotelCard #userDashboardHotelInfo #dashboard_btn button {
   background: transparent;
@@ -3626,6 +3627,19 @@ footer .footer_bottom {
 }
 .userHotels .userHotelCard #userDashboardHotelInfo #dashboard_btn #dashboard_deleteBtn:hover {
   background: #d51818;
+}
+.userHotels .userHotelCard #userDashboardHotelInfo #downloadBtn {
+  background: transparent;
+  border: 1px solid #2c70c8;
+  padding: 10px 50px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+.userHotels .userHotelCard #userDashboardHotelInfo #downloadBtn:hover {
+  background: rgb(3, 94, 3);
+  color: white;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
 }
 .userHotels .userHotelCard:hover {
   border: 1px solid #7E7E7E;
@@ -3685,6 +3699,20 @@ footer .footer_bottom {
 }
 .userFlights #dashboard_departure_date {
   font-weight: 600;
+}
+.userFlights #downloadBtn {
+  margin-top: 10px;
+  background: transparent;
+  border: 1px solid #2c70c8;
+  padding: 10px 50px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+.userFlights #downloadBtn:hover {
+  background: rgb(3, 94, 3);
+  color: white;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
 }
 
 #bookFormDiv, #bookFlightFormDiv {

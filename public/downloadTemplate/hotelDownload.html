@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Itinerary</title>
+    <style>
+        @font-face {
+            font-family: 'Lexend';
+            src: url('./lexend.woff2') format('woff2');
+        }
+        @font-face {
+            font-family: 'Space Grotesk';
+            src: url('./space-grotesk.woff2') format('woff2');
+        }
+        .itinerary_heading {
+            font-size: 38px;
+            font-weight: 600;
+            font-family: Lexend;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 50px;
+        }
+
+        .itinerary_heading span {
+            color: #4691f2;
+        }
+
+        .itinerary_table {
+            border-collapse: collapse;
+            width: 50%;
+            margin: auto;
+        }
+
+        .itinerary_table td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            font-family: Space Grotesk;
+        }
+
+        .itinerary_table td span {
+            font-weight: 500;
+            color: #4691f2;
+        }
+
+        .itinerary_table td:first-child {
+            width: 30%;
+            background-color: #2d68b5;
+            color: white;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="itinerary_heading">Your <span> Hotel Itinerary</span></div>
+    <table class="itinerary_table">
+        <tr>
+            <td>BoookingId:</td>
+            <td><span>{{id}}</span></td>
+        </tr>
+        <tr>
+            <td>UserId:</td>
+            <td><span>{{userId}}</span></td>
+        </tr>
+        <tr>
+            <td>HotelId:</td>
+            <td><span>{{hotelId}}</span></td>
+        </tr>
+        <tr>
+            <td>Arrival Date:</td>
+            <td><span>{{arrivalDate}}</span></td>
+        </tr>
+        <tr>
+            <td>Hotel Name:</td>
+            <td><span>{{hotelname}}</span></td>
+        </tr>
+        <tr>
+            <td>Room Type:</td>
+            <td><span>{{room_type}}</span></td>
+        </tr>
+        <tr>
+            <td>Room Rate:</td>
+            <td><span>{{room_rate}}</span></td>
+        </tr>
+        <tr>
+            <td>Room Count:</td>
+            <td><span>{{room_count}}</span></td>
+        </tr>
+        <tr>
+            <td>Booked Date:</td>
+            <td><span>{{createdat}}</span></td>
+        </tr>
+        <tr>
+            <td>Updated Date:</td>
+            <td><span>{{updatedat}}</span></td>
+        </tr>
+    </table>
+
+</body>
+
+</html>

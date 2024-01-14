@@ -3,8 +3,10 @@ import knexConfig, { baseKnexConfig } from "../knexFile";
 import knex from "knex";
 import { LoginInfo, SignupInfo } from "../interface/userInterface";
 import { DateTime } from "luxon";
-
+import bcrypt from "bcrypt";
 const knexInstance = knex(baseKnexConfig);
+
+
 
 // POST METHOD
 export async function signup(result: SignupInfo) {
@@ -14,11 +16,14 @@ export async function signup(result: SignupInfo) {
     "yyyy-MM-dd HH:mm:ss"
   );
 
+  const hashedPassword = await bcrypt.hash(result.password, 10); // 10 cost factor
+
+
   try {
     const databaseInsert = await knexInstance
       .insert({
         email: result.email,
-        password: result.password,
+        password: hashedPassword,
         firstname: result.firstname,
         lastname: result.lastname,
         dateofbirth: result.dateofbirth,
@@ -50,7 +55,7 @@ export async function login(result: LoginInfo) {
       // console.log("User doesnt exist")    // return a code
       return (404);
     }else{
-      if(emailValidation[0].password !== result.password){
+      if(!await bcrypt.compare(result.password, emailValidation[0].password)){
         return (401);
         // console.log("Invalid credentials");
       }else{

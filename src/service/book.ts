@@ -93,3 +93,15 @@ export const bookNewHotel = async (
     // console.log(data);
     return (data); 
   }
+
+  export const downloadHotel = async (dataId:number) => {
+    const data = await bookModel.downloadHotel(dataId);
+    // console.log(data);
+    return (data); 
+  }
+
+  export const downloadFlight = async (dataId:number) => {
+    const data = await bookModel.downloadFlight(dataId);
+    // console.log(data);
+    return (data); 
+  }
