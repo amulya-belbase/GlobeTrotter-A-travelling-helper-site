@@ -16,60 +16,76 @@ import {
 
 export const bookNewHotel = async (req: Request, res: Response) => {
   const result = req.body;
-
-  try {
-    const data = await bookService.bookNewHotel(
-      result.userId,
-      result.hotelId,
-      result.hotelname,
-      result.arrivalDate,
-      result.room_type,
-      result.room_rate,
-      result.room_count
-    );
-    if (data === 200) {
-      res.status(200).json({ message: "Hotel booked Successfully" });
-    } else {
-      res.status(422).json(data);
+  const userId = req.userData.id;
+  const userRole = req.userData.role;
+  if (userRole === "traveller") {
+    try {
+      const data = await bookService.bookNewHotel(
+        userId,
+        result.hotelId,
+        result.hotelname,
+        result.arrivalDate,
+        result.room_type,
+        result.room_rate,
+        result.room_count
+      );
+      if (data === 200) {
+        res.status(200).json({ message: "Hotel booked Successfully" });
+      } else {
+        res.status(422).json(data);
+      }
+    } catch (error) {
+      res.status(500).json({ error });
     }
-  } catch (error) {
-    res.status(500).json({ error });
+  } else {
+    res.status(401).json({ message: "Unauthorized request" });
   }
 };
 
 export const myHotels = async (req: Request, res: Response) => {
-  const userId = Number(req.params.id);
-  try {
-    const data = await bookService.myHotels(userId);
-    // console.log(data);
-    res.json(data);
-  } catch (error) {
-    res.status(500).json({ error });
+  const userId = req.userData.id;
+  const userRole = req.userData.role;
+  if (userRole === "traveller") {
+    try {
+      const data = await bookService.myHotels(userId);
+      // console.log(data);
+      res.json(data);
+    } catch (error) {
+      res.status(500).json({ error });
+    }
+  } else {
+    res.status(401).json({ message: "Unauthorized request" });
   }
 };
 
 export const updateMyHotel = async (req: Request, res: Response) => {
   const id = Number(req.params.id);
+  const userId = req.userData.id;
+  const userRole = req.userData.role;
   const result = req.body;
-  const newHotelObject: UpdateHotelBooking = {
-    userId: result.userId,
-    hotelId: result.hotelId,
-    hotelname: result.hotelname,
-    arrivalDate: result.arrivalDate,
-    room_type: result.room_type,
-    room_rate: result.room_rate,
-    room_count: result.room_count,
-    createdat: result.createdat,
-  };
-  try {
-    const data = await bookService.updateMyHotel(id, newHotelObject);
-    if (data === 200) {
-      res.status(200).json({ message: "Hotel deleted Successfully" });
-    } else {
-      res.status(401).json({ message: "Unauthorized request" });
+  if (userRole === "traveller") {
+    const newHotelObject: UpdateHotelBooking = {
+      userId: userId,
+      hotelId: result.hotelId,
+      hotelname: result.hotelname,
+      arrivalDate: result.arrivalDate,
+      room_type: result.room_type,
+      room_rate: result.room_rate,
+      room_count: result.room_count,
+      createdat: result.createdat,
+    };
+    try {
+      const data = await bookService.updateMyHotel(id, newHotelObject);
+      if (data === 200) {
+        res.status(200).json({ message: "Hotel updated Successfully" });
+      } else {
+        res.status(401).json({ message: "Unauthorized request" });
+      }
+    } catch (error) {
+      res.status(500).json({ error });
     }
-  } catch (error) {
-    res.status(500).json({ error });
+  } else {
+    res.status(401).json({ message: "Unauthorized request" });
   }
 };
 
@@ -78,16 +94,21 @@ export const deleteMyHotel = async (req: Request, res: Response) => {
   const { ids } = req.params;
   const idArray = ids.split(",").map(Number);
   const entryId = idArray[0];
-  const userId = idArray[1];
-  try {
-    const data = await bookService.deleteMyHotel(entryId, userId);
-    if (data === 401) {
-      res.status(401).json({ message: "Unauthorized request" });
-    } else if (data === 200) {
-      res.status(200).json({ message: "Hotel deleted Successfully" });
+  const userId = req.userData.id;
+  const userRole = req.userData.role;
+  if (userRole === "traveller") {
+    try {
+      const data = await bookService.deleteMyHotel(entryId, userId);
+      if (data === 401) {
+        res.status(401).json({ message: "Unauthorized request" });
+      } else if (data === 200) {
+        res.status(200).json({ message: "Hotel deleted Successfully" });
+      }
+    } catch (error) {
+      res.status(500).json({ error });
     }
-  } catch (error) {
-    res.status(500).json({ error });
+  } else {
+    res.status(401).json({ message: "Unauthorized request" });
   }
 };
 
@@ -95,60 +116,77 @@ export const deleteMyHotel = async (req: Request, res: Response) => {
 
 export const bookNewFlight = async (req: Request, res: Response) => {
   const result = req.body;
-
-  try {
-    const data = await bookService.bookNewFlight(
-      result.userId,
-      result.flightId,
-      result.flightname,
-      result.departureDate,
-      result.seat_type,
-      result.seat_rate,
-      result.seat_count
-    );
-    if (data === 200) {
-      res.status(200).json({ message: "Hotel booked Successfully" });
-    } else {
-      res.status(422).json(data);
+  const userId = req.userData.id;
+  const userRole = req.userData.role;
+  if (userRole === "traveller") {
+    try {
+      const data = await bookService.bookNewFlight(
+        userId,
+        result.flightId,
+        result.flightname,
+        result.departureDate,
+        result.seat_type,
+        result.seat_rate,
+        result.seat_count
+      );
+      if (data === 200) {
+        res.status(200).json({ message: "Hotel booked Successfully" });
+      } else {
+        res.status(422).json(data);
+      }
+    } catch (error) {
+      res.status(500).json({ error });
     }
-  } catch (error) {
-    res.status(500).json({ error });
+  } else {
+    res.status(401).json({ message: "Unauthorized request" });
   }
 };
 
 export const myFlights = async (req: Request, res: Response) => {
-  const userId = Number(req.params.id);
-  try {
-    const data = await bookService.myFlights(userId);
-    // console.log(data);
-    res.json(data);
-  } catch (error) {
-    res.status(500).json({ error });
+  const userId = req.userData.id;
+  const userRole = req.userData.role;
+  if (userRole === "traveller") {
+    try {
+      const data = await bookService.myFlights(userId);
+      // console.log(data);
+      res.json(data);
+    } catch (error) {
+      res.status(500).json({ error });
+    }
+  } else {
+    res.status(401).json({ message: "Unauthorized request" });
   }
 };
 
 export const updateMyFlight = async (req: Request, res: Response) => {
   const id = Number(req.params.id);
+  const userId = req.userData.id;
+  const userRole = req.userData.role;
   const result = req.body;
-  const newHotelObject: UpdateFlightBooking = {
-    userId: result.userId,
-    flightId: result.flightId,
-    flightname: result.flightname,
-    departureDate: result.departureDate,
-    seat_type: result.seat_type,
-    seat_rate: result.seat_rate,
-    seat_count: result.seat_count,
-    createdat: result.createdat,
-  };
-  try {
-    const data = await bookService.updateMyFlight(id, newHotelObject);
-    if (data === 200) {
-      res.status(200).json({ message: "Flight deleted Successfully" });
-    } else {
-      res.status(401).json({ message: "Unauthorized request" });
+  if (userRole === "traveller") {
+    const newHotelObject: UpdateFlightBooking = {
+      userId: userId,
+      flightId: result.flightId,
+      flightname: result.flightname,
+      departureDate: result.departureDate,
+      seat_type: result.seat_type,
+      seat_rate: result.seat_rate,
+      seat_count: result.seat_count,
+      createdat: result.createdat,
+    };
+    // console.log(id, newHotelObject)
+    try {
+      const data = await bookService.updateMyFlight(id, newHotelObject);
+      if (data === 200) {
+        res.status(200).json({ message: "Flight updated Successfully" });
+      } else {
+        res.status(401).json({ message: "Unauthorized request" });
+      }
+    } catch (error) {
+      res.status(500).json({ error });
     }
-  } catch (error) {
-    res.status(500).json({ error });
+  } else {
+    res.status(401).json({ message: "Unauthorized request" });
   }
 };
 
@@ -157,16 +195,21 @@ export const deleteMyFlight = async (req: Request, res: Response) => {
   const { ids } = req.params;
   const idArray = ids.split(",").map(Number);
   const entryId = idArray[0];
-  const userId = idArray[1];
-  try {
-    const data = await bookService.deleteMyFlight(entryId, userId);
-    if (data === 401) {
-      res.status(401).json({ message: "Unauthorized request" });
-    } else if (data === 200) {
-      res.status(200).json({ message: "Flight deleted Successfully" });
+  const userId = req.userData.id;
+  const userRole = req.userData.role;
+  if (userRole === "traveller") {
+    try {
+      const data = await bookService.deleteMyFlight(entryId, userId);
+      if (data === 401) {
+        res.status(401).json({ message: "Unauthorized request" });
+      } else if (data === 200) {
+        res.status(200).json({ message: "Flight deleted Successfully" });
+      }
+    } catch (error) {
+      res.status(500).json({ error });
     }
-  } catch (error) {
-    res.status(500).json({ error });
+  } else {
+    res.status(401).json({ message: "Unauthorized request" });
   }
 };
 
@@ -192,7 +235,7 @@ export const downloadHotel = async (req: Request, res: Response) => {
         .replace(/{{room_rate}}/g, data[0].room_rate)
         .replace(/{{room_count}}/g, data[0].room_count)
         .replace(/{{createdat}}/g, data[0].createdat)
-        .replace(/{{updatedat}}/g, data[0].updatedat)
+        .replace(/{{updatedat}}/g, data[0].updatedat);
     } else {
       console.error("Data is undefined or empty");
     }
@@ -217,7 +260,7 @@ export const downloadHotel = async (req: Request, res: Response) => {
             "attachment; filename=invoice.pdf"
           );
 
-          // for efficient memory mgmt to handle large PDFs -> toStream 
+          // for efficient memory mgmt to handle large PDFs -> toStream
           // if you need to store whole pdf first in the memory -> perhaps for further processing -> toBuffer
           // pipe() -> from readable stream (rendered pdf content) to writeable stream (response)
           stream.pipe(res);
@@ -227,7 +270,6 @@ export const downloadHotel = async (req: Request, res: Response) => {
     res.status(500).json({ error });
   }
 };
-
 
 // TO DOWNLOAD FLIGHT ITINERARY
 export const downloadFlight = async (req: Request, res: Response) => {
@@ -251,7 +293,7 @@ export const downloadFlight = async (req: Request, res: Response) => {
         .replace(/{{seat_rate}}/g, data[0].seat_rate)
         .replace(/{{seat_count}}/g, data[0].seat_count)
         .replace(/{{createdat}}/g, data[0].createdat)
-        .replace(/{{updatedat}}/g, data[0].updatedat)
+        .replace(/{{updatedat}}/g, data[0].updatedat);
     } else {
       console.error("Data is undefined or empty");
     }
@@ -276,7 +318,7 @@ export const downloadFlight = async (req: Request, res: Response) => {
             "attachment; filename=invoice.pdf"
           );
 
-          // for efficient memory mgmt to handle large PDFs -> toStream 
+          // for efficient memory mgmt to handle large PDFs -> toStream
           // if you need to store whole pdf first in the memory -> perhaps for further processing -> toBuffer
           // pipe() -> from readable stream (rendered pdf content) to writeable stream (response)
           stream.pipe(res);

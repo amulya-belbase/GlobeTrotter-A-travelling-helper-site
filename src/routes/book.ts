@@ -1,6 +1,6 @@
-import express, {Router} from "express";
-import fs from "fs";
-const pdf = require('html-pdf');
+import {Router} from "express";
+import {authenticateToken, authenticateTokenParams} from "../middleware/auth";
+
 import {
     bookNewHotel,
     myHotels,
@@ -17,19 +17,19 @@ import {
 const router = Router();
 
 // FOR Hotels
-router.post("/bookNewHotel", bookNewHotel);
-router.get("/myHotels/:id", myHotels);
-router.put("/updateMyHotel/:id", updateMyHotel);
-router.delete("/deleteMyHotel/:ids", deleteMyHotel);
+router.post("/bookNewHotel", authenticateToken, bookNewHotel);
+router.get("/myHotels/:id", authenticateTokenParams, myHotels);
+router.put("/updateMyHotel/:id", authenticateToken, updateMyHotel);
+router.delete("/deleteMyHotel/:ids", authenticateTokenParams, deleteMyHotel);
 
 // DOWNLOAD PDF routes
 router.get("/downloadHotel/:id",downloadHotel);
 router.get("/downloadFlight/:id",downloadFlight);
 
 // FOR FLIGHTS
-router.post("/bookNewFlight", bookNewFlight);
-router.get("/myFlights/:id", myFlights);
-router.put("/updateMyFlight/:id", updateMyFlight);
-router.delete("/deleteMyFlight/:ids", deleteMyFlight);
+router.post("/bookNewFlight", authenticateToken, bookNewFlight);
+router.get("/myFlights/:id", authenticateTokenParams, myFlights);
+router.put("/updateMyFlight/:id", authenticateToken, updateMyFlight);
+router.delete("/deleteMyFlight/:ids", authenticateTokenParams, deleteMyFlight);
 
 export default router; 

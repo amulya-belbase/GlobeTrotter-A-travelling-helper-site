@@ -1,9 +1,9 @@
-import { promises as fs } from "fs";
-import knexConfig, { baseKnexConfig } from "../knexFile";
+import  { baseKnexConfig } from "../knexFile";
 import knex from "knex";
 import { LoginInfo, SignupInfo } from "../interface/userInterface";
 import { DateTime } from "luxon";
 import bcrypt from "bcrypt";
+import { generateAccessToken } from "../middleware/auth";
 const knexInstance = knex(baseKnexConfig);
 
 
@@ -59,7 +59,16 @@ export async function login(result: LoginInfo) {
         return (401);
         // console.log("Invalid credentials");
       }else{
-        return emailValidation;
+        const userData = { username: emailValidation[0].firstname, id: emailValidation[0].id, role:emailValidation[0].role, profilepic:emailValidation[0].profilepic };
+        // console.log(userData);
+        // // FOR JWT
+        const accessToken = generateAccessToken(userData);
+        // const refreshToken = generateRefreshToken(userData);
+        // pushIntoRefresh(refreshToken);
+        // userLogger.log('info','Login success');
+
+        return { accessToken };
+        // return emailValidation;
         // console.log(`Welcome ${emailValidation[0].firstname}`);
       }
     }

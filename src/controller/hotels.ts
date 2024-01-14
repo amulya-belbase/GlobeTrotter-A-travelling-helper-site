@@ -10,6 +10,7 @@ import { HotelInfo, UpdateHotelInfo } from "../interface/hotelInterface";
 // ADMIN ROUTES
 export const addNew = async (req: Request, res: Response) => {
   const result = req.body;
+  // console.log(`From controller ${result}`);
   try {
     const data = await hotelService.addNew(
       result.userId,
@@ -40,6 +41,7 @@ export const addNew = async (req: Request, res: Response) => {
 
 
 export const getHotelsById = async (req:Request, res: Response) => {
+  // const userId = Number(req.userData.id);
   const userId = Number(req.params.userId); 
   try {
     const data = await hotelService.getHotelsById(userId);

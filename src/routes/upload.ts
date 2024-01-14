@@ -12,7 +12,7 @@ const storageUser = multer.diskStorage({
         cb(null,'public/images/users')
     },
     filename: (req:Request,file:Express.Multer.File,cb:Function) => {
-        console.log(file)
+        // console.log(file)
         cb(null,Date.now()+path.extname(file.originalname))
     }
 })
@@ -35,7 +35,7 @@ const storageHotel = multer.diskStorage({
         cb(null,'public/images/hotels')
     },
     filename: (req:Request,file:Express.Multer.File,cb:Function) => {
-        console.log(file)
+        // console.log(file)
         cb(null,Date.now()+path.extname(file.originalname))
     }
 })
@@ -58,7 +58,7 @@ const storageFlight = multer.diskStorage({
         cb(null,'public/images/flights')
     },
     filename: (req:Request,file:Express.Multer.File,cb:Function) => {
-        console.log(file)
+        // console.log(file)
         cb(null,Date.now()+path.extname(file.originalname))
     }
 })
