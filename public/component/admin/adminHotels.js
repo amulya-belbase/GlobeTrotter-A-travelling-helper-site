@@ -1,86 +1,100 @@
-const token = localStorage.getItem('accessToken');
-
+"use strict";
+// Object.defineProperty(exports, "__esModule", { value: true });
+// var axios = require("axios");
+var token = localStorage.getItem("accessToken");
 if (token) {
-    axios.get(`http://localhost:8000/parseAccessToken/${token}`)
-        .then(response => {
-            const role = response.data.role;
-            const userId = response.data.id;
-            if (role === 'admin') {
-                document.getElementById('addHotelsForm').addEventListener('submit', function (event) {
-                    event.preventDefault(); 
-
-                    // Get form data
-                    const hotelname = document.getElementById('hotelname').value;
-                    const location = document.getElementById('location').value;
-                    const established = document.getElementById('established').value;
-                    const singleroom = document.getElementById('singleroom').value;
-                    const singleroomrate = document.getElementById('singleroomrate').value;
-                    const doubleroom = document.getElementById('doubleroom').value;
-                    const doubleroomrate = document.getElementById('doubleroomrate').value;
-                    const suite = document.getElementById('suite').value;
-                    const suiterate = document.getElementById('suiterate').value;
-                    const website = document.getElementById('website').value;
-                    const email = document.getElementById('email').value;
-                    const phoneno = document.getElementById('phoneno').value;
-                    const imageInput = document.getElementById('image1');
-                    const image1 = imageInput.files[0];
-
-                    // FORM VALIDATION IS NEEDED
-                    const formData = {
-                        userId: userId,
-                        hotelname: hotelname,
-                        location: location,
-                        established: established,
-                        singleroom: singleroom,
-                        singleroomrate: singleroomrate,
-                        doubleroom: doubleroom,
-                        doubleroomrate: doubleroomrate,
-                        suite: suite,
-                        suiterate: suiterate,
-                        website: website,
-                        email: email,
-                        phoneno: phoneno,
-                        image1: image1,
-                    };
-
-                    axios.post('http://localhost:8000/upload/hotel', formData, {
-                        headers: {
-                            'Content-Type': 'multipart/form-data',
-                        },
-                    })
-                        .then(response => {
-                            formData.image1 = response.data.fileName;
-                            axios.post('http://localhost:8000/hotels/addNew', formData)
-                                .then(response => {
-                                    // console.log(response.status);
-                                    if (response.status === 200) {
-                                        alert("Hotel registered successfully");
-                                        window.location.href = './adminDashBoard.html';
-                                    }
-
-                                })
-                                .catch(error => {
-                                    if (error.response.status === 422) {
-                                        // emailValidation.style.display = 'block';
-                                        // emailValidation.innerHTML = "Invalid Credentials"; 
-                                        alert("Enter form properly. Date format (yyyy-mm-dd), upload image");
-                                    }
-                                });
-                        })
-                        .catch(error => {
-                            console.error(error);
-                        });
-                });
-            } else {
-                localStorage.removeItem('accessToken');
-                window.location.href = '../login.html';
-            }
-        })
-        .catch(error => {
-            console.log(error)
-        })
-
+  axios.default
+    .get("http://localhost:8000/parseAccessToken/".concat(token))
+    .then(function (response) {
+      var role = response.data.role;
+      var userId = response.data.id;
+      if (role === "admin") {
+        document
+          .getElementById("addHotelsForm")
+          .addEventListener("submit", function (event) {
+            var _a, _b;
+            event.preventDefault();
+            // Get form data
+            var hotelname = document.getElementById("hotelname").value;
+            var location = document.getElementById("location").value;
+            var established = document.getElementById("established").value;
+            var singleroom = document.getElementById("singleroom").value;
+            var singleroomrate =
+              document.getElementById("singleroomrate").value;
+            var doubleroom = document.getElementById("doubleroom").value;
+            var doubleroomrate =
+              document.getElementById("doubleroomrate").value;
+            var suite = document.getElementById("suite").value;
+            var suiterate = document.getElementById("suiterate").value;
+            var website = document.getElementById("website").value;
+            var email = document.getElementById("email").value;
+            var phoneno = document.getElementById("phoneno").value;
+            var image1 =
+              (_b =
+                (_a = document.getElementById("image1")) === null ||
+                _a === void 0
+                  ? void 0
+                  : _a.files) === null || _b === void 0
+                ? void 0
+                : _b[0];
+            // FORM VALIDATION IS NEEDED
+            var formData = {
+              userId: userId,
+              hotelname: hotelname,
+              location: location,
+              established: established,
+              singleroom: singleroom,
+              singleroomrate: singleroomrate,
+              doubleroom: doubleroom,
+              doubleroomrate: doubleroomrate,
+              suite: suite,
+              suiterate: suiterate,
+              website: website,
+              email: email,
+              phoneno: phoneno,
+              image1: image1,
+            };
+            axios.default
+              .post("http://localhost:8000/upload/hotel", formData, {
+                headers: {
+                  "Content-Type": "multipart/form-data",
+                },
+              })
+              .then(function (response) {
+                formData.image1 = response.data.fileName;
+                axios.default
+                  .post("http://localhost:8000/hotels/addNew", formData)
+                  .then(function (response) {
+                    // console.log(response.status);
+                    if (response.status === 200) {
+                      alert("Hotel registered successfully");
+                      window.location.href = "./adminDashBoard.html";
+                    }
+                  })
+                  .catch(function (error) {
+                    if (error.response.status === 422) {
+                      // emailValidation.style.display = 'block';
+                      // emailValidation.innerHTML = "Invalid Credentials";
+                      alert(
+                        "Enter form properly. Date format (yyyy-mm-dd), upload image"
+                      );
+                    }
+                  });
+              })
+              .catch(function (error) {
+                alert("Please Upload an image");
+                console.error(error);
+              });
+          });
+      } else {
+        localStorage.removeItem("accessToken");
+        window.location.href = "../login.html";
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 } else {
-    localStorage.removeItem('accessToken');
-    window.location.href = '../login.html';
+  localStorage.removeItem("accessToken");
+  window.location.href = "../login.html";
 }

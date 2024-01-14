@@ -1,87 +1,87 @@
-const token = localStorage.getItem("accessToken");
-
+"use strict";
+// Object.defineProperty(exports, "__esModule", { value: true });
+// var axios = require("axios");
+var token = localStorage.getItem("accessToken");
 if (token) {
-  axios
-    .get(`http://localhost:8000/parseAccessToken/${token}`)
-    .then((response) => {
-      const role = response.data.role;
-      const userId = response.data.id;
-      if (role === "admin") {
-        document
-          .getElementById("addFlightsForm")
-          .addEventListener("submit", function (event) {
-            event.preventDefault(); 
-
-            // Get form data
-            const flightname = document.getElementById("flightname").value;
-            const flightdepart = document.getElementById("flightdepart").value;
-            const flightdest = document.getElementById("flightdest").value;
-            const economy = document.getElementById("economy").value;
-            const economyrate = document.getElementById("economyrate").value;
-            const business = document.getElementById("business").value;
-            const businessrate = document.getElementById("businessrate").value;
-            const website = document.getElementById("website").value;
-            const email = document.getElementById("email").value;
-            const phoneno = document.getElementById("phoneno").value;
-            const imageInput = document.getElementById("image1");
-            const image1 = imageInput.files[0];
-
-            // FORM VALIDATION IS NEEDED
-            const formData = {
-              userId: userId,
-              flightname: flightname,
-              flightdepart: flightdepart,
-              flightdest: flightdest,
-              economy: economy,
-              economyrate: economyrate,
-              business: business,
-              businessrate: businessrate,
-              website: website,
-              email: email,
-              phoneno: phoneno,
-              image1: image1,
-            };
-
-            // console.log(formData);
-
-            axios
-              .post("http://localhost:8000/upload/flight", formData, {
-                headers: {
-                  "Content-Type": "multipart/form-data",
-                },
-              })
-              .then((response) => {
-                formData.image1 = response.data.fileName;
-                axios
-                  .post("http://localhost:8000/flights/addNew", formData)
-                  .then((response) => {
-                    // console.log(response.status);
-                    if (response.status === 200) {
-                      alert("Flight registered successfully");
-                      window.location.href = "./adminDashBoard.html";
-                    }
-                  })
-                  .catch((error) => {
-                    if (error.response.status === 422) {
-                      // emailValidation.style.display = 'block';
-                      // emailValidation.innerHTML = "Invalid Credentials";
-                      alert("Enter form properly. upload image");
-                    }
-                  });
-              })
-              .catch((error) => {
-                console.error(error);
-              });
-          });
-      } else {
-        localStorage.removeItem("accessToken");
-        window.location.href = "../login.html";
-      }
+    axios.default
+        .get("http://localhost:8000/parseAccessToken/".concat(token))
+        .then(function (response) {
+        var role = response.data.role;
+        var userId = response.data.id;
+        if (role === "admin") {
+            document
+                .getElementById("addFlightsForm")
+                .addEventListener("submit", function (event) {
+                var _a, _b;
+                event.preventDefault();
+                // Get form data
+                var flightname = document.getElementById("flightname").value;
+                var flightdepart = document.getElementById("flightdepart").value;
+                var flightdest = document.getElementById("flightdest").value;
+                var economy = document.getElementById("economy").value;
+                var economyrate = document.getElementById("economyrate").value;
+                var business = document.getElementById("business").value;
+                var businessrate = document.getElementById("businessrate").value;
+                var website = document.getElementById("website").value;
+                var email = document.getElementById("email").value;
+                var phoneno = document.getElementById("phoneno").value;
+                var image1 = (_b = (_a = document.getElementById("image1")) === null || _a === void 0 ? void 0 : _a.files) === null || _b === void 0 ? void 0 : _b[0];
+                // FORM VALIDATION IS NEEDED
+                var formData = {
+                    userId: userId,
+                    flightname: flightname,
+                    flightdepart: flightdepart,
+                    flightdest: flightdest,
+                    economy: economy,
+                    economyrate: economyrate,
+                    business: business,
+                    businessrate: businessrate,
+                    website: website,
+                    email: email,
+                    phoneno: phoneno,
+                    image1: image1,
+                };
+                // console.log(formData);
+                axios.default
+                    .post("http://localhost:8000/upload/flight", formData, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                })
+                    .then(function (response) {
+                    formData.image1 = response.data.fileName;
+                    axios.default
+                        .post("http://localhost:8000/flights/addNew", formData)
+                        .then(function (response) {
+                        // console.log(response.status);
+                        if (response.status === 200) {
+                            alert("Flight registered successfully");
+                            window.location.href = "./adminDashBoard.html";
+                        }
+                    })
+                        .catch(function (error) {
+                        if (error.response.status === 422) {
+                            // emailValidation.style.display = 'block';
+                            // emailValidation.innerHTML = "Invalid Credentials";
+                            alert("Enter form properly. upload image");
+                        }
+                    });
+                })
+                    .catch(function (error) {
+                    console.error(error);
+                });
+            });
+        }
+        else {
+            localStorage.removeItem("accessToken");
+            window.location.href = "../login.html";
+        }
     })
-    .catch((error) => {
-      console.log(error);
+        .catch(function (error) {
+        console.log(error);
     });
-} else {
-  localStorage.removeItem("accessToken");
-  window.location.href = "../login.html";
+}
+else {
+    localStorage.removeItem("accessToken");
+    window.location.href = "../login.html";
 }

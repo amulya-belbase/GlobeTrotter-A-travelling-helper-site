@@ -1,72 +1,77 @@
+"use strict";
+// Object.defineProperty(exports, "__esModule", { value: true });
+// var axios = require("axios");
 document.getElementById('signUpForm').addEventListener('submit', function (event) {
+    var _a, _b, _c, _d, _e, _f, _g, _h;
     event.preventDefault(); // Prevent default form submission
-
     // Get form data
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const firstname = document.getElementById('firstname').value;
-    const lastname = document.getElementById('lastname').value;
-    const dateofbirth = document.getElementById('birthday').value;
-    const gender = document.getElementById('gender').value;
-    const profilepicInput = document.getElementById('profilepic');
-    const profilepic = profilepicInput.files[0]; 
-    const role = document.getElementById('role').value;
-
-
+    var email = ((_a = document.getElementById('email')) === null || _a === void 0 ? void 0 : _a.value) || '';
+    var password = ((_b = document.getElementById('password')) === null || _b === void 0 ? void 0 : _b.value) || '';
+    var firstname = ((_c = document.getElementById('firstname')) === null || _c === void 0 ? void 0 : _c.value) || '';
+    var lastname = ((_d = document.getElementById('lastname')) === null || _d === void 0 ? void 0 : _d.value) || '';
+    var dateofbirth = ((_e = document.getElementById('birthday')) === null || _e === void 0 ? void 0 : _e.value) || '';
+    var gender = ((_f = document.getElementById('gender')) === null || _f === void 0 ? void 0 : _f.value) || '';
+    var profilepicInput = document.getElementById('profilepic');
+    var profilepic = ((_g = profilepicInput === null || profilepicInput === void 0 ? void 0 : profilepicInput.files) === null || _g === void 0 ? void 0 : _g[0]) || null;
+    var role = ((_h = document.getElementById('role')) === null || _h === void 0 ? void 0 : _h.value) || '';
     // Get validation elements
-    const emailValidation = document.getElementById("frontend_email_validation");
-    const passwordValidation = document.getElementById("frontend_password_validation");
-    const firstnameValidation = document.getElementById("frontend_firstname_validation");
-    const lastnameValidation = document.getElementById("frontend_lastname_validation");
-    const genderValidation = document.getElementById("frontend_gender_validation");
-    const roleValidation = document.getElementById("frontend_role_validation");
-    const birthdayValidation = document.getElementById("frontend_birthday_validation");
-
-    if(password === ''){
+    var emailValidation = document.getElementById("frontend_email_validation");
+    var passwordValidation = document.getElementById("frontend_password_validation");
+    var firstnameValidation = document.getElementById("frontend_firstname_validation");
+    var lastnameValidation = document.getElementById("frontend_lastname_validation");
+    var genderValidation = document.getElementById("frontend_gender_validation");
+    var roleValidation = document.getElementById("frontend_role_validation");
+    var birthdayValidation = document.getElementById("frontend_birthday_validation");
+    if (password === '') {
         passwordValidation.style.display = 'block';
         passwordValidation.innerHTML = "Password is required";
         return;
-    }else{
+    }
+    else {
         passwordValidation.style.display = 'none';
     }
-    if(firstname === ''){
+    if (firstname === '') {
         firstnameValidation.style.display = 'block';
         firstnameValidation.innerHTML = "Firstname is required";
         return;
-    }else{
+    }
+    else {
         firstnameValidation.style.display = 'none';
     }
-    if(lastname === ''){
+    if (lastname === '') {
         lastnameValidation.style.display = 'block';
         lastnameValidation.innerHTML = "Lastname is required";
         return;
-    }else{
+    }
+    else {
         lastnameValidation.style.display = 'none';
     }
-    if(gender === '#'){
+    if (gender === '#') {
         genderValidation.style.display = 'block';
         genderValidation.innerHTML = "Gender is required";
         return;
-    }else{
+    }
+    else {
         genderValidation.style.display = 'none';
     }
-    if(role === '#'){
+    if (role === '#') {
         roleValidation.style.display = 'block';
         roleValidation.innerHTML = "Role is required";
         return;
-    }else{
+    }
+    else {
         roleValidation.style.display = 'none';
     }
-    if(dateofbirth === ''){
+    if (dateofbirth === '') {
         birthdayValidation.style.display = 'block';
         birthdayValidation.innerHTML = "Date Of Birth is required";
         return;
-    }else{
+    }
+    else {
         birthdayValidation.style.display = 'none';
     }
-
     // Create a data object with form values
-    const formData = {
+    var formData = {
         email: email,
         password: password,
         firstname: firstname,
@@ -76,35 +81,35 @@ document.getElementById('signUpForm').addEventListener('submit', function (event
         profilepic: profilepic,
         role: role
     };
-        axios.post('http://localhost:8000/upload/user', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
+    axios.default.post('http://localhost:8000/upload/user', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    })
+        .then(function (response) {
+        formData.profilepic = response.data.fileName;
+        axios.default.post('http://localhost:8000/users/signup', formData)
+            .then(function (response) {
+            emailValidation.style.display = 'none';
+            if (response.status === 200) {
+                // console.log(response.data[0].id, response.data[0].firstname);
+                alert("User registration successful");
+                window.location.href = './login.html'; // Replace '/dashboard' with your desired page
+            }
+            else {
+                console.log(response);
+            }
         })
-        .then(response => {
-            formData.profilepic = response.data.fileName;
-            axios.post('http://localhost:8000/users/signup', formData)
-                .then(response => {
-                    emailValidation.style.display = 'none';
-
-                    if (response.status === 200) {
-                        // console.log(response.data[0].id, response.data[0].firstname);
-                        alert("User registration successful");
-                        window.location.href = './login.html'; // Replace '/dashboard' with your desired page
-                    } else {
-                        console.log(response);
-                    }
-                })
-                .catch(error => {
-                    console.log(error.response.status)
-                    if(error.response.status === 422){
-                        emailValidation.style.display = 'block';
-                        emailValidation.innerHTML = "User already exists";   
-                        return;  
-                    }
-                });
-        })
-        .catch(error => {
-            console.error(error);
+            .catch(function (error) {
+            console.log(error.response.status);
+            if (error.response.status === 422) {
+                emailValidation.style.display = 'block';
+                emailValidation.innerHTML = "User already exists";
+                return;
+            }
         });
+    })
+        .catch(function (error) {
+        console.error(error);
+    });
 });
