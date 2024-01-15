@@ -168,6 +168,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
       })
       .catch((error) => {
+        alert("There aren't any hotels")
         console.log(error);
       });
 

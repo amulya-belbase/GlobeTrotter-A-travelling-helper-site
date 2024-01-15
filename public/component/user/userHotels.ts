@@ -158,7 +158,6 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .catch((error) => {
         alert("There aren't any hotels");
-        window.location.href = "./userHotels.html";
         console.log(error);
       });
 

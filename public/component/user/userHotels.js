@@ -122,7 +122,6 @@ document.addEventListener("DOMContentLoaded", function () {
         })
             .catch(function (error) {
             alert("There aren't any hotels");
-            window.location.href = "./userHotels.html";
             console.log(error);
         });
         // for hotel filter

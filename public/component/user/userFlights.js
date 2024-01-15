@@ -129,6 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         })
             .catch(function (error) {
+                alert("There aren't any hotels")
             console.log(error);
         });
         document
