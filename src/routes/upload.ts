@@ -75,8 +75,4 @@ router.post('/flight', uploadFlight.single('image1'), (req,res)=>{
 });
 
 
-
-
-
-
 export default router; 

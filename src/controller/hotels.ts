@@ -1,16 +1,12 @@
 import { Request, Response } from "express";
 
-// data validation without middleware
-// import { ValidationError } from 'joi';
-// import {loginSchema, signupSchema} from "../schema/userValidation";
-
 import * as hotelService from "../service/hotels";
-import { HotelInfo, UpdateHotelInfo } from "../interface/hotelInterface";
+import { UpdateHotelInfo } from "../interface/hotelInterface";
 
 // ADMIN ROUTES
 export const addNew = async (req: Request, res: Response) => {
   const result = req.body;
-  // console.log(`From controller ${result}`);
+  // console.log(`From controller ${result.established}`);
   try {
     const data = await hotelService.addNew(
       result.userId,
@@ -29,7 +25,7 @@ export const addNew = async (req: Request, res: Response) => {
       result.image1
     );
     if (data === 200) {
-      res.status(200).json({message:"Hotel registered Successfully"});
+      res.status(200).json({ message: "Hotel registered Successfully" });
     } else {
       res.status(422).json(data);
     }
@@ -38,11 +34,9 @@ export const addNew = async (req: Request, res: Response) => {
   }
 };
 
-
-
-export const getHotelsById = async (req:Request, res: Response) => {
+export const getHotelsById = async (req: Request, res: Response) => {
   // const userId = Number(req.userData.id);
-  const userId = Number(req.params.userId); 
+  const userId = Number(req.params.userId);
   try {
     const data = await hotelService.getHotelsById(userId);
     // console.log(data);
@@ -50,31 +44,34 @@ export const getHotelsById = async (req:Request, res: Response) => {
   } catch (error) {
     res.status(500).json({ error });
   }
-}
+};
 
-
-export const deleteHotel = async (req:Request, res: Response) => {
-  // const hotelId = Number(req.params.id); 
+export const deleteHotel = async (req: Request, res: Response) => {
+  // const hotelId = Number(req.params.id);
   const { ids } = req.params;
-  const idArray = ids.split(',').map(Number); 
+  const idArray = ids.split(",").map(Number);
   const hotelId = idArray[0];
   const userId = idArray[1];
-  try {
-    const data = await hotelService.deleteHotel(hotelId,userId);
-    if(data === 401){
-      res.status(401).json({message:"Unauthorized request"})
-    }else if(data === 200){
-      res.status(200).json({message:"Hotel deleted Successfully"});
+  if (!Number.isNaN(hotelId)) {
+    try {
+      const data = await hotelService.deleteHotel(hotelId, userId);
+      if (data === 401) {
+        res.status(401).json({ message: "Unauthorized request" });
+      } else if (data === 200) {
+        res.status(200).json({ message: "Hotel deleted Successfully" });
+      }
+    } catch (error) {
+      res.status(500).json({ error });
     }
-  } catch (error) {
-    res.status(500).json({ error });
+  } else {
+    res.status(422).json({ message: "Delete Id must be a number" });
   }
-}
+};
 
-export const updateHotel = async (req:Request, res: Response) => {
-  const hotelId = Number(req.params.id); 
+export const updateHotel = async (req: Request, res: Response) => {
+  const hotelId = Number(req.params.id);
   const result = req.body;
-  const newHotelObject:UpdateHotelInfo = {
+  const newHotelObject: UpdateHotelInfo = {
     userId: result.userId,
     hotelname: result.hotelname,
     location: result.location,
@@ -89,45 +86,42 @@ export const updateHotel = async (req:Request, res: Response) => {
     email: result.email,
     phoneno: result.phoneno,
     image1: result.image1,
-    createdat:result.createdat,
-};
+    createdat: result.createdat,
+  };
 
   try {
-    const data = await hotelService.updateHotel(hotelId,newHotelObject);
-    if(data === 200){
-      res.status(200).json({message:"Hotel deleted Successfully"});
-    }else{
-      res.status(401).json({message:"Unauthorized request"})
+    const data = await hotelService.updateHotel(hotelId, newHotelObject);
+    if (data === 200) {
+      res.status(200).json({ message: "Hotel deleted Successfully" });
+    } else {
+      res.status(401).json({ message: "Unauthorized request" });
     }
   } catch (error) {
     res.status(500).json({ error });
   }
-}
-
+};
 
 // USER ROUTES
 
-export const getAllFilter = async (req:Request, res:Response) => {
+export const getAllFilter = async (req: Request, res: Response) => {
   const result = req.params.searchData;
-  const filterArray = result.split(',').map(String); 
+  const filterArray = result.split(",").map(String);
   const locationValue = filterArray[0];
   const searchValue = filterArray[1];
-  try{
-    const data = await hotelService.getAllFilter(locationValue,searchValue);
+  try {
+    const data = await hotelService.getAllFilter(locationValue, searchValue);
     if (data === 404) {
-      res.status(404).json({message:"No Hotels found"});
+      res.status(404).json({ message: "No Hotels found" });
     } else {
       res.status(200).json(data);
     }
-  }
-  catch(error){
+  } catch (error) {
     res.status(500).json({ error });
   }
-}
+};
 
-
-export const getHotelForUser = async (req:Request, res: Response) => {
-  const hotelId = Number(req.params.id); 
+export const getHotelForUser = async (req: Request, res: Response) => {
+  const hotelId = Number(req.params.id);
   try {
     const data = await hotelService.getHotelForUser(hotelId);
     // console.log(data);
@@ -135,4 +129,4 @@ export const getHotelForUser = async (req:Request, res: Response) => {
   } catch (error) {
     res.status(500).json({ error });
   }
-}
+};

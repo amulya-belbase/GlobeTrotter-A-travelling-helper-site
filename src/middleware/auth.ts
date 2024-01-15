@@ -7,7 +7,7 @@ import { decode } from "punycode";
 declare global {
   namespace Express {
     interface Request {
-      userData?: any; // Modify 'any' to the actual type of userData if possible
+      userData?: any; 
     }
   }
 }
@@ -77,6 +77,7 @@ export const generateAccessToken = (user: object) => {
   return jwt.sign(user, config.ACCESS_TOKEN_KEY);
 };
 
+// FOR REFRESH TOKEN
 // export const generateRefreshToken = (user: object) => {
 //   return jwt.sign(user, config.REFRESH_TOKEN_KEY, { expiresIn: "365d" }); // Expires in 1 year
 // };

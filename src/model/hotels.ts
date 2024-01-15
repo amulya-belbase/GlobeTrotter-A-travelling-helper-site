@@ -1,5 +1,4 @@
-import { promises as fs } from "fs";
-import knexConfig, { baseKnexConfig } from "../knexFile";
+import  { baseKnexConfig } from "../knexFile";
 import knex from "knex";
 import { DateTime } from "luxon";
 import { HotelInfo, UpdateHotelInfo } from "../interface/hotelInterface";

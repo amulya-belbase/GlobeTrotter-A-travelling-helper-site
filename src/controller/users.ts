@@ -1,9 +1,5 @@
 import { Request, Response } from "express";
 
-// data validation without middleware
-// import { ValidationError } from 'joi';
-// import {loginSchema, signupSchema} from "../schema/userValidation";
-
 import * as userService from "../service/users";
 
 export const signup = async (req: Request, res: Response) => {
@@ -43,13 +39,5 @@ export const login = async (req: Request, res: Response) => {
     }
   } catch (error) {
     res.status(500).json({ error });
-
-    // if (error instanceof ValidationError && error.isJoi) {
-    //     // Handle Joi validation error
-    //     return res.status(422).json({message:"Invalid data"})
-    //   } else {
-    //     // Handle other types of errors
-    //     res.status(500).json({message:"Internal server error"});
-    //   }
   }
 };

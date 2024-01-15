@@ -1,4 +1,5 @@
-import express, {Router} from "express";
+import {Router} from "express";
+import { validateFlightForm,validateUpdateFlightForm } from "../middleware/flightFormValidator";
 
 import {
     getAllFilter,
@@ -12,10 +13,10 @@ import {
 const router = Router();
 
 // FOR ADMIN
-router.post("/addNew", addNew);
+router.post("/addNew", validateFlightForm, addNew);
 router.get("/getFlightsById/:userId",getFlightsById);
 router.delete("/delete/:ids", deleteFlight)
-router.put("/update/:id", updateFlight);
+router.put("/update/:id", validateUpdateFlightForm, updateFlight);
 
 // FOR USER Display and filter
 router.get("/getAllFilter/:searchData", getAllFilter);

@@ -162,10 +162,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                             })
                                                 .catch(function (error) {
                                                 console.error("Error updating hotel:", error);
-                                                // Handle error while trying to update the hotel
-                                                if (error.response.status === 401) {
-                                                    alert("Unauthorized request");
-                                                }
+                                                alert(`Error updating: ${error.response.data.message}`);
                                             });
                                         })
                                             .catch(function (error) {
@@ -198,10 +195,8 @@ document.addEventListener("DOMContentLoaded", function () {
                                 })
                                     .catch(function (error) {
                                     console.error("Error deleting hotel:", error);
-                                    if (error.response.status === 401) {
-                                        alert("Unauthorized request");
-                                        window.location.href = "./adminDashBoard.html";
-                                    }
+                                    alert(`Error deleting hotel: ${error.response.data.message}`);
+                                    window.location.href = "./adminDashBoard.html";
                                 });
                             });
                         });
@@ -362,6 +357,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                                 }
                                             })
                                                 .catch(function (error) {
+                                                alert(`Error updating flights: ${error.response.data.message}`);
                                                 console.error("Error updating flight:", error);
                                                 // Handle error while trying to update the hotel
                                             });
@@ -396,10 +392,8 @@ document.addEventListener("DOMContentLoaded", function () {
                                 })
                                     .catch(function (error) {
                                     console.error("Error deleting flight:", error);
-                                    if (error.response.status === 401) {
-                                        alert("Unauthorized request");
-                                        window.location.href = "./adminDashBoard.html";
-                                    }
+                                    alert(`Error deleting hotel: ${error.response.data.message}`);
+                                    window.location.href = "./adminDashBoard.html";
                                 });
                             });
                         });

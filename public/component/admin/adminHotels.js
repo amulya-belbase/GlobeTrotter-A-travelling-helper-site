@@ -72,13 +72,7 @@ if (token) {
                     }
                   })
                   .catch(function (error) {
-                    if (error.response.status === 422) {
-                      // emailValidation.style.display = 'block';
-                      // emailValidation.innerHTML = "Invalid Credentials";
-                      alert(
-                        "Enter form properly. Date format (yyyy-mm-dd), upload image"
-                      );
-                    }
+                    alert(`Error updating: ${error.response.data.message}`);
                   });
               })
               .catch(function (error) {

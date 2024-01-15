@@ -1,13 +1,9 @@
 import { Request, Response } from "express";
 import fs from "fs";
 const pdf = require("html-pdf");
-// data validation without middleware
-// import { ValidationError } from 'joi';
-// import {loginSchema, signupSchema} from "../schema/userValidation";
 
 import * as bookService from "../service/book";
 import {
-  BookHotelInfo,
   UpdateHotelBooking,
   UpdateFlightBooking,
 } from "../interface/bookInterface";
@@ -302,8 +298,6 @@ export const downloadFlight = async (req: Request, res: Response) => {
       format: "Letter",
     };
 
-    // Convert HTML to PDF and stream it directly to the response
-    // Assuming 'populatedHtml' is the HTML content with placeholders replaced
     pdf
       .create(populatedHtml, options)
       .toStream((pdfErr: Error, stream: NodeJS.ReadableStream) => {
@@ -318,9 +312,6 @@ export const downloadFlight = async (req: Request, res: Response) => {
             "attachment; filename=invoice.pdf"
           );
 
-          // for efficient memory mgmt to handle large PDFs -> toStream
-          // if you need to store whole pdf first in the memory -> perhaps for further processing -> toBuffer
-          // pipe() -> from readable stream (rendered pdf content) to writeable stream (response)
           stream.pipe(res);
         }
       });

@@ -12,10 +12,10 @@ const router = Router();
 // user route for login and signup
 router.use("/users",usersRoutes);
 
-// route for HOTEL CRUD operations
+// route for ADMIN HOTEL CRUD operations
 router.use("/hotels", hotelsRoutes);
 
-// route for FLIGHT CRUD operations
+// route for ADMIN FLIGHT CRUD operations
 router.use("/flights", flightsRoutes);
 
 // route for user bookings

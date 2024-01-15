@@ -1,4 +1,3 @@
-
 import express from "express";
 import config from "./src/config";
 import routes from "./src/routes";
